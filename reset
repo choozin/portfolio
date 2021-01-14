@@ -1,0 +1,488 @@
+[33mcommit a43e343937990f7f963603c0b0c5fc1a8e94c451[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: choozin <ctaylor17@outlook.com>
+Date:   Thu Jan 14 01:56:31 2021 -0500
+
+    Initializing project. Created basic framework structure, layout/theme files, and a test page.
+
+[1mdiff --git a/.gitignore b/.gitignore[m
+[1mnew file mode 100644[m
+[1mindex 0000000..1437c53[m
+[1m--- /dev/null[m
+[1m+++ b/.gitignore[m
+[36m@@ -0,0 +1,34 @@[m
+[32m+[m[32m# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.[m
+[32m+[m
+[32m+[m[32m# dependencies[m
+[32m+[m[32m/node_modules[m
+[32m+[m[32m/.pnp[m
+[32m+[m[32m.pnp.js[m
+[32m+[m
+[32m+[m[32m# testing[m
+[32m+[m[32m/coverage[m
+[32m+[m
+[32m+[m[32m# next.js[m
+[32m+[m[32m/.next/[m
+[32m+[m[32m/out/[m
+[32m+[m
+[32m+[m[32m# production[m
+[32m+[m[32m/build[m
+[32m+[m
+[32m+[m[32m# misc[m
+[32m+[m[32m.DS_Store[m
+[32m+[m[32m*.pem[m
+[32m+[m
+[32m+[m[32m# debug[m
+[32m+[m[32mnpm-debug.log*[m
+[32m+[m[32myarn-debug.log*[m
+[32m+[m[32myarn-error.log*[m
+[32m+[m
+[32m+[m[32m# local env files[m
+[32m+[m[32m.env.local[m
+[32m+[m[32m.env.development.local[m
+[32m+[m[32m.env.test.local[m
+[32m+[m[32m.env.production.local[m
+[32m+[m
+[32m+[m[32m# vercel[m
+[32m+[m[32m.vercel[m
+[1mdiff --git a/README.md b/README.md[m
+[1mnew file mode 100644[m
+[1mindex 0000000..4b412a3[m
+[1m--- /dev/null[m
+[1m+++ b/README.md[m
+[36m@@ -0,0 +1,34 @@[m
+[32m+[m[32mThis is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).[m
+[32m+[m
+[32m+[m[32m## Getting Started[m
+[32m+[m
+[32m+[m[32mFirst, run the development server:[m
+[32m+[m
+[32m+[m[32m```bash[m
+[32m+[m[32mnpm run dev[m
+[32m+[m[32m# or[m
+[32m+[m[32myarn dev[m
+[32m+[m[32m```[m
+[32m+[m
+[32m+[m[32mOpen [http://localhost:3000](http://localhost:3000) with your browser to see the result.[m
+[32m+[m
+[32m+[m[32mYou can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.[m
+[32m+[m
+[32m+[m[32m[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.[m
+[32m+[m
+[32m+[m[32mThe `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.[m
+[32m+[m
+[32m+[m[32m## Learn More[m
+[32m+[m
+[32m+[m[32mTo learn more about Next.js, take a look at the following resources:[m
+[32m+[m
+[32m+[m[32m- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.[m
+[32m+[m[32m- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.[m
+[32m+[m
+[32m+[m[32mYou can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome![m
+[32m+[m
+[32m+[m[32m## Deploy on Vercel[m
+[32m+[m
+[32m+[m[32mThe easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.[m
+[32m+[m
+[32m+[m[32mCheck out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.[m
+[1mdiff --git a/components/common/active-link.js b/components/common/active-link.js[m
+[1mnew file mode 100644[m
+[1mindex 0000000..64c241f[m
+[1m--- /dev/null[m
+[1m+++ b/components/common/active-link.js[m
+[36m@@ -0,0 +1,20 @@[m
+[32m+[m[32mimport { useRouter } from 'next/router'[m
+[32m+[m
+[32m+[m[32mexport default function ActiveLink({ children, href }) {[m
+[32m+[m[32m  const router = useRouter()[m
+[32m+[m[32m  const style = {[m
+[32m+[m[32m    marginRight: 10,[m
+[32m+[m[32m    color: router.pathname === href ? 'red' : 'green',[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  const handleClick = (e) => {[m
+[32m+[m[32m    e.preventDefault()[m
+[32m+[m[32m    router.push(href)[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  return ([m
+[32m+[m[32m    <a href={href} onClick={handleClick} style={style}>[m
+[32m+[m[32m      {children}[m
+[32m+[m[32m    </a>[m
+[32m+[m[32m  )[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/components/common/date.tsx b/components/common/date.tsx[m
+[1mnew file mode 100644[m
+[1mindex 0000000..52e59b2[m
+[1m--- /dev/null[m
+[1m+++ b/components/common/date.tsx[m
+[36m@@ -0,0 +1,6 @@[m
+[32m+[m[32mimport { parseISO, format } from 'date-fns'[m
+[32m+[m
+[32m+[m[32mexport default function Date({ dateString }: { dateString: string }) {[m
+[32m+[m[32m  const date = parseISO(dateString)[m
+[32m+[m[32m  return <time dateTime={dateString}>{format(date, 'LLLL d, yyyy')}</time>[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/components/layout/layout.module.css b/components/layout/layout.module.css[m
+[1mnew file mode 100644[m
+[1mindex 0000000..1b23cc7[m
+[1m--- /dev/null[m
+[1m+++ b/components/layout/layout.module.css[m
+[36m@@ -0,0 +1,30 @@[m
+[32m+[m[32m.container {[m
+[32m+[m[32m    max-width: 36rem;[m
+[32m+[m[32m    padding: 0 1rem;[m
+[32m+[m[32m    margin: 3rem auto 6rem;[m
+[32m+[m[32m  }[m
+[32m+[m[41m  [m
+[32m+[m[32m  .header {[m
+[32m+[m[32m    display: flex;[m
+[32m+[m[32m    flex-direction: column;[m
+[32m+[m[32m    align-items: center;[m
+[32m+[m[32m  }[m
+[32m+[m[41m  [m
+[32m+[m[32m  .headerImage {[m
+[32m+[m[32m    width: 6rem;[m
+[32m+[m[32m    height: 6rem;[m
+[32m+[m[32m  }[m
+[32m+[m[41m  [m
+[32m+[m[32m  .headerHomeImage {[m
+[32m+[m[32m    width: 8rem;[m
+[32m+[m[32m    height: 8rem;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  .main {[m
+[32m+[m[32m    padding: 10px;[m
+[32m+[m[32m    border: solid 1px gold;[m
+[32m+[m[32m  }[m
+[32m+[m[41m  [m
+[32m+[m[32m  .backToHome {[m
+[32m+[m[32m    margin: 3rem 0 0;[m
+[32m+[m[32m  }[m
+\ No newline at end of file[m
+[1mdiff --git a/components/layout/layout.tsx b/components/layout/layout.tsx[m
+[1mnew file mode 100644[m
+[1mindex 0000000..9167ffa[m
+[1m--- /dev/null[m
+[1m+++ b/components/layout/layout.tsx[m
+[36m@@ -0,0 +1,57 @@[m
+[32m+[m[32mimport Head from 'next/head'[m
+[32m+[m[32mimport Link from 'next/link'[m
+[32m+[m
+[32m+[m[32mimport styles from './layout.module.css'[m
+[32m+[m
+[32m+[m[32mconst name = 'Your Name'[m
+[32m+[m[32mexport const siteTitle = 'Next.js Sample Website'[m
+[32m+[m
+[32m+[m[32mexport default function Layout({ children, home }: { children: React.ReactNode, home?: boolean}) {[m
+[32m+[m[32m  return ([m
+[32m+[m[32m    <div className={styles.container}>[m
+[32m+[m[32m      <Head>[m
+[32m+[m[32m        <link rel="icon" href="/favicon.ico" />[m
+[32m+[m[32m        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />[m
+[32m+[m[32m        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />[m
+[32m+[m[32m        <meta[m
+[32m+[m[32m          name="description"[m
+[32m+[m[32m          content="Learn how to build a personal website using Next.js"[m
+[32m+[m[32m        />[m
+[32m+[m[32m        <meta[m
+[32m+[m[32m          property="og:image"[m
+[32m+[m[32m          content={`https://og-image.now.sh/${encodeURI([m
+[32m+[m[32m            siteTitle[m
+[32m+[m[32m          )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}[m
+[32m+[m[32m        />[m
+[32m+[m[32m        <meta name="og:title" content={siteTitle} />[m
+[32m+[m[32m        <meta name="twitter:card" content="summary_large_image" />[m
+[32m+[m[32m      </Head>[m
+[32m+[m[32m      <header className={styles.header}>[m
+[32m+[m[32m        <p>This is the header.</p>[m
+[32m+[m[32m        {home ? ([m
+[32m+[m[32m          <>[m
+[32m+[m[32m            <h1>This is a Homepage, does not need a link home</h1>[m
+[32m+[m[32m          </>[m
+[32m+[m[32m        ) : ([m
+[32m+[m[32m          <>[m
+[32m+[m
+[32m+[m[32m            <h2>[m
+[32m+[m[32m              <Link href="/">[m
+[32m+[m[32m                <a>Go to Homepage</a>[m
+[32m+[m[32m              </Link>[m
+[32m+[m[32m            </h2>[m
+[32m+[m[32m          </>[m
+[32m+[m[32m        )}[m
+[32m+[m[32m      </header>[m
+[32m+[m[32m      <main className={styles.main}>{children}</main>[m
+[32m+[m[32m      {!home && ([m
+[32m+[m[32m        <div className={styles.backToHome}>[m
+[32m+[m[32m          <p>This is the footer.</p>[m
+[32m+[m[32m          <Link href="/">[m
+[32m+[m[32m            <a>← Back to home</a>[m
+[32m+[m[32m          </Link>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m      )}[m
+[32m+[m[32m    </div>[m
+[32m+[m[32m  )[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/components/todo/ToDos.tsx b/components/todo/ToDos.tsx[m
+[1mnew file mode 100644[m
+[1mindex 0000000..15e0000[m
+[1m--- /dev/null[m
+[1m+++ b/components/todo/ToDos.tsx[m
+[36m@@ -0,0 +1,40 @@[m
+[32m+[m[32mimport React, { Component, useContext, useEffect } from 'react';[m
+[32m+[m[32mimport { ToDosContext } from '../contexts/ToDosContext';[m
+[32m+[m[32mimport { ThemeContext } from '../contexts/ThemeContext';[m
+[32m+[m[32mimport List from '@material-ui/core/List';[m
+[32m+[m[32mimport Divider from '@material-ui/core/Divider';[m
+[32m+[m[32mimport ListItem from '@material-ui/core/ListItem';[m
+[32m+[m[32mimport ListItemIcon from '@material-ui/core/ListItemIcon';[m
+[32m+[m[32mimport ListItemText from '@material-ui/core/ListItemText';[m
+[32m+[m[32mimport InboxIcon from '@material-ui/icons/MoveToInbox';[m
+[32m+[m
+[32m+[m[41m [m
+[32m+[m[32mconst ToDos = () => {[m
+[32m+[m
+[32m+[m[32m    const { toDos } = useContext(ToDosContext);[m
+[32m+[m
+[32m+[m[32m    useEffect(() => {[m
+[32m+[m[32m        console.log('ToDos rendered');[m
+[32m+[m[32m        console.log(toDos);[m
+[32m+[m[32m    });[m
+[32m+[m
+[32m+[m[32m    return ([m[41m [m
+[32m+[m[32m        <div className='todos'>[m
+[32m+[m[32m            <List>[m
+[32m+[m[32m                {toDos.map(todo => {[m
+[32m+[m[32m                    return ([m
+[32m+[m[32m                        //<ItemDetails todo={todo} key={todo.id} />[m
+[32m+[m[32m                        <ListItem button key={todo.id}>[m
+[32m+[m[32m                            <ListItemIcon>[m
+[32m+[m[32m                                <InboxIcon />[m
+[32m+[m[32m                            </ListItemIcon>[m
+[32m+[m[32m                            <ListItemText primary={todo.description} />[m
+[32m+[m[32m                        </ListItem>[m
+[32m+[m[32m                    )[m
+[32m+[m[32m                })}[m
+[32m+[m[32m            </List>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m     );[m
+[32m+[m[32m}[m
+[32m+[m[41m [m
+[32m+[m[32mexport default ToDos;[m
+\ No newline at end of file[m
+[1mdiff --git a/contexts/ThemeContext.js b/contexts/ThemeContext.js[m
+[1mnew file mode 100644[m
+[1mindex 0000000..76016cb[m
+[1m--- /dev/null[m
+[1m+++ b/contexts/ThemeContext.js[m
+[36m@@ -0,0 +1,30 @@[m
+[32m+[m[32mimport React, { createContext, Component } from 'react';[m
+[32m+[m
+[32m+[m[32mexport const ThemeContext = createContext();[m
+[32m+[m
+[32m+[m[32mclass ThemeContextProvider extends Component {[m
+[32m+[m[32m    state = {[m
+[32m+[m[32m        pageTitle: `Cam's Portfolio Website`,[m
+[32m+[m[32m        isLightTheme: true,[m
+[32m+[m[32m        light: { syntax: '#555', ui: '#ddd', bg: '#eee' },[m
+[32m+[m[32m        dark: { syntax: '#ddd', ui: '#333', bg: '#555' },[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    setPageTitle = (title) => {[m
+[32m+[m[32m        this.setState({ pageTitle: title });[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    toggleTheme = () => {[m
+[32m+[m[32m        this.setState({ isLightTheme: !this.state.isLightTheme });[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    render() {[m
+[32m+[m[32m        return ([m
+[32m+[m[32m            <ThemeContext.Provider value={{ ...this.state, toggleTheme: this.toggleTheme, setPageTitle: this.setPageTitle }}>[m
+[32m+[m[32m                {this.props.children}[m
+[32m+[m[32m            </ThemeContext.Provider>[m
+[32m+[m[32m        );[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mexport default ThemeContextProvider;[m
+\ No newline at end of file[m
+[1mdiff --git a/contexts/ToDosContext.js b/contexts/ToDosContext.js[m
+[1mnew file mode 100644[m
+[1mindex 0000000..f767ff9[m
+[1m--- /dev/null[m
+[1m+++ b/contexts/ToDosContext.js[m
+[36m@@ -0,0 +1,49 @@[m
+[32m+[m[32mimport React, { Component, createContext, useState, useEffect } from 'react';[m
+[32m+[m[32mimport { v4 as uuid } from 'uuid';[m
+[32m+[m[32mexport const ToDosContext = createContext();[m
+[32m+[m
+[32m+[m[32mconst ToDosContextProvider = (props) => {[m
+[32m+[m[41m    [m
+[32m+[m[32m    const initializeData = () => {[m
+[32m+[m[32m        const localData = localStorage.getItem('todos');[m
+[32m+[m[32m        return localData ?[m[41m [m
+[32m+[m[32m            JSON.parse(localData) :[m[41m [m
+[32m+[m[32m            [[m
+[32m+[m[32m                {description: 'item 1', datetime: 'now', id: 1},[m
+[32m+[m[32m                {description: 'item 2', datetime: 'now', id: 2},[m
+[32m+[m[32m                {description: 'item 3', datetime: 'now', id: 3},[m
+[32m+[m[32m                {description: 'item 4', datetime: 'now', id: 4}[m
+[32m+[m[32m            ];[m
+[32m+[m[32m    };[m
+[32m+[m[41m    [m
+[32m+[m[32m    const [ toDos, setToDos ] = useState(initializeData);[m
+[32m+[m
+[32m+[m
+[32m+[m[32m    const addToDo = (description, datetime) => {[m
+[32m+[m[32m        setToDos([...toDos, { description, datetime, id: uuid() }]);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    const removeToDo = (id) => {[m
+[32m+[m[32m        setToDos(toDos.filter(todo => todo.id !== id));[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    const updateToDo = (id, description, datetime) => {[m
+[32m+[m[32m        const toDoIndex = toDos.findIndex(toDo => toDo.id == id);[m
+[32m+[m[32m        const newToDos = toDos;[m
+[32m+[m[32m        newToDos[toDoIndex].description = description;[m
+[32m+[m[32m        newToDos[toDoIndex].datetime = datetime;[m
+[32m+[m[32m        setToDos([...newToDos]);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    useEffect(() => {[m
+[32m+[m[32m        localStorage.setItem('todos', JSON.stringify(toDos))[m
+[32m+[m[32m    }, [toDos]);[m
+[32m+[m
+[32m+[m[32m    return ([m[41m [m
+[32m+[m[32m        <ToDosContext.Provider value={{toDos, addToDo, removeToDo, updateToDo }}>[m
+[32m+[m[32m            {props.children}[m
+[32m+[m[32m        </ToDosContext.Provider>[m
+[32m+[m[32m     );[m
+[32m+[m[32m}[m
+[32m+[m[41m [m
+[32m+[m[32mexport default ToDosContextProvider;[m
+\ No newline at end of file[m
+[1mdiff --git a/lib/posts.tsx b/lib/posts.tsx[m
+[1mnew file mode 100644[m
+[1mindex 0000000..a184c9f[m
+[1m--- /dev/null[m
+[1m+++ b/lib/posts.tsx[m
+[36m@@ -0,0 +1,106 @@[m
+[32m+[m[32mimport fs from 'fs'[m
+[32m+[m[32mimport path from 'path'[m
+[32m+[m[32mimport matter from 'gray-matter';[m
+[32m+[m[32mimport remark from 'remark'[m
+[32m+[m[32mimport html from 'remark-html';[m
+[32m+[m
+[32m+[m[32mconst postsDirectory = path.join(process.cwd(), 'posts')[m
+[32m+[m
+[32m+[m
+[32m+[m[32m// THIS FILE BASICALLY FETCHES POSTS DATA[m
+[32m+[m[32m// it gets it from ../posts/xxxx.md using gray-matter library[m
+[32m+[m
+[32m+[m[32mexport function getSortedPostsData() {[m
+[32m+[m[32m  // Get file names under /posts[m
+[32m+[m[32m  const fileNames = fs.readdirSync(postsDirectory)[m
+[32m+[m[32m  const allPostsData = fileNames.map(fileName => {[m
+[32m+[m[32m    // Remove ".md" from file name to get id[m
+[32m+[m[32m    const id = fileName.replace(/\.md$/, '')[m
+[32m+[m
+[32m+[m[32m    // Read markdown file as string[m
+[32m+[m[32m    const fullPath = path.join(postsDirectory, fileName)[m
+[32m+[m[32m    const fileContents = fs.readFileSync(fullPath, 'utf8')[m
+[32m+[m
+[32m+[m[32m    // Use gray-matter to parse the post metadata section[m
+[32m+[m[32m    const matterResult = matter(fileContents)[m
+[32m+[m
+[32m+[m[32m    // Combine the data with the id[m
+[32m+[m[32m    return {[m
+[32m+[m[32m      id,[m
+[32m+[m[32m      ...(matterResult.data as {date: string; title: string })[m
+[32m+[m[32m    }[m
+[32m+[m[32m  })[m
+[32m+[m[32m  // Sort posts by date[m
+[32m+[m[32m  return allPostsData.sort((a, b) => {[m
+[32m+[m[32m    if (a.date < b.date) {[m
+[32m+[m[32m      return 1[m
+[32m+[m[32m    } else {[m
+[32m+[m[32m      return -1[m
+[32m+[m[32m    }[m
+[32m+[m[32m  })[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/*export async function getAllPostIds() {[m
+[32m+[m[32m  // Instead of the file system,[m
+[32m+[m[32m  // fetch post data from an external API endpoint[m
+[32m+[m[32m  const res = await fetch('..')[m
+[32m+[m[32m  const posts = await res.json()[m
+[32m+[m[32m  return posts.map(post => {[m
+[32m+[m[32m    return {[m
+[32m+[m[32m      params: {[m
+[32m+[m[32m        id: post.id[m
+[32m+[m[32m      }[m
+[32m+[m[32m    }[m
+[32m+[m[32m  })[m
+[32m+[m[32m}*/[m
+[32m+[m
+[32m+[m[32m// see above for external api call[m
+[32m+[m[32mexport function getAllPostIds() {[m
+[32m+[m[32m  const fileNames = fs.readdirSync(postsDirectory)[m
+[32m+[m
+[32m+[m[32m  // Returns an array that looks like this:[m
+[32m+[m[32m  // [[m
+[32m+[m[32m  //   {[m
+[32m+[m[32m  //     params: {[m
+[32m+[m[32m  //       id: 'ssg-ssr'[m
+[32m+[m[32m  //     }[m
+[32m+[m[32m  //   },[m
+[32m+[m[32m  //   {[m
+[32m+[m[32m  //     params: {[m
+[32m+[m[32m  //       id: 'pre-rendering'[m
+[32m+[m[32m  //     }[m
+[32m+[m[32m  //   }[m
+[32m+[m[32m  // ][m
+[32m+[m[32m  return fileNames.map(fileName => {[m
+[32m+[m[32m    // returns array full of objects with "params" key, each containing an "id" key inside[m
+[32m+[m[32m    return {[m
+[32m+[m[32m      // params is required[m
+[32m+[m[32m      params: {[m
+[32m+[m[32m        id: fileName.replace(/\.md$/, '')[m
+[32m+[m[32m      }[m
+[32m+[m[32m    }[m
+[32m+[m[32m  })[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m
+[32m+[m[32m// await must be used in this function and the function calling it, for it to work[m
+[32m+[m[32mexport async function getPostData(id: string) {[m
+[32m+[m[32m  const fullPath = path.join(postsDirectory, `${id}.md`)[m
+[32m+[m[32m  const fileContents = fs.readFileSync(fullPath, 'utf8')[m
+[32m+[m
+[32m+[m[32m  // Use gray-matter to parse the post metadata section[m
+[32m+[m[32m  const matterResult = matter(fileContents)[m
+[32m+[m
+[32m+[m[32m  // Use remark to convert markdown into HTML string[m
+[32m+[m[32m  const processedContent = await remark()[m
+[32m+[m[32m    .use(html)[m
+[32m+[m[32m    .process(matterResult.content)[m
+[32m+[m[32m  const contentHtml = processedContent.toString()[m
+[32m+[m
+[32m+[m[32m  // Combine the data with the id and contentHtml[m
+[32m+[m[32m  return {[m
+[32m+[m[32m    id,[m
+[32m+[m[32m    contentHtml,[m
+[32m+[m[32m    ...(matterResult.data as { date: string, title: string })[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/next-env.d.ts b/next-env.d.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..7b7aa2c[m
+[1m--- /dev/null[m
+[1m+++ b/next-env.d.ts[m
+[36m@@ -0,0 +1,2 @@[m
+[32m+[m[32m/// <reference types="next" />[m
+[32m+[m[32m/// <referen

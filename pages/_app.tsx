@@ -6,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import materialUiTheme from '../theme/theme'
 
 import ThemeContextProvider from '../contexts/ThemeContext'
+import AuthContextProvider from '../contexts/AuthContext'
 
 
 /*This App component is the top-level component 
@@ -15,19 +16,21 @@ state when navigating between pages, for example.
 https://nextjs.org/learn/basics/assets-metadata-css/global-styles
 */
 export default function App({ Component, pageProps }: AppProps) {
-  
+
   // ThemeProvider comes from material-ui,
   // may do better inside ThemeContextProvider
   // if custom theming isn't overriding material-ui
-  
+
   return (
     <div>
-      <ThemeProvider theme={materialUiTheme}>
-        <CssBaseline/>
-        <ThemeContextProvider>
-          <Component {...pageProps} />
-        </ThemeContextProvider>
-      </ThemeProvider>
+      <AuthContextProvider>
+        <ThemeProvider theme={materialUiTheme}>
+          <CssBaseline />
+          <ThemeContextProvider>
+            <Component {...pageProps} />
+          </ThemeContextProvider>
+        </ThemeProvider>
+      </AuthContextProvider>
     </div>
   );
 }

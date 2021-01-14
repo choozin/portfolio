@@ -3,19 +3,22 @@ import Link from 'next/link'
 
 import styles from './layout.module.css'
 
-const name = 'Your Name'
-export const siteTitle = 'Next.js Sample Website'
+import Navbar from '../navbar/Navbar'
+
+export const siteTitle = `Cam's Portfolio`;
 
 export default function Layout({ children, home }: { children: React.ReactNode, home?: boolean}) {
   return (
+    <>
+    <Navbar/>
     <div className={styles.container}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
         <meta
-          name="description"
-          content="Learn how to build a personal website using Next.js"
+          name="Cam's Portfolio"
+          content="Learn about Cam's Skills, Accomplishments and Goals"
         />
         <meta
           property="og:image"
@@ -53,5 +56,6 @@ export default function Layout({ children, home }: { children: React.ReactNode, 
         </div>
       )}
     </div>
+    </>
   )
 }
