@@ -3,7 +3,6 @@ import Link from 'next/link'
 
 import { AuthContext } from '../../contexts/AuthContext';
 import { ThemeContext } from '../../contexts/ThemeContext';
-//import ThemeToggle from '../ThemeToggle';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -87,10 +86,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navbar = () => {
-    const { pageTitle, isLightTheme, light, dark } = useContext(ThemeContext);
-    const theme = isLightTheme ? light : dark;
-
-    //const { isAuthenticated, toggleAuth } = useContext(AuthContext);
+    const { status, user } = useContext(AuthContext);
+    const { page, theme } = useContext(ThemeContext);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -123,15 +120,17 @@ const Navbar = () => {
         titles: [
             'Test Webpage',
             'To Do List',
+            'Git Reference'
         ],
         links: [
             '/test',
             '/portfolio/todo',
+            '/git'
         ]
     });
 
     const classes = useStyles();
-    const title = pageTitle;
+
     return(
         <div className={classes.root}>
             <AppBar position="static">
@@ -154,7 +153,7 @@ const Navbar = () => {
                         >
                         <List>
                             {primaryNavElements.titles.map((text, index) => (
-                            <Link href={primaryNavElements.links[index]}>
+                            <Link href={primaryNavElements.links[index]} key={index}>
                                 <ListItem button key={text}>
                                     <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                                     <ListItemText primary={text} />
@@ -165,7 +164,7 @@ const Navbar = () => {
                         <Divider />
                         <List>
                             {secondaryNavElements.titles.map((text, index) => (
-                            <Link href={secondaryNavElements.links[index]}>
+                            <Link href={secondaryNavElements.links[index]} key={index}>
                                 <ListItem button key={text}>
                                     <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                                     <ListItemText primary={text} />
@@ -176,7 +175,7 @@ const Navbar = () => {
                     </div>
                 </Drawer>
                 <Typography className={classes.title} variant="h6" noWrap>
-                    {title}
+                    {page.pageTitle}
                 </Typography>
                 <div className={classes.search}>
                     <div className={classes.searchIcon}>

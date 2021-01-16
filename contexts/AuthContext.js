@@ -1,27 +1,47 @@
-import React, { createContext, Component, ContextType } from 'react';
+import React, {
+    createContext,
+    useState
+} from 'react';
 
-export const AuthContext = createContext({
-    isAuthenticated: false,
-});
+export const AuthContext = createContext();
 
-class AuthContextProvider extends Component {
-  state = {
-      isAuthenticated: false,
-  }
+const AuthContextProvider = ({ children }) => {
 
-  toggleAuth = () => {
-      this.setState({
-          isAuthenticated: !this.state.isAuthenticated
-      })
-  }
+    const [ loggedIn, setLoggedIn ] = useState(false);
+    const [ userDetails, setUserDetails ] = useState([]);
 
-  render() {
-      return (
-          <AuthContext.Provider value={{...this.state, toggleAuth: this.toggleAuth}}>
-              {this.props.children}
-          </AuthContext.Provider>
-      );
-  }
+    const login = data => {
+        setLoggedIn(true);
+        setUserDetails({
+            name: 'Cam',
+            role: 'Admin',
+            notifications: 3,
+        });
+    }
+
+    const logout = data => {
+        setLoggedIn(false);
+        setUserDetails([]);
+    }
+
+    // initialize single data object to pass in context
+    const contextData = {
+        status: {
+            loggedIn,
+            login,
+            logout,
+        },
+        user: {
+            userDetails,
+            setUserDetails,
+        }
+    }
+
+    return (
+        <AuthContext.Provider value={ contextData }>
+            { children }
+        </AuthContext.Provider>
+    )
 }
 
 export default AuthContextProvider;

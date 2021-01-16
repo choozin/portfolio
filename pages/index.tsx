@@ -7,6 +7,8 @@ import Link from 'next/link'
 import Date from '../components/common/date'
 import ActiveLink from '../components/common/active-link'
 
+import Auth from '../components/auth/auth'
+
 export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData()
   return {
@@ -25,6 +27,7 @@ export default function Home({
     id: string 
   }[] 
 }) {
+
   return (
     <Layout home>
       <Head>
@@ -58,14 +61,7 @@ export default function Home({
         </ul>
       </section>
       <section>
-        <h2>This is how to upload to git!</h2>
-        <code>
-        git init<br/>
-        git config user.name "choozin"<br/>
-        git config user.email "ctaylor17@outlook.com"<br/>
-        git add *<br/>
-        git commit -m "some init msg"
-        </code>
+        <Auth/>
       </section>
     </Layout>
   )
