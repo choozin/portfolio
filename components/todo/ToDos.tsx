@@ -1,6 +1,6 @@
 import React, { Component, useContext, useEffect } from 'react';
-import { ToDosContext } from '../contexts/ToDosContext';
-import { ThemeContext } from '../contexts/ThemeContext';
+import { ToDosContext } from '../../contexts/ToDosContext';
+import { ThemeContext } from '../../contexts/ThemeContext';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
@@ -12,19 +12,13 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 const ToDos = () => {
 
     const { toDos } = useContext(ToDosContext);
-
-    useEffect(() => {
-        console.log('ToDos rendered');
-        console.log(toDos);
-    });
-
+    
     return ( 
         <div className='todos'>
             <List>
-                {toDos.map(todo => {
+                {toDos.toDos.map(todo => {
                     return (
-                        //<ItemDetails todo={todo} key={todo.id} />
-                        <ListItem button key={todo.id}>
+                        <ListItem button key={toDos.toDos.id}>
                             <ListItemIcon>
                                 <InboxIcon />
                             </ListItemIcon>
@@ -35,6 +29,7 @@ const ToDos = () => {
             </List>
         </div>
      );
+    
 }
  
 export default ToDos;

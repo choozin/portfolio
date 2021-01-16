@@ -1,19 +1,28 @@
-import React, { Component, createContext, useState, useEffect } from 'react';
-import { v4 as uuid } from 'uuid';
+import React, {
+    createContext,
+    useState, 
+    useEffect,
+} from 'react';
+import { v4 as uuid } from 'uuid'
+
 export const ToDosContext = createContext();
 
-const ToDosContextProvider = (props) => {
-    
+const ToDosContextProvider = ({ children }) => {
+
     const initializeData = () => {
-        const localData = localStorage.getItem('todos');
-        return localData ? 
-            JSON.parse(localData) : 
-            [
-                {description: 'item 1', datetime: 'now', id: 1},
-                {description: 'item 2', datetime: 'now', id: 2},
-                {description: 'item 3', datetime: 'now', id: 3},
-                {description: 'item 4', datetime: 'now', id: 4}
-            ];
+        if(typeof localStorage !== "undefined") {
+            const localData = localStorage.getItem('todos');
+            return localData ? 
+                JSON.parse(localData) : 
+                [
+                    {description: 'item 1', datetime: 'now', id: 1},
+                    {description: 'item 2', datetime: 'now', id: 2},
+                    {description: 'item 3', datetime: 'now', id: 3},
+                    {description: 'item 4', datetime: 'now', id: 4}
+                ];
+        } else {
+            return [{description: 'Could not connect to local storage, using shared state.', datetime: 'now', id: 1}];
+        }
     };
     
     const [ toDos, setToDos ] = useState(initializeData);
@@ -39,11 +48,21 @@ const ToDosContextProvider = (props) => {
         localStorage.setItem('todos', JSON.stringify(toDos))
     }, [toDos]);
 
-    return ( 
-        <ToDosContext.Provider value={{toDos, addToDo, removeToDo, updateToDo }}>
-            {props.children}
+    // initialize single data object to pass in context
+    const contextData = {
+        toDos: {
+            toDos,
+            addToDo,
+            removeToDo,
+            updateToDo
+        }
+    }
+
+    return (
+        <ToDosContext.Provider value={ contextData }>
+            { children }
         </ToDosContext.Provider>
-     );
+    )
 }
- 
+
 export default ToDosContextProvider;

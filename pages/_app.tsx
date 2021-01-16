@@ -7,6 +7,7 @@ import materialUiTheme from '../theme/theme'
 
 import ThemeContextProvider from '../contexts/ThemeContext'
 import AuthContextProvider from '../contexts/AuthContext'
+import TodosContextProvider from '../contexts/ToDosContext'
 
 
 /*This App component is the top-level component 
@@ -27,7 +28,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <ThemeProvider theme={materialUiTheme}>
           <CssBaseline />
           <ThemeContextProvider>
-            <Component {...pageProps} />
+            <TodosContextProvider>
+              <Component {...pageProps} />
+            </TodosContextProvider>
           </ThemeContextProvider>
         </ThemeProvider>
       </AuthContextProvider>
