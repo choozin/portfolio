@@ -120,12 +120,14 @@ const Navbar = () => {
         titles: [
             'Test Webpage',
             'To Do List',
-            'Git Reference'
+            'Git Reference',
+            'Posts',
         ],
         links: [
             '/test',
             '/portfolio/todo',
-            '/git'
+            '/git',
+            '/posts',
         ]
     });
 
