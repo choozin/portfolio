@@ -84,7 +84,7 @@ export function getAllPostIds() {
 
 
 // await must be used in this function and the function calling it, for it to work
-export async function getPostData(id: string) {
+export async function getPostData(id: string[] | string) {
   const fullPath = path.join(postsDirectory, `${id}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
 

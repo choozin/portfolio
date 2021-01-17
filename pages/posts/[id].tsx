@@ -4,8 +4,12 @@ import { getAllPostIds, getPostData } from '../../lib/posts';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Date from '../../components/common/date'
 import utilStyles from '../../styles/utils.module.css'
+import { VideogameAsset } from '@material-ui/icons';
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  
+  // params intrinsically takes in a variable named "id" because that's 
+  // what's inside of the [square brackets] in the filename.
   const postData = await getPostData(params.id)
   return {
     props: {
@@ -22,6 +26,7 @@ export const getStaticPaths = async () => {
 }
 
 export const Post = ({ postData }) => {
+  console.log();
     return (
       <Layout home={false}>
         <Head>
