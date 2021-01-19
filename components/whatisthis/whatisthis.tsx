@@ -19,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
         top: 0,
         backgroundColor: 'rgba(0, 0, 0, 0.7)'
     },
-    openModalBtn: {
+    openWITModalBtn: {
         color: 'red',
     },
-    modal: {
+    WITModal: {
         display: 'flex',
         flexDirection: 'column',
         flexGrow: 1,
@@ -173,7 +173,7 @@ const WhatIsThisBtn = ({ text, topic }) => {
         }
     ];
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isWITModalOpen, setIsWITModalOpen] = useState(false);
     const [currentData, setCurrentData] = useState(topic);
     const [previousData, setPreviousData] = useState([]);
 
@@ -244,7 +244,7 @@ const WhatIsThisBtn = ({ text, topic }) => {
 
         return (
             <span className={classes.WITBtn} onClick={() => { 
-                setIsModalOpen(true); 
+                setIsWITModalOpen(true); 
                 setPreviousData(previousData.length > 0 ? [...previousData, currentData] : [currentData]); 
                 getTopicData(topic); }}>
                 {text}
@@ -288,13 +288,13 @@ const WhatIsThisBtn = ({ text, topic }) => {
     console.log(previousData);
     return (
         <>
-            <span className={classes.WITBtn} onClick={() => { setIsModalOpen(true); getTopicData(topic); }}>
+            <span className={classes.WITBtn} onClick={() => { setIsWITModalOpen(true); getTopicData(topic); }}>
                 {text}
             </span>
             {
-                isModalOpen &&
+                isWITModalOpen &&
                 <div className={classes.root}>
-                    <div className={classes.modal}>
+                    <div className={classes.WITModal}>
                         <h2>What Is <span className={classes.title}>{currentData.title}</span>?</h2>
                         <div className={classes.description}>
                             <WITDescription description={currentData.description} lookups={currentData.lookups} />
@@ -304,7 +304,7 @@ const WhatIsThisBtn = ({ text, topic }) => {
                             <Link href={currentData.url}>
                                 <Button>Visit Official Website</Button>
                             </Link>
-                            <Button onClick={() => setIsModalOpen(false)}>Close</Button>
+                            <Button onClick={() => setIsWITModalOpen(false)}>Close</Button>
                         </div>
                     </div>
                 </div>
