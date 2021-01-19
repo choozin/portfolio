@@ -62,6 +62,8 @@ const WhatIsThisBtn = ({ text, topic }) => {
 
     const classes = useStyles();
 
+    // lookups array should contain strings that match the part of the text
+    // to be made into a lookup component, including any punctuation
     const topics = [
         {
             topic: 'error',
@@ -72,7 +74,10 @@ const WhatIsThisBtn = ({ text, topic }) => {
             url: 'http://google.com',
             imagePath: 'https://spng.subpng.com/20180604/iqs/kisspng-react-javascript-angularjs-ionic-atom-5b154be64e7965.3537065815281223423214.jpg',
             lookups: [
-                'error',
+                {
+                    label: 'error',
+                    topic: 'error',
+                },
             ]
         },
         {
@@ -81,12 +86,32 @@ const WhatIsThisBtn = ({ text, topic }) => {
             description: `
                 JavaScript is a high-level programming language which has existed since 1995.
                 It is used primarily to provide programatic logic to web pages, and can be used 
-                in an extensive array of applications.
+                in an extensive array of applications. Modern JavaScript utilizes the power of 
+                node.js to compile more complex custom applications using libraries / frameworks such as Vue, React or Angular.
             `,
             url: 'https://www.javascript.com/',
             imagePath: 'https://spng.subpng.com/20180604/iqs/kisspng-react-javascript-angularjs-ionic-atom-5b154be64e7965.3537065815281223423214.jpg',
             lookups: [
-                'react',
+                {
+                    label: 'React',
+                    topic: 'react',
+                },
+                {
+                    label: 'Vue',
+                    topic: 'vue',
+                },
+                {
+                    label: 'Angular',
+                    topic: 'angular',
+                },
+                {
+                    label: 'library',
+                    topic: 'library',
+                },
+                {
+                    label: 'framework',
+                    topic: 'framework',
+                },
             ]
         },
         {
@@ -105,23 +130,45 @@ const WhatIsThisBtn = ({ text, topic }) => {
             url: 'http://reactjs.org',
             imagePath: 'https://spng.subpng.com/20180604/iqs/kisspng-react-javascript-angularjs-ionic-atom-5b154be64e7965.3537065815281223423214.jpg',
             lookups: [
-                'redux',
-                'javascript',
-                'hooks',
+                {
+                    label: 'Redux',
+                    topic: 'redux',
+                },
+                {
+                    label: 'JavaScript',
+                    topic: 'javascript',
+                },
+                {
+                    label: 'Hooks',
+                    topic: 'hooks',
+                },
             ]
         },
         {
             topic: 'hooks',
             title: 'React Hooks',
             description: `
-                Hooks are a newer addition to the react library. It is built using the javascript programming language.
+                Hooks are a newer addition to the React library. It is built using the JavaScript programming language.
             `,
             url: 'http://reactjs.org',
             imagePath: 'https://spng.subpng.com/20180604/iqs/kisspng-react-javascript-angularjs-ionic-atom-5b154be64e7965.3537065815281223423214.jpg',
             lookups: [
-                'redux',
-                'javascript',
-                'react',
+                {
+                    label: 'Redux',
+                    topic: 'redux',
+                },
+                {
+                    label: 'JavaScript',
+                    topic: 'javascript',
+                },
+                {
+                    label: 'React',
+                    topic: 'react',
+                },
+                {
+                    label: 'library',
+                    topic: 'library',
+                }
             ]
         }
     ];
@@ -159,9 +206,9 @@ const WhatIsThisBtn = ({ text, topic }) => {
                 return false;
             }
         }*/
-
-        if (typeof lookups !== 'undefined') {
-
+        
+        if (typeof lookups === 'object') {
+            
             for (let wordIndex = 0; wordIndex < wordArray.length; wordIndex++) {
 
                 //let currentWord = wordArray[wordIndex];
@@ -180,8 +227,8 @@ const WhatIsThisBtn = ({ text, topic }) => {
                 */
                 
                 for (let lookupsIndex = 0; lookupsIndex < lookups.length; lookupsIndex++) {
-
-                    if ((wordArray[wordIndex] === lookups[lookupsIndex]) && (isLookupWord === false)) {
+                    
+                    if ((wordArray[wordIndex] === lookups[lookupsIndex].label) && (isLookupWord === false)) {
 
                         isLookupWord = true;
 
@@ -191,7 +238,7 @@ const WhatIsThisBtn = ({ text, topic }) => {
                         newObjectsArray.push(<InternalWITText text={newWordsArray.join(' ')} />)
                         newWordsArray = [];
 
-                        newObjectsArray.push(<InternalWITBtn text={wordArray[wordIndex]} topic={wordArray[wordIndex]} />)
+                        newObjectsArray.push(<InternalWITBtn text={lookups[lookupsIndex].label} topic={lookups[lookupsIndex].topic} />)
 
                         //console.log('isLookup: ', isLookupWord)
                         //console.log('wordArray[wordIndex]: ', wordArray[wordIndex])
