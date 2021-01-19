@@ -131,7 +131,7 @@ const WhatIsThisBtn = ({ text, topic }) => {
             imagePath: 'https://spng.subpng.com/20180604/iqs/kisspng-react-javascript-angularjs-ionic-atom-5b154be64e7965.3537065815281223423214.jpg',
             lookups: [
                 {
-                    label: 'Redux',
+                    label: 'Redux,',
                     topic: 'redux',
                 },
                 {
@@ -139,7 +139,7 @@ const WhatIsThisBtn = ({ text, topic }) => {
                     topic: 'javascript',
                 },
                 {
-                    label: 'Hooks',
+                    label: 'Hooks,',
                     topic: 'hooks',
                 },
             ]
@@ -175,6 +175,7 @@ const WhatIsThisBtn = ({ text, topic }) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentData, setCurrentData] = useState(topic);
+    const [previousData, setPreviousData] = useState([]);
 
     const getTopicData = (topic) => {
         let topicData = topics[0];
@@ -193,39 +194,12 @@ const WhatIsThisBtn = ({ text, topic }) => {
         let newObjectsArray = []
         const [isLookupWord, setIsLookupWord] = useState(false)
 
-        // returns punctuation at end of string if it exists, otherwise returns false
-        /*const isPunctuated = (word) => {
-
-            let code = word.charCodeAt(word.length-1);
-            if ((code > 32 && code < 48) ||
-                (code > 57 && code < 65) ||
-                (code > 90 && code < 97)) {
-                    console.log('is punctuated: ', word.slice(-1));
-                    return word.slice(-1);
-            } else {
-                return false;
-            }
-        }*/
-        
         if (typeof lookups === 'object') {
             
             for (let wordIndex = 0; wordIndex < wordArray.length; wordIndex++) {
 
-                //let currentWord = wordArray[wordIndex];
                 let isLookupWord = false;
 
-                //console.log('pre-formatting: ', wordArray[wordIndex])
-
-                // find out if word is followed by a punctuation mark of some kind
-                // if so, store it and remove it form the word so that it's not included in the string comparison below
-                /*let punctuation = isPunctuated(wordArray[wordIndex]);
-                console.log('punctuation: ', punctuation);
-                console.log('word: ', currentWord);
-                (punctuation !== false) && currentWord.replace(punctuation, '');
-                
-                console.log('modifiedWord: ', currentWord)//.replace(punctuation, ''));
-                */
-                
                 for (let lookupsIndex = 0; lookupsIndex < lookups.length; lookupsIndex++) {
                     
                     if ((wordArray[wordIndex] === lookups[lookupsIndex].label) && (isLookupWord === false)) {
@@ -240,18 +214,12 @@ const WhatIsThisBtn = ({ text, topic }) => {
 
                         newObjectsArray.push(<InternalWITBtn text={lookups[lookupsIndex].label} topic={lookups[lookupsIndex].topic} />)
 
-                        //console.log('isLookup: ', isLookupWord)
-                        //console.log('wordArray[wordIndex]: ', wordArray[wordIndex])
                     }
 
                 }
 
-                // if punctuation was attached to word, put it back on,
-                // attach a space at the beginning
-                //punctuation && newWordsArray.push(punctuation);
                 newWordsArray.push(' ');
-                //punctuation = false;
-
+                
                 !isLookupWord && newWordsArray.push(wordArray[wordIndex]);
                 isLookupWord = false;
 
@@ -275,7 +243,10 @@ const WhatIsThisBtn = ({ text, topic }) => {
     const InternalWITBtn = ({ text, topic }) => {
 
         return (
-            <span className={classes.WITBtn} onClick={() => { setIsModalOpen(true); getTopicData(topic); }}>
+            <span className={classes.WITBtn} onClick={() => { 
+                setIsModalOpen(true); 
+                setPreviousData(previousData.length > 0 ? [...previousData, currentData] : [currentData]); 
+                getTopicData(topic); }}>
                 {text}
             </span>
         )
@@ -290,7 +261,31 @@ const WhatIsThisBtn = ({ text, topic }) => {
         )
     }
 
+    const goBackBtn = () => {
 
+        switch(previousData.length) {
+            case 0: 
+                //
+                setCurrentData([]);
+                setPreviousData([]);
+                break;
+            case 1: 
+                //
+                setCurrentData(previousData[previousData.length-1]);
+                setPreviousData([]);
+                break;
+            default: 
+                //
+                setCurrentData(previousData[previousData.length-1]);
+
+                let pData = previousData;
+                pData.splice(-1,1);
+                setPreviousData(pData);
+        }
+
+    }
+
+    console.log(previousData);
     return (
         <>
             <span className={classes.WITBtn} onClick={() => { setIsModalOpen(true); getTopicData(topic); }}>
@@ -305,6 +300,7 @@ const WhatIsThisBtn = ({ text, topic }) => {
                             <WITDescription description={currentData.description} lookups={currentData.lookups} />
                         </div>
                         <div className={classes.btnContainer}>
+                            { previousData.length > 0 && <Button onClick={() => goBackBtn()}>Back</Button> }
                             <Link href={currentData.url}>
                                 <Button>Visit Official Website</Button>
                             </Link>
