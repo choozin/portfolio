@@ -2,14 +2,13 @@ import { useState, useEffect, useContext, Component } from 'react';
 import Link from 'next/link'
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
-import { FullscreenExitTwoTone } from '@material-ui/icons';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     WITBtn: {
         color: 'red',
         fontWeight: 'bold',
     },
-    root: {
+    fullscreenBase: {
         width: '100vw',
         height: '100vh',
         margin: '0 auto',
@@ -20,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'rgba(0, 0, 0, 0.7)'
     },
     openWITModalBtn: {
-        color: 'red',
+        color: 'green',
     },
     WITModal: {
         display: 'flex',
@@ -293,7 +292,7 @@ const WhatIsThisBtn = ({ text, topic }) => {
             </span>
             {
                 isWITModalOpen &&
-                <div className={classes.root}>
+                <div className={classes.fullscreenBase}>
                     <div className={classes.WITModal}>
                         <h2>What Is <span className={classes.title}>{currentData.title}</span>?</h2>
                         <div className={classes.description}>
