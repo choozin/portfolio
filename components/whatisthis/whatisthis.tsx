@@ -59,7 +59,7 @@ const useStyles = makeStyles(() => ({
 
 const WhatIsThisBtn = ({ text, topic }) => {
 
-    const classes = useStyles();
+    const styles = useStyles();
 
     // lookups array should contain strings that match the part of the text
     // to be made into a lookup component, including any punctuation
@@ -242,7 +242,7 @@ const WhatIsThisBtn = ({ text, topic }) => {
     const InternalWITBtn = ({ text, topic }) => {
 
         return (
-            <span className={classes.WITBtn} onClick={() => { 
+            <span className={styles.WITBtn} onClick={() => { 
                 setIsWITModalOpen(true); 
                 setPreviousData(previousData.length > 0 ? [...previousData, currentData] : [currentData]); 
                 getTopicData(topic); }}>
@@ -287,18 +287,18 @@ const WhatIsThisBtn = ({ text, topic }) => {
     console.log(previousData);
     return (
         <>
-            <span className={classes.WITBtn} onClick={() => { setIsWITModalOpen(true); getTopicData(topic); }}>
+            <span className={styles.WITBtn} onClick={() => { setIsWITModalOpen(true); getTopicData(topic); }}>
                 {text}
             </span>
             {
                 isWITModalOpen &&
-                <div className={classes.fullscreenBase}>
-                    <div className={classes.WITModal}>
-                        <h2>What Is <span className={classes.title}>{currentData.title}</span>?</h2>
-                        <div className={classes.description}>
+                <div className={styles.fullscreenBase}>
+                    <div className={styles.WITModal}>
+                        <h2>What Is <span className={styles.title}>{currentData.title}</span>?</h2>
+                        <div className={styles.description}>
                             <WITDescription description={currentData.description} lookups={currentData.lookups} />
                         </div>
-                        <div className={classes.btnContainer}>
+                        <div className={styles.btnContainer}>
                             { previousData.length > 0 && <Button onClick={() => goBackBtn()}>Back</Button> }
                             <Link href={currentData.url}>
                                 <Button>Visit Official Website</Button>
