@@ -7,7 +7,7 @@ import Link from 'next/link'
 import Date from '../components/common/date'
 import ActiveLink from '../components/common/active-link'
 
-import Auth from '../components/auth/Auth'
+//import Auth from '../components/auth/Auth'
 import WhatIsThisBtn from '../components/whatisthis/WhatIsThis'
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -62,7 +62,6 @@ export default function Home({
         </ul>
       </section>
       <section>
-        <Auth/>
         <WhatIsThisBtn children='React' topic='react'/>
         <WhatIsThisBtn topic='hooks'>React Hooks</WhatIsThisBtn>
         <WhatIsThisBtn topic='javascript'>
