@@ -7,8 +7,8 @@ import Link from 'next/link'
 import Date from '../components/common/date'
 import ActiveLink from '../components/common/active-link'
 
-//import Auth from '../components/auth/Auth'
-//import WhatIsThisBtn from '../components/whatisthis/WhatIsThis'
+import Auth from '../components/auth/Auth'
+import WhatIsThisBtn from '../components/whatisthis/WhatIsThis'
 
 export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData()
