@@ -7,7 +7,7 @@ const Auth = () => {
 
     return (
         <div>
-            <h4>Authorization</h4>
+            <h4>Authorization for Cam's Page</h4>
             <span style={{ color: status.loggedIn ? "green" : "red" }}>Status: {status.loggedIn ? "Logged In as "+ user.userDetails.name : "Not Signed In" }</span>
             <div>
                 {

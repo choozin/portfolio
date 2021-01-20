@@ -238,7 +238,7 @@ const WhatIsThisBtn = ({ children, topic }) => {
                 isWITModalOpen &&
                 <div className={styles.fullscreenBase}>
                     <div className={styles.WITModal}>
-                        <img className={styles.image} src={currentData.img}/>
+                        <img className={styles.image} src={currentData.imagePath}/>
                         <h2>What Is <span className={styles.title}>{currentData.title}</span>?</h2>
                         <div className={styles.description}>
                             <WITDescription description={currentData.description} lookups={currentData.lookups} />
