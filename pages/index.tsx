@@ -65,6 +65,10 @@ export default function Home({
         <Auth/>
         <WhatIsThisBtn children='React' topic='react'/>
         <WhatIsThisBtn topic='hooks'>React Hooks</WhatIsThisBtn>
+        <WhatIsThisBtn topic='javascript'>
+          <img src='https://www.vhv.rs/dpng/d/456-4562295_library-of-javascript-icon-graphic-freeuse-png-files.png'
+            width='20px' height='20px'></img>
+        </WhatIsThisBtn>
       </section>
     </Layout>
   )

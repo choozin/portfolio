@@ -33,7 +33,7 @@ const WhatIsThisBtn = ({ children, topic }) => {
                 node.js to compile more complex custom applications using libraries / frameworks such as Vue, React or Angular.
             `,
             url: 'https://www.javascript.com/',
-            imagePath: 'https://spng.subpng.com/20180604/iqs/kisspng-react-javascript-angularjs-ionic-atom-5b154be64e7965.3537065815281223423214.jpg',
+            imagePath: 'https://www.vhv.rs/dpng/d/456-4562295_library-of-javascript-icon-graphic-freeuse-png-files.png',
             lookups: [
                 {
                     label: 'React',
@@ -238,6 +238,7 @@ const WhatIsThisBtn = ({ children, topic }) => {
                 isWITModalOpen &&
                 <div className={styles.fullscreenBase}>
                     <div className={styles.WITModal}>
+                        <img className={styles.image} src={currentData.img}/>
                         <h2>What Is <span className={styles.title}>{currentData.title}</span>?</h2>
                         <div className={styles.description}>
                             <WITDescription description={currentData.description} lookups={currentData.lookups} />
