@@ -8,7 +8,7 @@ import Date from '../components/common/date'
 import ActiveLink from '../components/common/active-link'
 
 //import Auth from '../components/auth/Auth'
-import WhatIsThisBtn from '../components/whatisthis/WhatIsThis'
+//import WhatIsThisBtn from '../components/whatisthis/WhatIsThis'
 
 export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData()
@@ -61,7 +61,14 @@ export default function Home({
           ))}
         </ul>
       </section>
+    </Layout>
+  )
+}
+
+/*
+
       <section>
+        <Auth/>
         <WhatIsThisBtn children='React' topic='react'/>
         <WhatIsThisBtn topic='hooks'>React Hooks</WhatIsThisBtn>
         <WhatIsThisBtn topic='javascript'>
@@ -69,6 +76,4 @@ export default function Home({
             width='20px' height='20px'></img>
         </WhatIsThisBtn>
       </section>
-    </Layout>
-  )
-}
+*/
