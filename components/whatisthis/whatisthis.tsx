@@ -1,65 +1,9 @@
 import { useState, useEffect, useContext, Component } from 'react';
 import Link from 'next/link'
-import { makeStyles } from '@material-ui/core/styles';
+import styles from './whatisthis.module.css'
 import { Button } from '@material-ui/core';
 
-const useStyles = makeStyles(() => ({
-    WITBtn: {
-        color: 'red',
-        fontWeight: 'bold',
-    },
-    fullscreenBase: {
-        width: '100vw',
-        height: '100vh',
-        margin: '0 auto',
-        zIndex: 1,
-        position: 'fixed',
-        left: 0,
-        top: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.7)'
-    },
-    openWITModalBtn: {
-        color: 'green',
-    },
-    WITModal: {
-        display: 'flex',
-        flexDirection: 'column',
-        flexGrow: 1,
-        border: 'solid 1rem black',
-        borderRadius: '1rem',
-        backgroundColor: 'white',
-        padding: '1rem',
-        zIndex: 2,
-        minWidth: '15rem',
-        maxWidth: '38rem',
-        minHeight: '10rem',
-        alignItems: 'center',
-        justifyContent: 'center',
-        margin: '3rem auto 6rem',
-    },
-    title: {
-        flexGrow: 1,
-        color: 'red',
-    },
-    description: {
-
-    },
-    btnContainer: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        width: '100%',
-    },
-    urlBtn: {
-
-    },
-    closeBtn: {
-
-    }
-}));
-
 const WhatIsThisBtn = ({ text, topic }) => {
-
-    const styles = useStyles();
 
     // lookups array should contain strings that match the part of the text
     // to be made into a lookup component, including any punctuation

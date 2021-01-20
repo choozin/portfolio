@@ -1,0 +1,53 @@
+.WITBtn {
+    color: red;
+    font-weight: bold,
+}
+
+.fullscreenBase {
+    width: 100vw;
+    height: 100vh;
+    margin: 0 auto;
+    z-index: 1;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.openWITModalBtn {
+    color: green;
+}
+
+.WITModal {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    border: solid 0.5rem black;
+    border-radius: 1rem;
+    background-color: white;
+    padding: 1rem;
+    z-index: 2;
+    min-width: 15rem;
+    max-width: 38rem;
+    min-height: 10rem;
+    align-items: center;
+    justify-content: center;
+    margin: 3rem auto 6rem;
+}
+
+.title {
+    flex-grow: 1;
+    color: red;
+}
+
+/*.description {}*/
+
+.btnContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/*.urlBtn {}*/
+
+/*.closeBtn {}*/
