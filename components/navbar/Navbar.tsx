@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { AuthContext } from '../../contexts/AuthContext';
 import { ThemeContext } from '../../contexts/ThemeContext';
+import navbarStyles from './navbar.module.css'
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -28,7 +29,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 
 const useStyles = makeStyles((theme) => ({
-    root: {
+    /*root: {
       flexGrow: 1,
     },
     menuButton: {
@@ -54,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(1),
         width: 'auto',
       },
-    },
+    },*/
     searchIcon: {
       padding: theme.spacing(0, 2),
       height: '100%',
@@ -80,9 +81,9 @@ const useStyles = makeStyles((theme) => ({
         },
       },
     },
-    list: {
+    /*list: {
         width: 250,
-    },
+    },*/
 }));
 
 const Navbar = () => {
@@ -101,16 +102,16 @@ const Navbar = () => {
 
     const [primaryNavElements, setPrimaryNavElements] = useState({
         titles: [
-            'Home', 
+            'Home',
             'Biography',
-            'Resume', 
-            'Portfolio', 
+            'Resume',
+            'Portfolio',
             'Interests & Goals'
         ],
         links: [
             '/',
             'Biography',
-            'Resume', 
+            'Resume',
             'Portfolio',
             'Interests',
         ]
@@ -133,69 +134,87 @@ const Navbar = () => {
 
     const classes = useStyles();
 
-    return(
-        <div className={classes.root}>
+    return (
+        <div className={navbarStyles.root}>
             <AppBar position="static">
                 <Toolbar>
-                <IconButton
-                    edge="start"
-                    className={classes.menuButton}
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={handleClick}
-                >
-                    <MenuIcon />
-                </IconButton>
-                <Drawer anchor='left' open={Boolean(anchorEl)} onClose={handleClose}>
-                    <div
-                        className={classes.list}
-                        role="presentation"
-                        onClick={handleClose}
-                        onKeyDown={handleClose}
+                    <IconButton
+                        edge="start"
+                        className={navbarStyles.menuButton}
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={handleClick}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Drawer anchor='left' open={Boolean(anchorEl)} onClose={handleClose}>
+                        <div
+                            className={navbarStyles.list}
+                            role="presentation"
+                            onClick={handleClose}
+                            onKeyDown={handleClose}
                         >
-                        <List>
-                            {primaryNavElements.titles.map((text, index) => (
-                            <Link href={primaryNavElements.links[index]} key={index}>
-                                <ListItem button key={text}>
-                                    <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                                    <ListItemText primary={text} />
-                                </ListItem>
-                            </Link>
-                            ))}
-                        </List>
-                        <Divider />
-                        <List>
-                            {secondaryNavElements.titles.map((text, index) => (
-                            <Link href={secondaryNavElements.links[index]} key={index}>
-                                <ListItem button key={text}>
-                                    <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                                    <ListItemText primary={text} />
-                                </ListItem>
-                            </Link>
-                            ))}
-                        </List>
+                            <List>
+                                {primaryNavElements.titles.map((text, index) => (
+                                    <Link href={primaryNavElements.links[index]} key={index}>
+                                        <ListItem button key={text}>
+                                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                                            <ListItemText primary={text} />
+                                        </ListItem>
+                                    </Link>
+                                ))}
+                            </List>
+                            <Divider />
+                            <List>
+                                {secondaryNavElements.titles.map((text, index) => (
+                                    <Link href={secondaryNavElements.links[index]} key={index}>
+                                        <ListItem button key={text}>
+                                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                                            <ListItemText primary={text} />
+                                        </ListItem>
+                                    </Link>
+                                ))}
+                            </List>
+                        </div>
+                    </Drawer>
+                    <Typography className={navbarStyles.title} variant="h6" noWrap>
+                        {page.pageTitle}
+                    </Typography>
+                    <div className={navbarStyles.search}>
+                        <div className={navbarStyles.searchIcon}>
+                            <SearchIcon />
+                        </div>
+                        <InputBase
+                            placeholder="Search…"
+                            className={navbarStyles.searchInput}
+                            classes={{
+                                root: classes.inputRoot,
+                                input: classes.inputInput,
+                            }}
+                        />
                     </div>
-                </Drawer>
-                <Typography className={classes.title} variant="h6" noWrap>
-                    {page.pageTitle}
-                </Typography>
-                <div className={classes.search}>
-                    <div className={classes.searchIcon}>
-                    <SearchIcon />
-                    </div>
-                    <InputBase
-                    placeholder="Search…"
-                    classes={{
-                        root: classes.inputRoot,
-                        input: classes.inputInput,
-                    }}
-                    inputProps={{ 'aria-label': 'search' }}
-                    />
-                </div>
                 </Toolbar>
             </AppBar>
         </div>
     )
 }
- 
+
+/* SEARCH BAR */
+/*
+<div className={navbarStyles.search}>
+    <div className={navbarStyles.searchIcon}>
+        <SearchIcon />
+    </div>
+    <InputBase
+        placeholder="Search…"
+        classes={{
+            root: navbarStyles.inputRoot,
+            input: navbarStyles.inputInput,
+        }}
+        inputProps={{ 'aria-label': 'search' }}
+    />
+</div>
+*/
+
+
 export default Navbar;

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import styles from './whatisthis.module.css'
 import { Button } from '@material-ui/core';
 
-const WhatIsThisBtn = ({ text, topic }) => {
+const WhatIsThisBtn = ({ children, topic }) => {
 
     // lookups array should contain strings that match the part of the text
     // to be made into a lookup component, including any punctuation
@@ -232,7 +232,7 @@ const WhatIsThisBtn = ({ text, topic }) => {
     return (
         <>
             <span className={styles.WITBtn} onClick={() => { setIsWITModalOpen(true); getTopicData(topic); }}>
-                {text}
+                {children}
             </span>
             {
                 isWITModalOpen &&
