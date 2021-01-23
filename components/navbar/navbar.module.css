@@ -66,16 +66,16 @@
     /*justify-content: space-between;*/
     align-items: center;
     padding: 0.1rem;
+    max-width: 50%;
 }
 
 .searchIcon {
-    flex-basis: auto;
-    align-self: center;
-    margin: 0.2rem 0 0 0.5rem;
+    /*flex-basis: auto;
+    align-self: center;*/
+    margin: 0.2rem -2.5rem 0 0.5rem;
 }
 
 .searchInput {
-    /*width: 100%;*/
     color: white;
     background: none;
     border-style: none;

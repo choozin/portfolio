@@ -106,7 +106,8 @@ const Navbar = () => {
             'Biography',
             'Resume',
             'Portfolio',
-            'Interests & Goals'
+            'Interests & Goals',
+            'Contact'
         ],
         links: [
             '/',
@@ -114,6 +115,7 @@ const Navbar = () => {
             'Resume',
             'Portfolio',
             'Interests',
+            '/contact',
         ]
     });
 
