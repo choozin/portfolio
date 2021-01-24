@@ -1,4 +1,4 @@
-import React, { Component, useContext, useEffect } from 'react';
+import React, { Component, useState, useContext, useEffect } from 'react';
 import { ToDosContext } from '../../contexts/ToDosContext';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import List from '@material-ui/core/List';
@@ -13,16 +13,53 @@ const ToDos = () => {
 
     const { toDos } = useContext(ToDosContext);
     
+    /*const sort = (sortType) => {
+        switch (sortType) {
+            case 'category': 
+                //
+                console.log(orderedList);
+
+                break;
+            case 'alphabetically': 
+                //
+                setOrderedList(
+                    unorderedList.sort((a, b) => b.description-a.description)
+                );
+                console.log(unorderedList.sort((a, b) => {return a.description-b.description}));
+                break;
+            default: 
+                //
+                console.log('default sort');
+                break;
+        }
+    }*/
+
+    const deleteItem = (id) => {
+        
+        toDos.removeToDo(id);
+
+    }
+
+    const sortItems = (type) => {
+
+        toDos.sortToDos(type)
+
+    }
+
     return ( 
         <div className='todos'>
+            <div className='sort'>
+                <input type='button' value='category' onClick={() => sortItems('category')}/>
+                <input type='button' value='alphabetically' onClick={() => sortItems('alphabetically')}/>
+            </div>
             <List>
-                {toDos.toDos.map(todo => {
+                {toDos.updatedToDos.map(item => {
                     return (
-                        <ListItem button key={toDos.toDos.id}>
+                        <ListItem button key={item.id}>
                             <ListItemIcon>
-                                <InboxIcon />
+                               <InboxIcon onClick={() => deleteItem(item.id)}/>
                             </ListItemIcon>
-                            <ListItemText primary={todo.description} />
+                            <ListItemText primary={item.label} />
                         </ListItem>
                     )
                 })}

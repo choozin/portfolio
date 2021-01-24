@@ -15,46 +15,91 @@ const ToDosContextProvider = ({ children }) => {
             return localData ? 
                 JSON.parse(localData) : 
                 [
-                    {description: 'item 1', datetime: 'now', id: 1},
-                    {description: 'item 2', datetime: 'now', id: 2},
-                    {description: 'item 3', datetime: 'now', id: 3},
-                    {description: 'item 4', datetime: 'now', id: 4}
+                    {
+                        label: 'title1',
+                        description: 'item 1', 
+                        category: 'a',
+                        datetime: 'now', 
+                        id: 1
+                    },
+                    {
+                        label: 'title2',
+                        description: 'item 2', 
+                        category: 'a',
+                        datetime: 'now', 
+                        id: 2
+                    },
+                    {
+                        label: 'titlea',
+                        description: 'item 3', 
+                        category: 'b',
+                        datetime: 'now', 
+                        id: 3
+                    },
+                    {
+                        label: 'titleb',
+                        description: 'item 4', 
+                        category: 'b',
+                        datetime: 'now', 
+                        id: 4
+                    }
                 ];
         } else {
             return [{description: 'Could not connect to local storage, using shared state.', datetime: 'now', id: 1}];
         }
-    };
+    }; 
     
-    const [ toDos, setToDos ] = useState(initializeData);
+    const [ initialToDos, setInitialToDos ] = useState(initializeData);
+    const [ updatedToDos, setUpdatedToDos] = useState(initialToDos);
 
 
-    const addToDo = (description, datetime) => {
-        setToDos([...toDos, { description, datetime, id: uuid() }]);
+    const addToDo = (label, description, category, datetime) => {
+        setUpdatedToDos([...updatedToDos, { label, description, category, datetime, id: uuid() }]);
     }
 
     const removeToDo = (id) => {
-        setToDos(toDos.filter(todo => todo.id !== id));
+        setUpdatedToDos(updatedToDos.filter(todo => todo.id !== id));
     }
 
     const updateToDo = (id, description, datetime) => {
-        const toDoIndex = toDos.findIndex(toDo => toDo.id == id);
-        const newToDos = toDos;
+        const toDoIndex = updatedToDos.findIndex(toDo => toDo.id == id);
+        const newToDos = updatedToDos;
         newToDos[toDoIndex].description = description;
         newToDos[toDoIndex].datetime = datetime;
-        setToDos([...newToDos]);
+        setUpdatedToDos([...newToDos]);
+    }
+
+    const sortToDos = (sortType) => {
+        let sortedArray = [];
+        switch (sortType) {
+            case 'category': 
+                //
+                sortedArray = updatedToDos.sort((a, b) => a.category.localeCompare(b.category));
+                setUpdatedToDos([...sortedArray]);
+                break;
+            case 'alphabetically': 
+                //
+                sortedArray = updatedToDos.sort((a, b) => a.description.localeCompare(b.description));
+                setUpdatedToDos([...sortedArray]);
+                break;
+            default: 
+                //
+                break;
+        }
     }
 
     useEffect(() => {
-        localStorage.setItem('todos', JSON.stringify(toDos))
-    }, [toDos]);
+        localStorage.setItem('todos', JSON.stringify(updatedToDos))
+    }, [updatedToDos]);
 
     // initialize single data object to pass in context
     const contextData = {
         toDos: {
-            toDos,
+            updatedToDos,
             addToDo,
             removeToDo,
-            updateToDo
+            updateToDo,
+            sortToDos,
         }
     }
 
