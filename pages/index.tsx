@@ -10,6 +10,8 @@ import ActiveLink from '../components/common/active-link'
 import Auth from '../components/auth/auth'
 import WhatIsThisBtn from '../components/whatisthis/whatisthis'
 
+import request from '../pages/api/mailjet'
+
 export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData()
   return {
@@ -28,6 +30,10 @@ export default function Home({
     id: string 
   }[] 
 }) {
+
+  let mailjet = request;
+
+  console.log('mailjet: ', mailjet);
 
   return (
     <Layout home>
