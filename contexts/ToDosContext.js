@@ -295,6 +295,20 @@ const ToDosContextProvider = ({ children }) => {
                         datetime: 'now', 
                         id: uuid(),
                     },
+                    {
+                        label: 'panzarotti toppings',
+                        description: '', 
+                        category: 'fridge/produce/meats',
+                        datetime: 'now', 
+                        id: uuid(),
+                    },,
+                    {
+                        label: 'sticky rice',
+                        description: '', 
+                        category: 'pantry',
+                        datetime: 'now', 
+                        id: uuid(),
+                    },
                 ];/*
         } else {
             return [{description: 'Could not connect to local storage, using shared state.', datetime: 'now', id: 1}];
