@@ -60,6 +60,7 @@ const ToDos = () => {
                                <InboxIcon onClick={() => deleteItem(item.id)}/>
                             </ListItemIcon>
                             <ListItemText primary={item.label} />
+                            <span>{item.category}</span>
                         </ListItem>
                     )
                 })}

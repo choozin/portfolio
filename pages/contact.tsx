@@ -25,6 +25,7 @@ import {
 const reasons = [
     'Freelance Work Opportunity',
     'Employment Opportunity',
+    'Collaboration Opportunity',
     'IT Consultation',
     'Technical Assistance',
     'Other Inquiries',
