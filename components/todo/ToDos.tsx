@@ -53,7 +53,7 @@ const ToDos = () => {
         setOnlyShowPriority(onlyShowPriority ? false : true);
 
     }
-    console.log(toDos.updatedToDos);
+    
     return ( 
         <div className='todos'>
             <div className='sort'>

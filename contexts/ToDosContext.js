@@ -184,6 +184,14 @@ const ToDosContextProvider = ({ children }) => {
                 id: uuid(),
             },
             {
+                label: 'bacon',
+                description: '',
+                category: 'meat',
+                priority: 1, 
+                datetime: 'now',
+                id: uuid(),
+            },
+            {
                 label: 'celary',
                 description: '',
                 category: 'produce',

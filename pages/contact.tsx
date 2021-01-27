@@ -22,31 +22,59 @@ import {
     Icon,
 } from '@material-ui/core'
 
-const reasons = [
-    'Freelance Work Opportunity',
-    'Employment Opportunity',
-    'Collaboration Opportunity',
-    'IT Consultation',
-    'Technical Assistance',
-    'Other Inquiries',
-];
-
 const Contact = () => {
 
     const { page } = useContext(ThemeContext);
     page.setPageTitle('Contact');
 
+    const [status, setStatus] = useState("");
     const [contactReason, setContactReason] = useState([]);
 
+
+    const reasons = [
+        'Freelance Work Opportunity',
+        'Employment Opportunity',
+        'Collaboration Opportunity',
+        'IT Consultation',
+        'Technical Assistance',
+        'Other Inquiries',
+    ];
+
     const handleReasonChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-        const { options } = event.target as HTMLSelectElement;
+        /*const { options } = event.target.value as HTMLSelectElement;
         const value: string[] = [];
-        for (let i = 0, l = options.length; i < l; i += 1) {
-            if (options[i].selected) {
-                value.push(options[i].value);
+        console.log('event', event.target.value)
+        if(options.length > 0) { 
+            for (let i = 0, l = options.length; i < l; i += 1) {
+                if (options[i].selected) {
+                    value.push(options[i].value);
+                }
             }
         }
-        setContactReason(value);
+        setContactReason(value);*/
+    }
+
+    const submitForm = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const data = new FormData(form);
+        const xhr = new XMLHttpRequest();
+        xhr.open(form.method, form.action);
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState !== XMLHttpRequest.DONE) return;
+            if (xhr.status === 200) {
+                form.reset();
+                setStatus("SUCCESS");
+            } else {
+                setStatus("ERROR");
+            }
+        };
+        xhr.send(data);
+        console.log('e', data);
+
+        
+
     }
 
     return (
@@ -56,8 +84,13 @@ const Contact = () => {
             </Head>
             <section>
                 <Paper variant="elevation">
-                    <form className={styles.contactForm}>
-                    <h2 className={styles.paperHeader}>Send Me A Message!</h2>
+                    <form
+                        className={styles.contactForm}
+                        onSubmit={(e) => submitForm(e)}
+                        action="https://formspree.io/f/mqkgnoye"
+                        method="POST"
+                    >
+                        <h2 className={styles.paperHeader}>Send Me A Message!</h2>
                         <FormControl fullWidth={true}>
                             <InputLabel htmlFor="name">Your Name</InputLabel>
                             <Input id="name" aria-describedby="my-helper-text" />
@@ -105,16 +138,21 @@ const Contact = () => {
                             placeholder="Enter your message here"
                             fullWidth={true}
                         />
-                        <div className={styles.submitButton}>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                endIcon={<Icon>send</Icon>}
-                                size="large"
-                            >
-                                Send
-                            </Button>
-                        </div>
+                        {status === "SUCCESS" ?
+                            <p>Thank for getting in touch! I'll get back to you soon.</p> :
+                            <div className={styles.submitButton}>
+                                <Button
+                                    type="submit" 
+                                    variant="contained"
+                                    color="primary"
+                                    endIcon={<Icon>send</Icon>}
+                                    size="large"
+                                >
+                                    Send
+                                </Button>
+                            </div>
+                        }
+                        {status === "ERROR" && <p>Oops! There was an error. Please refresh the page and try again. I'd tell you to get in touch with an administrator, but that's me, and getting in touch with me seems to be the problem.</p>}
                     </form>
                 </Paper>
             </section>
