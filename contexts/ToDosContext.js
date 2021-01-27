@@ -166,7 +166,7 @@ const ToDosContextProvider = ({ children }) => {
                 priority: 1, 
                 datetime: 'now',
                 id: uuid(),
-            },,
+            },
             {
                 label: 'ricotta cheese',
                 description: 'small for lasagna',
@@ -407,8 +407,8 @@ const ToDosContextProvider = ({ children }) => {
     const [updatedToDos, setUpdatedToDos] = useState(initialToDos);
 
 
-    const addToDo = (label, description, category, datetime) => {
-        setUpdatedToDos([...updatedToDos, { label, description, category, datetime, id: uuid() }]);
+    const addToDo = (label, description, category, priority, datetime) => {
+        setUpdatedToDos([...updatedToDos, { label, description, category, priority, datetime, id: uuid() }]);
     }
 
     const removeToDo = (id) => {
@@ -433,7 +433,7 @@ const ToDosContextProvider = ({ children }) => {
                 break;
             case 'alphabetically':
                 //
-                sortedArray = updatedToDos.sort((a, b) => a.label.localeCompare(b.description));
+                sortedArray = updatedToDos.sort((a, b) => a.label.localeCompare(b.label));
                 setUpdatedToDos([...sortedArray]);
                 break;
             default:
