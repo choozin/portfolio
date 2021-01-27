@@ -11,6 +11,8 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
  
 const ToDos = () => {
 
+    const [ onlyShowPriority, setOnlyShowPriority ] = useState(false)
+
     const { toDos } = useContext(ToDosContext);
     
     /*const sort = (sortType) => {
@@ -46,23 +48,36 @@ const ToDos = () => {
 
     }
 
+    const togglePriority = () => {
+
+        setOnlyShowPriority(onlyShowPriority ? false : true);
+
+    }
+
     return ( 
         <div className='todos'>
             <div className='sort'>
                 <input type='button' value='category' onClick={() => sortItems('category')}/>
                 <input type='button' value='alphabetically' onClick={() => sortItems('alphabetically')}/>
+                <input type='button' value='Priority Only' onClick={() => togglePriority()}/>
             </div>
             <List>
                 {toDos.updatedToDos.map(item => {
-                    return (
-                        <ListItem button key={item.id}>
-                            <ListItemIcon>
-                               <InboxIcon onClick={() => deleteItem(item.id)}/>
-                            </ListItemIcon>
-                            <ListItemText primary={item.label} />
-                            <span>{item.category}</span>
-                        </ListItem>
-                    )
+                    
+                    let showItem = ((onlyShowPriority && item.priority) || !onlyShowPriority);
+
+                    if (showItem) {
+                        return (
+                            <ListItem button key={item.id}>
+                                <ListItemIcon>
+                                <InboxIcon onClick={() => deleteItem(item.id)}/>
+                                </ListItemIcon>
+                                
+                                <ListItemText primary={item.label} />
+                                <span>{item.category}</span>
+                            </ListItem>
+                        )
+                    }
                 })}
             </List>
         </div>

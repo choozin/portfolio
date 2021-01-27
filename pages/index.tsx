@@ -31,9 +31,9 @@ export default function Home({
   }[] 
 }) {
 
-  let mailjet = request;
+  /*let mailjet = request;
 
-  console.log('mailjet: ', mailjet);
+  console.log('mailjet: ', mailjet);*/
 
   return (
     <Layout home>
