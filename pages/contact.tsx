@@ -7,6 +7,8 @@ import styles from './contact.module.css'
 import Layout from '../components/layout/layout'
 import React, { useState, useEffect, useContext } from 'react';
 
+import MyForm from './contact/myform';
+
 import {
     FormControl,
     InputLabel,
@@ -28,7 +30,7 @@ const Contact = () => {
     page.setPageTitle('Contact');
 
     const [status, setStatus] = useState("");
-    const [contactReason, setContactReason] = useState([]);
+    const [contactReason, setContactReason] = useState(["empty"]);
 
 
     const reasons = [
@@ -77,6 +79,17 @@ const Contact = () => {
 
     }
 
+    /*return (
+        <Layout home={false}>
+            <Head>
+                <title>{page.pageTitle}</title>
+            </Head>
+            <section>
+                <MyForm/>
+            </section>
+        </Layout>
+    )*/
+
     return (
         <Layout home={false}>
             <Head>
@@ -93,18 +106,18 @@ const Contact = () => {
                         <h2 className={styles.paperHeader}>Send Me A Message!</h2>
                         <FormControl fullWidth={true}>
                             <InputLabel htmlFor="name">Your Name</InputLabel>
-                            <Input id="name" aria-describedby="my-helper-text" />
+                            <Input id="name" name="name" aria-describedby="my-helper-text" />
                         </FormControl>
                         <br />
                         <FormControl fullWidth={true}>
                             <InputLabel htmlFor="organization">Organization</InputLabel>
-                            <Input id="organization" aria-describedby="my-helper-text" />
+                            <Input id="organization" name="organization" aria-describedby="my-helper-text" />
                             <FormHelperText id="my-helper-text">(If applicable)</FormHelperText>
                         </FormControl>
                         <br />
                         <FormControl fullWidth={true}>
                             <InputLabel htmlFor="email">Email</InputLabel>
-                            <Input id="email" aria-describedby="my-helper-text" />
+                            <Input id="email" name="email" aria-describedby="my-helper-text" />
                             <FormHelperText id="my-helper-text">Your information will never be shared</FormHelperText>
                         </FormControl>
                         <br />
@@ -114,6 +127,7 @@ const Contact = () => {
 
                                 labelId="reason-label"
                                 id="reason"
+                                name="reason"
                                 value={contactReason}
                                 onChange={handleReasonChange}
                                 multiple
@@ -131,7 +145,8 @@ const Contact = () => {
                         </FormControl>
                         <br /><br />
                         <TextField
-                            id="outlined-multiline-static"
+                            id="message"
+                            name="message"
                             label="Your Message"
                             multiline
                             rows={4}
@@ -142,6 +157,8 @@ const Contact = () => {
                             <p>Thank for getting in touch! I'll get back to you soon.</p> :
                             <div className={styles.submitButton}>
                                 <Button
+                                    id="submit"
+                                    name="submit" 
                                     type="submit" 
                                     variant="contained"
                                     color="primary"
