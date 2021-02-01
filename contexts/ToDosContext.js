@@ -4,12 +4,35 @@ import React, {
     useEffect,
 } from 'react';
 import { v4 as uuid } from 'uuid'
+//import FirebaseContext from '../context/firebase'
+import { db, base } from '../components/firebase/firebase'
 
 export const ToDosContext = createContext();
 
 const ToDosContextProvider = ({ children }) => {
 
     const initializeData = () => {
+
+        /* FIREBASE */
+        
+        const [todos, setTodos] = useState([])
+        useEffect(() => {
+            const ref = base.syncState(`todos`, {
+                context: {
+                    setState: ({ todos }) => setTodos({ ...todos }),
+                    state: { todos },
+                },
+                state: 'todos',
+                asArray: true,
+            })
+            return () => {
+                base.removeBinding(ref);
+            }
+            console.log('todos', todos)
+        }, [])
+
+        
+
         /*if(typeof localStorage !== "undefined") {
             const localData = localStorage.getItem('todos');
             return localData ? 

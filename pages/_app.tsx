@@ -9,6 +9,9 @@ import ThemeContextProvider from '../contexts/ThemeContext'
 import AuthContextProvider from '../contexts/AuthContext'
 import TodosContextProvider from '../contexts/ToDosContext'
 
+import React from 'react'
+
+
 
 /*This App component is the top-level component 
 which will be common across all the different 

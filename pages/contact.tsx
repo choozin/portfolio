@@ -7,7 +7,7 @@ import styles from './contact.module.css'
 import Layout from '../components/layout/layout'
 import React, { useState, useEffect, useContext } from 'react';
 
-import MyForm from './contact/myform';
+//import MyForm from './contact/myform';
 
 import {
     FormControl,
@@ -30,7 +30,7 @@ const Contact = () => {
     page.setPageTitle('Contact');
 
     const [status, setStatus] = useState("");
-    const [contactReason, setContactReason] = useState(["empty"]);
+    const [contactReason, setContactReason] = useState<string[]>([]);
 
 
     const reasons = [
@@ -45,7 +45,17 @@ const Contact = () => {
     const handleReasonChange = (event: React.ChangeEvent<{ value: unknown }>) => {
         /*const { options } = event.target.value as HTMLSelectElement;
         const value: string[] = [];
-        console.log('event', event.target.value)
+        for (let i = 0, l = options.length; i < l; i += 1) {
+            if (options[i].selected) {
+                value.push(options[i].value);
+            }
+        }
+        setContactReason(value);
+        console.log(value)  */
+
+        //const { options } = event.target.value as HTMLSelectElement;
+        /*const value: string[] = [];
+        
         if(options.length > 0) { 
             for (let i = 0, l = options.length; i < l; i += 1) {
                 if (options[i].selected) {
@@ -54,6 +64,25 @@ const Contact = () => {
             }
         }
         setContactReason(value);*/
+        //console.log(event.target.value)
+
+        /*let currentContactReason = contactReason
+        let clickedOption = event.target.value[0];
+        currentContactReason.push(clickedOption)
+        setContactReason(currentContactReason);
+        console.log(currentContactReason)*/
+
+        /*if(event) {
+            let choice = event.target.value[1]
+            let value = contactReason
+            /*for(let i = 0; i < contactReason.length; i++) {
+                contactReason[i] !== choice ? value.push(choice) : value.filter(choice)
+            }
+            
+           value.push(choice)
+            setContactReason(value)
+            console.log(value)
+        }*/
     }
 
     const submitForm = (e) => {
@@ -75,7 +104,7 @@ const Contact = () => {
         xhr.send(data);
         console.log('e', data);
 
-        
+
 
     }
 
@@ -132,6 +161,7 @@ const Contact = () => {
                                 onChange={handleReasonChange}
                                 multiple
                                 input={<Input />}
+                                inputProps={{ id: 'select-reason-change'}}
                                 renderValue={(selected) => (selected as string[]).join(', ')}
                             >
                                 {reasons.map((reason) => (
@@ -158,8 +188,8 @@ const Contact = () => {
                             <div className={styles.submitButton}>
                                 <Button
                                     id="submit"
-                                    name="submit" 
-                                    type="submit" 
+                                    name="submit"
+                                    type="submit"
                                     variant="contained"
                                     color="primary"
                                     endIcon={<Icon>send</Icon>}

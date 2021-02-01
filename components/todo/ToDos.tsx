@@ -1,6 +1,7 @@
 import React, { Component, useState, useContext, useEffect } from 'react';
 import { ToDosContext } from '../../contexts/ToDosContext';
-import { ThemeContext } from '../../contexts/ThemeContext';
+
+
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
@@ -14,7 +15,18 @@ const ToDos = () => {
     const [ onlyShowPriority, setOnlyShowPriority ] = useState(false)
 
     const { toDos } = useContext(ToDosContext);
-    
+    //const { firebase } = useContext(FirebaseContext);
+
+
+    /* FIREBASE */
+    /*const [firebaseToDos, setFirebaseToDos] = useState({})
+    useEffect(() => {
+        let firebaseToDosRef = base.syncState('todos', {
+            context: firebaseToDos,
+            state: 'todos'
+        });
+    }, [])*/
+
     /*const sort = (sortType) => {
         switch (sortType) {
             case 'category': 
@@ -37,10 +49,10 @@ const ToDos = () => {
     }*/
 
     const deleteItem = (id) => {
-        
-        toDos.removeToDo(id);
 
-    }
+            toDos.removeToDo(id);
+
+        }
 
     const sortItems = (type) => {
 
