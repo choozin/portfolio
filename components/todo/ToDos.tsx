@@ -1,6 +1,7 @@
 import React, { Component, useState, useContext, useEffect } from 'react';
 import { ToDosContext } from '../../contexts/ToDosContext';
 
+import { db, base } from '../firebase/firebase';
 
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -19,13 +20,21 @@ const ToDos = () => {
 
 
     /* FIREBASE */
-    /*const [firebaseToDos, setFirebaseToDos] = useState({})
+    const [todos, setTodos] = useState({})
     useEffect(() => {
-        let firebaseToDosRef = base.syncState('todos', {
-            context: firebaseToDos,
-            state: 'todos'
-        });
-    }, [])*/
+        const ref = base.syncState(`todos`, {
+            context: {
+                setState: ({ todos }) => setTodos({ ...todos }),
+                state: { todos },
+            },
+            state: 'todos',
+        })
+        return () => {
+            base.removeBinding(ref);
+        }
+    }, [])
+
+    //console.log('todos', todos)
 
     /*const sort = (sortType) => {
         switch (sortType) {
