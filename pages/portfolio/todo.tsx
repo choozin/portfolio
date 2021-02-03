@@ -16,7 +16,7 @@ import Tab from '@material-ui/core/Tab'
 import Typography from '@material-ui/core/Typography'
 
 import ToDosFirebase from '../../components/firebase/ToDosFirebase';
-
+import ToDosLocalStorage from '../../components/todo/ToDosLocalStorage';
 const Todo = () => {
 
     const { page } = useContext(ThemeContext);
@@ -51,6 +51,7 @@ const Todo = () => {
             </section>}
             {selectedTab === 2 && <section>
                 <h2>Local Device List</h2>
+                <ToDosLocalStorage/>
             </section>}
         </Layout>
     );

@@ -15,23 +15,15 @@ export const ToDosContext = createContext();
 
 const ToDosContextProvider = ({ children }) => {
 
-    /*const [todos, setTodos] = useState(todosArray)
-
-    useEffect(() => {
-        const ref = base.syncState(`todos`, {
-            context: {
-                setState: ({ todos }) => setTodos({ ...todos }),
-                state: { todos },
-            },
-            state: 'todos',
-        })
-        return () => {
-            base.removeBinding(ref);
-        }
-    }, {})*/
+    //const [toggleLocalStorage, setToggleLocalStorage] = useState(false)
+    //const [localArray, setLocalArray] = useState(null)
 
     const initializeData = () => {
-        return todosArray;
+
+        //setLocalArray(localStorage.getItem('todos'))
+        //console.log('lA', localArray)
+
+        return /*toggleLocalStorage ? localArray : */todosArray;
     };
 
     const [initialToDos, setInitialToDos] = useState(initializeData);
@@ -73,9 +65,10 @@ const ToDosContextProvider = ({ children }) => {
         }
     }
 
-    useEffect(() => {
+    /*useEffect(() => {
         localStorage.setItem('todos', JSON.stringify(updatedToDos))
-    }, [updatedToDos]);
+        
+    }, [updatedToDos]);*/
 
     // initialize single data object to pass in context
     const contextData = {

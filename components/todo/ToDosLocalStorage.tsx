@@ -11,21 +11,24 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 
  
-const ToDos = () => {
+const ToDosLocalStorage = () => {
 
     const [ onlyShowPriority, setOnlyShowPriority ] = useState(false)
 
-    const { toDos } = useContext(ToDosContext);
+    const [ initialArray, setInitialArray ] = useState([]);
+    const [ updatedArray, setUpdatedArray ] = useState(localStorage.getItem('todos'));
 
     const deleteItem = (id) => {
 
-            toDos.removeToDo(id);
+        //setUpdatedArray()
+
+        localStorage.setItem('todos', JSON.stringify(updatedArray))
 
     }
 
     const sortItems = (type) => {
 
-        toDos.sortToDos(type)
+        
 
     }
 
@@ -34,18 +37,14 @@ const ToDos = () => {
         setOnlyShowPriority(onlyShowPriority ? false : true);
 
     }
-
-    //JSON.parse(localStorage.getItem('todos'))
     
     return ( 
         <div className='todos'>
             <div className='sort'>
-                <input type='button' value='category' onClick={() => sortItems('category')}/>
-                <input type='button' value='alphabetically' onClick={() => sortItems('alphabetically')}/>
                 <input type='button' value='Priority Only' onClick={() => togglePriority()}/>
             </div>
             <List>
-                {toDos.updatedToDos.map(item => {
+                {JSON.parse(localStorage.getItem('todos')).map(item => {
                     
                     let showItem = ((onlyShowPriority && item.priority) || !onlyShowPriority);
 
@@ -68,4 +67,4 @@ const ToDos = () => {
     
 }
  
-export default ToDos;
+export default ToDosLocalStorage;
