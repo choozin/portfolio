@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 
+import AddToDoFirebase from './AddToDoFirebase'
+
 import List from '@material-ui/core/List'
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
@@ -29,17 +31,21 @@ const ToDosFirebase = () => {
         }
     }, [])
     */
-    useEffect(() => {
+
+    const fetchData = () => {
         const ref = base.fetch(`todos`, {
             context: {
                 setState: ({ todos }) => setTodos({ ...todos }),
                 state: { todos },
             },
-            asArray: true,
+            asArray: false,
             then(data) {
                 setTodos(data)
             }
         })
+    }
+    useEffect(() => {
+        fetchData();
     }, [])
 
     /*useEffect(() => {
@@ -55,11 +61,73 @@ const ToDosFirebase = () => {
         })   
     }, [])*/
 
+    const getFirebaseKeyForItemId = (id) => {
+
+        const keys = Object.keys(todos)
+        const ids = Object.values(todos).map(item => {
+            return item.id
+        })
+
+        for(let i = 0; i < ids.length; i++) {
+            if(ids[i] === id) return keys[i]
+        }
+
+    }
+
+    const deleteItem = (id) => {
+
+        let key = getFirebaseKeyForItemId(id)
+        
+        let obj = todos;
+        delete obj[key];
+        
+        base.post('todos', {
+            data: obj
+        })
+
+        fetchData()
+
+    }
+
+    const sortItems = (type) => {
+
+        let unsortedArray = Object.values(todos);
+        let sortedArray = [];
+        switch (type) {
+            case 'category':
+                //
+                sortedArray = unsortedArray.sort((a, b) => a.category.localeCompare(b.category));
+                setTodos([...sortedArray]);
+                break;
+            case 'alphabetically':
+                //
+                sortedArray = unsortedArray.sort((a, b) => a.label.localeCompare(b.label));
+                setTodos([...sortedArray]);
+                break;
+            default:
+                //
+                break;
+        }
+
+    }
+
+    const togglePriority = () => {
+
+        setOnlyShowPriority(onlyShowPriority ? false : true);
+
+    }
+
+    const addToDoCallback = (ref) => {
+
+        fetchData()
+
+    }
+
     return (
         <div className='todos'>
             <div className='sort'>
-                <input type='button' value='category' />
-                <input type='button' value='alphabetically' />
+                <input type='button' value='category' onClick={() => sortItems('category')}/>
+                <input type='button' value='alphabetically' onClick={() => sortItems('alphabetically')}/>
                 <input type='button' value='Priority Only' />
             </div>
             <List>
@@ -71,11 +139,10 @@ const ToDosFirebase = () => {
 
                         if (showItem) {
                             return (
-                                <ListItem button key={item.id}>
+                                <ListItem id={item.id} button key={item.id}>
                                     <ListItemIcon>
-                                        <InboxIcon />
+                                        <InboxIcon  onClick={() => deleteItem(item.id)}/>
                                     </ListItemIcon>
-
                                     <ListItemText primary={item.label} />
                                     <span>{item.category}</span>
                                 </ListItem>
@@ -85,6 +152,7 @@ const ToDosFirebase = () => {
                     //console.log('todos is undefined: ', todos)
                 }
             </List>
+            <AddToDoFirebase callback={addToDoCallback}/>
         </div>
     )
 

@@ -16,26 +16,7 @@ const ToDos = () => {
     const [ onlyShowPriority, setOnlyShowPriority ] = useState(false)
 
     const { toDos } = useContext(ToDosContext);
-    //const { firebase } = useContext(FirebaseContext);
-
-
-    /* FIREBASE */
-    const [todos, setTodos] = useState({})
-    useEffect(() => {
-        const ref = base.syncState(`todos`, {
-            context: {
-                setState: ({ todos }) => setTodos({ ...todos }),
-                state: { todos },
-            },
-            state: 'todos',
-        })
-        return () => {
-            base.removeBinding(ref);
-        }
-    }, [])
-
-    //console.log('todos', todos)
-
+    
     /*const sort = (sortType) => {
         switch (sortType) {
             case 'category': 

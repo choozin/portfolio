@@ -10,12 +10,11 @@ import Layout from '../../components/layout/layout'
 import ToDos from '../../components/todo/ToDos'
 import AddToDo from '../../components/todo/AddToDo';
 
-import TodosFirebase from '../../components/firebase/ToDosFirebase'
-
 import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import Typography from '@material-ui/core/Typography'
+
 import ToDosFirebase from '../../components/firebase/ToDosFirebase';
 
 const Todo = () => {
@@ -23,7 +22,7 @@ const Todo = () => {
     const { page } = useContext(ThemeContext);
     page.setPageTitle(`Cam's To Do List`);
 
-    const [selectedTab, setSelectedTab] = useState(1)
+    const [selectedTab, setSelectedTab] = useState(0)
 
     const handleTabChange = (event, value) => {
         setSelectedTab(value);

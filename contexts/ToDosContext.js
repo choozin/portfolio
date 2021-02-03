@@ -6,6 +6,8 @@ import React, {
 
 import todosArray from '../lib/todos'
 
+import { v4 as uuid } from 'uuid'
+
 //import FirebaseContext from '../context/firebase'
 import { db, base } from '../components/firebase/firebase'
 
