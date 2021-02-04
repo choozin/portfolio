@@ -35,8 +35,6 @@ const ToDos = () => {
 
     }
 
-    //JSON.parse(localStorage.getItem('todos'))
-    
     return ( 
         <div className='todos'>
             <div className='sort'>
@@ -45,7 +43,7 @@ const ToDos = () => {
                 <input type='button' value='Priority Only' onClick={() => togglePriority()}/>
             </div>
             <List>
-                {toDos.updatedToDos.map(item => {
+                {toDos.updatedToDos.length > 0 && toDos.updatedToDos.map(item => {
                     
                     let showItem = ((onlyShowPriority && item.priority) || !onlyShowPriority);
 

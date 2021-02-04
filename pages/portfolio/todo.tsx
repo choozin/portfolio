@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { GetStaticProps } from 'next';
 import Link from 'next/link'
+import NoSSR from 'react-no-ssr'
 
 import { useContext, useState } from 'react'
 import { ThemeContext } from '../../contexts/ThemeContext'
@@ -35,23 +36,25 @@ const Todo = () => {
             </Head>
             <AppBar position='static'>
                 <Tabs value={selectedTab} onChange={handleTabChange}>
-                    <Tab value={0} label="Default List"/>
-                    <Tab value={1} label="Public List"/>
-                    <Tab value={2} label="Local Device List"/>
+                    <Tab value={0} label="Local Device List" />
+                    <Tab value={1} label="Public List" />
+                    <Tab value={2} label="Default List" />
                 </Tabs>
             </AppBar>
             {selectedTab === 0 && <section>
-                <h2>Default List</h2>
-                <ToDos />
-                <AddToDo />
+                <h2>Local Device List</h2>
+                <NoSSR onSSR={<section />}>
+                    <ToDosLocalStorage />
+                </NoSSR>
             </section>}
             {selectedTab === 1 && <section>
                 <h2>Public List</h2>
-                <ToDosFirebase/>
+                <ToDosFirebase />
             </section>}
             {selectedTab === 2 && <section>
-                <h2>Local Device List</h2>
-                <ToDosLocalStorage/>
+                <h2>Default List</h2>
+                <ToDos />
+                <AddToDo />
             </section>}
         </Layout>
     );

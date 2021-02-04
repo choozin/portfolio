@@ -133,7 +133,7 @@ const ToDosFirebase = () => {
             <List>
                 {//typeof todos !== 'undefined' ?
                     //console.log('todos: ', todos)
-                    Object.values(todos).map(item => {
+                    todos && Object.values(todos).map(item => {
 
                         let showItem = ((onlyShowPriority && item.priority) || !onlyShowPriority);
 

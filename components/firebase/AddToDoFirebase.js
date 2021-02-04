@@ -14,7 +14,7 @@ const AddToDoFirebase = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        let ref = base.push('todos', { 
+        let ref = base.push('todos', {
             data: {
                 label: label,
                 category: category,
@@ -23,7 +23,7 @@ const AddToDoFirebase = (props) => {
                 datetime: datetime,
                 id: uuid()
             },
-            then(err){ console.log('could not add todo: ', err) }
+            then(err) { console.log('could not add todo: ', err) }
         })
         props.callback(ref)
 
@@ -32,29 +32,30 @@ const AddToDoFirebase = (props) => {
         setDescription('');
         setCategory('');
         setDatetime('');
+        setPriority(false);
     }
-    
-    return ( 
+
+    return (
         <form onSubmit={handleSubmit}>
-            <input type="text" 
-                placeholder="label" 
+            <input type="text"
+                placeholder="label"
                 value={label}
-                onChange={(e) => setLabel(e.target.value)} required/>
-            <input type="text" 
-                placeholder="description" 
+                onChange={(e) => setLabel(e.target.value)} required />
+            <input type="text"
+                placeholder="description"
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}/>
-            <input type="text" 
-                    placeholder="category" 
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}/>
-            <input type="text" 
-                placeholder="datetime" 
+                onChange={(e) => setDescription(e.target.value)} />
+            <input type="text"
+                placeholder="category"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)} />
+            <input type="text"
+                placeholder="datetime"
                 value={datetime}
-                onChange={(e) => setDatetime(e.target.value)}/>
-            <input type="submit" value="Add To Do"/>
+                onChange={(e) => setDatetime(e.target.value)} />
+            <input type="submit" value="Add To Do" />
         </form>
-     );
+    );
 }
 
 export default AddToDoFirebase;
