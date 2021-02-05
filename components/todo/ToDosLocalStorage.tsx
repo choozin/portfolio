@@ -31,19 +31,23 @@ const ToDosLocalStorage = () => {
             []
     );
 
-    console.log(localStorage.todos ? JSON.parse(localStorage.todos) : 'no');
+    //console.log(localStorage.todos ? JSON.parse(localStorage.todos) : 'no');
 
     const deleteItem = (id) => {
 
-        //setUpdatedArray()
         const tempArray = updatedArray;
-        let key = id;
-        delete tempArray[key];
-        console.log('initial', updatedArray)
-        console.log('new', tempArray)
+        let index = 0;
 
-        //localStorage.setItem('todos', JSON.stringify(updatedArray))
+        for(let i = 0; i < tempArray.length; i++) {
+            if(tempArray[i].id = id) index = i;
+        }
 
+        tempArray.splice(index);
+
+        localStorage.setItem('todos', JSON.stringify(tempArray))
+        setUpdatedArray(tempArray);
+        //() => location.reload();
+        
     }
 
     const addItem = () => {
@@ -60,6 +64,7 @@ const ToDosLocalStorage = () => {
         const tempArray = updatedArray;
         tempArray.push(newItem)
         setUpdatedArray(tempArray)
+        localStorage.clear();
         localStorage.setItem('todos', JSON.stringify(tempArray))
 
         setLabel('');
@@ -68,8 +73,8 @@ const ToDosLocalStorage = () => {
         setDatetime('');
         setPriority(false);
 
-        console.log('new item', newItem)
-        console.log('temp array', tempArray)
+        //console.log('new item', newItem)
+        //console.log('temp array', tempArray)
 
     }
 
@@ -94,8 +99,8 @@ const ToDosLocalStorage = () => {
                 {updatedArray.length > 0 && updatedArray.map(item => {
 
                     let showItem = ((onlyShowPriority && item.priority) || !onlyShowPriority);
-
-                    if (showItem) {
+                    
+                    if (showItem && (item !== null)) {
                         return (
                             <ListItem button key={item.id}>
                                 <ListItemIcon>
