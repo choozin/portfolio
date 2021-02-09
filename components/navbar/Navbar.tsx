@@ -125,12 +125,14 @@ const Navbar = () => {
             'To Do List',
             'Git Reference',
             'Posts',
+            'MineSweeper',
         ],
         links: [
             '/test',
             '/portfolio/todo',
             '/git',
             '/posts',
+            '/portfolio/minesweeper',
         ]
     });
 
