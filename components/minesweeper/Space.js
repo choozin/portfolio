@@ -1,22 +1,22 @@
-//import { ProximityCounter } from './ProximityCounter'
+import React, { useState } from 'react'
 
-export const Space = ({ data, position, onSpaceClick }) => {
+const Space = (props) => {
 
-    const [ status, setStatus ] = useState('untouched')
-
-    // if ISNT revealed
-    if(!data.revealed) setStatus(data.isFlagged ? 'f' : null)
-
-    // if IS revealed && mine
-    if(data.mine) setStatussetStatus('M')
-
-    // if IS revealed but ISNT mine
-    if(data.neighbour === 0) setStatus(null)
 
     return (
-        <div onClick={onSpaceClick} >
-            {status}
-        </div>
+        <button
+            className={props.style}
+            id={props.id}
+            style={{
+                backgroundColor: props.active ? 'lightgrey' : 'darkgrey'
+            }}
+            onContextMenu={props.handleLeftClick}
+            onClick={props.handleClick}
+        >
+            {props.spaceContent}
+        </button>
     )
 
 }
+
+export default Space
