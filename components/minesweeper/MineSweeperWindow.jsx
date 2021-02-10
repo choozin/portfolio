@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useImperativeHandle } from 'react';
 
 import styles from './minesweeper.module.css'
 import MineSweeperMap from './MineSweeperMap';
@@ -21,13 +21,19 @@ const MineSweeperWindow = () => {
                 </div>
             </div>
             <div className={styles.menu}>
-                <button className={styles.menuBtn}>
+                <button 
+                    className={styles.menuBtn}
+                    onClick={() => mapRef.current.newGame()}>
                     New Game
                 </button>
-                <button className={styles.menuBtn}>
+                <button 
+                    className={styles.menuBtn}
+                    onClick={() => mapRef.current.restartGame()}>
                     Restart
                 </button>
-                <button className={styles.menuBtn}>
+                <button 
+                    className={styles.menuBtn}
+                    onClick={() => mapRef.current.solveGame()}>
                     Solve
                 </button>
             </div>
@@ -42,7 +48,7 @@ const MineSweeperWindow = () => {
                     ref={mapRef}
                     totalMines={totalMines}
                     flagsPlanted={flagsPlanted}
-                    setFlagsPlanted={setFlagsPlanted}
+                    setFlagsPlanted={() => setFlagsPlanted}
                     numberOfRows={numberOfRows}
                     numberOfCols={numberOfCols}
                 />

@@ -1,3 +1,8 @@
 .window {
-    width: 370px;
+    width: 30rem;
+}
+
+.space {
+    width: 3rem;
+    height: 3rem;
 }

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 const Space = (props) => {
 
-
     return (
         <button
             className={props.style}
