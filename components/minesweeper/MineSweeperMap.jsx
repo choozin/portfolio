@@ -126,7 +126,7 @@ const MineSweeperMap = forwardRef((props, ref) => {
     }
 
     const handleSpaceClick = (row, col) => {
-        console.log(revealedSpacesGrid[row][col])
+        console.log('1', revealedSpacesGrid[row][col])
         if (revealedSpacesGrid[row][col] === 1) {
             return;
         }
@@ -145,7 +145,9 @@ const MineSweeperMap = forwardRef((props, ref) => {
                     numberOfRevealedSpaces += 1;
                 }
             }
-        }
+        } 
+
+        console.log('2', revealedSpacesGrid[row][col])
         setNumberOfRevealedSpaces(numberOfRevealedSpaces)
         setRevealedSpacesGrid([...revealedSpacesGrid]);
         numberOfRevealedSpaces === (props.totalCols * props.totalRows - props.numberOfMines) && gameWon()
@@ -215,7 +217,7 @@ const MineSweeperMap = forwardRef((props, ref) => {
         }
     }
 
-    let map = [];
+    let map = [];`1`
 
     for (let rowIndex = 0; rowIndex < grid.length; rowIndex++) {
         for (let colIndex = 0; colIndex < grid.length; colIndex++) {
@@ -226,7 +228,7 @@ const MineSweeperMap = forwardRef((props, ref) => {
                     active={revealedSpacesGrid[rowIndex][colIndex] === 1 ? false : true}
                     handleLeftClick={() => handleLeftClick(rowIndex, colIndex)}
                     handleClick={() => handleSpaceClick(rowIndex, colIndex)}
-                    spaceContent={() => generateSpaceContent(rowIndex, colIndex)}
+                    spaceContent={generateSpaceContent(rowIndex, colIndex)}
                 />
             )
         }
