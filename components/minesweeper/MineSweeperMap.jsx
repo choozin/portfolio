@@ -69,14 +69,14 @@ const MineSweeperMap = forwardRef((props, ref) => {
     const [grid, setGrid] = useState(generateGrid(props.numberOfRows, props.numberOfCols, props.totalMines))
     const [revealedSpacesGrid, setRevealedSpacesGrid] = useState(generateRevealedSpacesGrid(props.numberOfRows, props.numberOfCols, props.totalMines))
     const [numberOfRevealedSpaces, setNumberOfRevealedSpaces] = useState(0);
-    const [numberOfFlagsPlanted, setNumberOfFlagsPlanted] = useState(0)
+    let [numberOfFlagsPlanted, setNumberOfFlagsPlanted] = useState(0)
     useImperativeHandle(ref, () => ({
         newGame() {
             setNumberOfFlagsPlanted(0)
             props.setFlagsPlanted(0)
             setNumberOfRevealedSpaces(0)
             setGrid([
-                ...generateGrid(props.numberOfRows, props.numberOfCols, props.numberOfMines)
+                ...generateGrid(props.numberOfRows, props.numberOfCols, props.totalMines)
             ])
             setRevealedSpacesGrid([
                 ...generateRevealedSpacesGrid(props.numberOfRows, props.numberOfCols, 0)

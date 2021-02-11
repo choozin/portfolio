@@ -7,8 +7,8 @@ const MineSweeperWindow = () => {
 
     const mapRef = useRef()
 
-    const [totalMines, setTotalMines] = useState(10)
-    const [flagsPlanted, setFlagsPlanted] = useState(0)
+    const [totalMines, setTotalMines] = useState(15)
+    let [flagsPlanted, setFlagsPlanted] = useState(0)
     const [numberOfRows, setNumberOfRows] = useState(10)
     const [numberOfCols, setNumberOfCols] = useState(10)
 
@@ -48,7 +48,7 @@ const MineSweeperWindow = () => {
                     ref={mapRef}
                     totalMines={totalMines}
                     flagsPlanted={flagsPlanted}
-                    setFlagsPlanted={() => setFlagsPlanted}
+                    setFlagsPlanted={setFlagsPlanted}
                     numberOfRows={numberOfRows}
                     numberOfCols={numberOfCols}
                 />
