@@ -7,7 +7,9 @@ const Space = (props) => {
             className={props.style}
             id={props.id}
             style={{
-                backgroundColor: props.active ? 'lightgrey' : 'darkgrey'
+                backgroundColor: props.active ? 'lightgrey' : 'darkgrey',
+                width: props.spaceSize+'rem',
+                height: props.spaceSize+'rem',
             }}
             onContextMenu={props.handleLeftClick}
             onClick={props.handleClick}

@@ -112,8 +112,8 @@ const MineSweeperMap = forwardRef((props, ref) => {
         ])
     }
 
-    const handleLeftClick = (row, col) => {
-
+    const handleLeftClick = (event, row, col) => {
+        event.preventDefault()
         if (revealedSpacesGrid[row][col] === 0) {
             revealedSpacesGrid[row][col] = 2;
             setNumberOfFlagsPlanted(++numberOfFlagsPlanted)
@@ -225,8 +225,9 @@ const MineSweeperMap = forwardRef((props, ref) => {
                 <Space
                     style={styles.space}
                     id={colIndex + ',' + rowIndex}
+                    spaceSize={props.spaceSize}
                     active={revealedSpacesGrid[rowIndex][colIndex] === 1 ? false : true}
-                    handleLeftClick={() => handleLeftClick(rowIndex, colIndex)}
+                    handleLeftClick={() => handleLeftClick(event, rowIndex, colIndex)}
                     handleClick={() => handleSpaceClick(rowIndex, colIndex)}
                     spaceContent={generateSpaceContent(rowIndex, colIndex)}
                 />
