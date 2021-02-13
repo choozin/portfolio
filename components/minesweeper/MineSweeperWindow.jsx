@@ -121,7 +121,7 @@ const MineSweeperWindow = () => {
                     <div /*style={{ display: {...startGame[0] ? 'block' : 'hidden'} }}*/ className={styles.advancedMenu}>
                         <div>
                             <span>Flags: </span><span>{flagsPlanted}</span>
-                            <span>Mines: </span><span>{(totalMines - flagsPlanted)}</span>
+                            <span>Mines: </span><span>{totalMines}</span>
                         </div>
                         <button
                             className={styles.menuBtn}

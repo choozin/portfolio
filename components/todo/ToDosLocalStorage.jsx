@@ -1,4 +1,4 @@
-import React, { Component, useState, useContext, useEffect } from 'react';
+import React, { Component, useState, useContext, useEffect, useReducer } from 'react';
 import { ToDosContext } from '../../contexts/ToDosContext';
 
 import { db, base } from '../firebase/firebase';
@@ -31,23 +31,21 @@ const ToDosLocalStorage = () => {
             []
     );
 
+    const [ , forceUpdate ] = useReducer(x => x+1, 0)
+
     //console.log(localStorage.todos ? JSON.parse(localStorage.todos) : 'no');
 
     const deleteItem = (id) => {
-
+        
         const tempArray = updatedArray;
-        let index = 0;
-
-        for(let i = 0; i < tempArray.length; i++) {
-            if(tempArray[i].id = id) index = i;
+        
+        for (let i = 0; i < tempArray.length; i++) {
+            if (tempArray[i].id === id) tempArray.splice(i, 1);
         }
-
-        tempArray.splice(index);
 
         localStorage.setItem('todos', JSON.stringify(tempArray))
         setUpdatedArray(tempArray);
-        //() => location.reload();
-        
+        forceUpdate()
     }
 
     const addItem = () => {
@@ -80,7 +78,23 @@ const ToDosLocalStorage = () => {
 
     const sortItems = (type) => {
 
-
+        let unsortedArray = Object.values(updatedArray);
+        let sortedArray = [];
+        switch (type) {
+            case 'category':
+                //
+                sortedArray = unsortedArray.sort((a, b) => a.category.localeCompare(b.category));
+                setUpdatedArray([...sortedArray]);
+                break;
+            case 'alphabetically':
+                //
+                sortedArray = unsortedArray.sort((a, b) => a.label.localeCompare(b.label));
+                setUpdatedArray([...sortedArray]);
+                break;
+            default:
+                //
+                break;
+        }
 
     }
 
@@ -93,13 +107,15 @@ const ToDosLocalStorage = () => {
     return (
         <div className='todos'>
             <div className='sort'>
+                <input type='button' value='category' onClick={() => sortItems('category')}/>
+                <input type='button' value='alphabetically' onClick={() => sortItems('alphabetically')}/>
                 <input type='button' value='Priority Only' onClick={() => togglePriority()} />
             </div>
             <List>
                 {updatedArray.length > 0 && updatedArray.map(item => {
 
                     let showItem = ((onlyShowPriority && item.priority) || !onlyShowPriority);
-                    
+
                     if (showItem && (item !== null)) {
                         return (
                             <ListItem button key={item.id}>

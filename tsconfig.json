@@ -21,7 +21,7 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx", "pages/test.js"  ],
+    "**/*.tsx", "pages/test.js", "components/todo/ToDosLocalStorage.jsx"  ],
   "exclude": [
     "node_modules"
   ]
