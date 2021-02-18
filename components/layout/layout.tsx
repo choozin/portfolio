@@ -33,10 +33,9 @@ export default function Layout({ children, home }: { children: React.ReactNode, 
           <meta name="twitter:card" content="summary_large_image" />
         </Head>
         <header className={styles.header}>
-          <p>This is the header.</p>
           {home ? (
             <>
-              <h1>This is a Homepage, does not need a link home</h1>
+              
             </>
           ) : (
               <>

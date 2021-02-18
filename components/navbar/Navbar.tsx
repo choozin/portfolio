@@ -112,7 +112,7 @@ const Navbar = () => {
         links: [
             '/',
             'Biography',
-            'Resume',
+            '/resume',
             'Portfolio',
             'Interests',
             '/contact',
