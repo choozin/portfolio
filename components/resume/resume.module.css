@@ -6,6 +6,37 @@
 
 }
 
+.controlPanel {
+    width: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column; 
+}
+
+.timeframe { 
+    width: 100%;
+    justify-content: center;
+}
+
+.categories {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.categories h3 {
+    display: block;
+}
+
+.categoriesBtn {
+    
+}
+
+.sort {
+    width: 100%;
+    justify-content: center;
+}
+
 .content {
 
 }
