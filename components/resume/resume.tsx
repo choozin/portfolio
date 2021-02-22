@@ -6,7 +6,7 @@ import styles from './resume.module.css'
 
 import Button from '@material-ui/core/Button';
 import Slider from '@material-ui/core/Slider'
-import { Code, School, People, Explore, Mouse, Palette } from '@material-ui/icons';
+import { Code, School, People, Explore, Mouse, Palette, BubbleChart, Assignment, MenuBook, TextFormat } from '@material-ui/icons';
 
 import useWindowDimensions from '../hooks/useWindowDimensions'
 
@@ -31,6 +31,12 @@ const Resume = () => {
     const [creative, setCreative] = useState(true);
     const [education, setEducation] = useState(true);
     const [interests, setInterests] = useState(true);
+
+    const [infographic, setInfographic] = useState(true);
+    const [storybook, setStorybook] = useState(true);
+    const [oleStandard, setOleStandard] = useState(true);
+    const [plainText, setPlainText] = useState(true);
+    const [binary, setBinary] = useState(true);
 
 
     const marks = [
@@ -62,6 +68,44 @@ const Resume = () => {
         switch (e.currentTarget.value) {
             case 'techStuff':
                 setTechStuff(!techStuff)
+                break;
+            case 'clients':
+                setClients(!clients)
+                break;
+            case 'programming':
+                setProgramming(!programming)
+                break;
+            case 'creative':
+                setCreative(!creative)
+                break;
+            case 'education':
+                setEducation(!education)
+                break;
+            case 'interests':
+                setInterests(!interests)
+                break;
+        }
+    }
+
+    const formatButtonClick = (e) => {
+        e.preventDefault();
+        console.log(e.currentTarget.value);
+        switch (e.currentTarget.value) {
+            case 'infographic':
+                setInfographic(!infographic)
+                break;
+            case 'storybook':
+                setStorybook(!storybook)
+                break;
+            case 'oleStandard':
+                setOleStandard(!oleStandard)
+                break;
+            case 'plainText':
+                setPlainText(!plainText)
+                break;
+            case 'binary':
+                setBinary(!binary)
+                break;
         }
     }
 
@@ -132,10 +176,13 @@ const Resume = () => {
                     <Button
                         variant="contained"
                         color='primary'
-                        style={{backgroundColor: '#5dc66b', margin: '1rem'}}
+                        style={{
+                            color: techStuff ? '#fff' : '#ddd',
+                            backgroundColor: techStuff ? '#5dc66b' : '#bbb',
+                            margin: '1rem'
+                        }}
                         className={styles.categoriesBtn}
                         startIcon={<Mouse />}
-                        disabled={!techStuff}
                         value='techStuff'
                         onClick={(e) => categoriesButtonClick(e)}
                     >
@@ -144,55 +191,75 @@ const Resume = () => {
                     <Button
                         variant="contained"
                         color="secondary"
-                        style={{backgroundColor: '#aa134a', margin: '1rem'}}
+                        style={{
+                            color: clients ? '#fff' : '#ddd',
+                            backgroundColor: clients ? '#aa134a' : '#bbb',
+                            margin: '1rem'
+                        }}
                         className={styles.categoriesBtn}
                         startIcon={<People />}
-                        disabled={!clients}
                         value='clients'
+                        onClick={(e) => categoriesButtonClick(e)}
                     >
                         Clients & Customers
                     </Button>
                     <Button
                         variant="contained"
                         color="secondary"
-                        style={{backgroundColor: '#318c3d', margin: '1rem'}}
+                        style={{
+                            color: programming ? '#fff' : '#ddd',
+                            backgroundColor: programming ? '#318c3d' : '#bbb',
+                            margin: '1rem'
+                        }}
                         className={styles.categoriesBtn}
                         startIcon={<Code />}
-                        disabled={!programming}
                         value='programming'
+                        onClick={(e) => categoriesButtonClick(e)}
                     >
                         Programming & Development
                     </Button>
                     <Button
                         variant="contained"
                         color="secondary"
-                        style={{backgroundColor: '#0f93cc', margin: '1rem'}}
+                        style={{
+                            color: creative ? '#fff' : '#ddd',
+                            backgroundColor: creative ? '#0f93cc' : '#bbb',
+                            margin: '1rem'
+                        }}
                         className={styles.categoriesBtn}
                         startIcon={<Palette />}
-                        disabled={!creative}
                         value='creative'
+                        onClick={(e) => categoriesButtonClick(e)}
                     >
                         Creative
                     </Button>
                     <Button
                         variant="contained"
                         color="secondary"
-                        style={{backgroundColor: '#e8c111', margin: '1rem'}}
+                        style={{
+                            color: education ? '#fff' : '#ddd',
+                            backgroundColor: education ? '#e8c111' : '#bbb',
+                            margin: '1rem'
+                        }}
                         className={styles.categoriesBtn}
                         startIcon={<School />}
-                        disabled={!education}
                         value='education'
+                        onClick={(e) => categoriesButtonClick(e)}
                     >
                         Training & Education
                     </Button>
                     <Button
                         variant="contained"
                         color="secondary"
-                        style={{backgroundColor: '#ee6120', margin: '1rem'}}
+                        style={{
+                            color: interests ? '#fff' : '#ddd',
+                            backgroundColor: interests ? '#ee6120' : '#bbb',
+                            margin: '1rem'
+                        }}
                         className={styles.categoriesBtn}
                         startIcon={<Explore />}
-                        disabled={!interests}
                         value='interests'
+                        onClick={(e) => categoriesButtonClick(e)}
                     >
                         Interests & Passions
                     </Button>
@@ -204,18 +271,76 @@ const Resume = () => {
                     }}
                 >
                     <h3>What format would you like?</h3>
-                    <button>
-                        Infographic
-                    </button>
-                    <button>
-                        Storybook
-                    </button>
-                    <button>
-                        Ole Standard
-                    </button>
-                    <button>
-                        Plain Text
-                    </button>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        style={{
+                            color: infographic ? '#fff' : '#ddd',
+                            backgroundColor: infographic ? '#ee6120' : '#bbb',
+                            margin: '1rem'
+                        }}
+                        className={styles.formatBtn}
+                        value='infographic'
+                        onClick={(e) => formatButtonClick(e)}
+                    >
+                        <BubbleChart />
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        style={{
+                            color: storybook ? '#fff' : '#ddd',
+                            backgroundColor: storybook ? '#ee6120' : '#bbb',
+                            margin: '1rem'
+                        }}
+                        className={styles.formatBtn}
+                        value='storybook'
+                        onClick={(e) => formatButtonClick(e)}
+                    >
+                        <MenuBook />
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        style={{
+                            color: oleStandard ? '#fff' : '#ddd',
+                            backgroundColor: oleStandard ? '#ee6120' : '#bbb',
+                            margin: '1rem'
+                        }}
+                        className={styles.formatBtn}
+                        value='oleStandard'
+                        onClick={(e) => formatButtonClick(e)}
+                    >
+                        <Assignment />
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        style={{
+                            color: plainText ? '#fff' : '#ddd',
+                            backgroundColor: plainText ? '#ee6120' : '#bbb',
+                            margin: '1rem'
+                        }}
+                        className={styles.formatBtn}
+                        value='plainText'
+                        onClick={(e) => formatButtonClick(e)}
+                    >
+                        <TextFormat />
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        style={{
+                            color: binary ? '#fff' : '#ddd',
+                            backgroundColor: binary ? '#ee6120' : '#bbb',
+                            margin: '1rem'
+                        }}
+                        className={styles.formatBtn}
+                        value='binary'
+                        onClick={(e) => formatButtonClick(e)}
+                    >
+                        <Explore />
+                    </Button>
                 </motion.div>
             </motion.div>
 
