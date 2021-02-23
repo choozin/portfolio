@@ -6,9 +6,56 @@ import styles from './resume.module.css'
 
 import Button from '@material-ui/core/Button';
 import Slider from '@material-ui/core/Slider'
-import { Code, School, People, Explore, Mouse, Palette, BubbleChart, Assignment, MenuBook, TextFormat } from '@material-ui/icons';
+import { Code, School, People, Explore, Mouse, Palette, BubbleChart, Assignment, MenuBook, TextFormat, PictureAsPdf } from '@material-ui/icons';
 
 import useWindowDimensions from '../hooks/useWindowDimensions'
+
+const FormatButton = ({ label, color, click, currentlyClicked, icon }) => {
+
+    const [mouseOver, setMouseOver] = useState(false)
+
+    return (
+        <div style={{ height: '7rem' }}>
+            <Button
+                variant="contained"
+                color="secondary"
+                style={{
+                    color: currentlyClicked === label ? '#fff' : '#ddd',
+                    backgroundColor: currentlyClicked === label ? color : '#bbb',
+                    margin: '1rem'
+                }}
+                className={styles.formatBtn}
+                value={label}
+                onClick={click}
+                onMouseEnter={() => setMouseOver(true)}
+                onMouseLeave={() => setMouseOver(false)}
+            >
+                {icon}
+            </Button>
+            {mouseOver && <motion.div
+                initial={{
+                    opacity: 0,
+                }}
+                animate={{
+                    opacity: 100,
+                    transition: {
+                        duration: 7.0
+                    },
+                }}
+            >
+                <span style={{
+                    color: color,
+                    fontWeight: 'bold',
+                    position: 'relative',
+                    top: '-0.5rem',
+                    textShadow: '0px 0px 1.5px '+color,
+                }}>
+                    {label}
+                </span>
+            </motion.div>}
+        </div>
+    )
+}
 
 const Resume = () => {
 
@@ -32,29 +79,29 @@ const Resume = () => {
     const [education, setEducation] = useState(true);
     const [interests, setInterests] = useState(true);
 
-    const [infographic, setInfographic] = useState(true);
-    const [storybook, setStorybook] = useState(true);
-    const [oleStandard, setOleStandard] = useState(true);
-    const [plainText, setPlainText] = useState(true);
-    const [binary, setBinary] = useState(true);
+    const [selectedFormat, setSelectedFormat] = useState('Infographic')
+
+    const updateSelectedFormat = (value) => {
+
+    }
 
 
     const marks = [
         {
             value: 0,
-            label: 'Teen Years',
+            label: `High School`,
         },
         {
-            value: 40,
-            label: `Early 20's`,
+            value: 30,
+            label: 'University',
         },
         {
-            value: 75,
-            label: 'Yesteryear',
+            value: 60,
+            label: 'College',
         },
         {
             value: 100,
-            label: 'This Very Moment',
+            label: 'Present',
         },
     ];
 
@@ -87,27 +134,34 @@ const Resume = () => {
         }
     }
 
-    const formatButtonClick = (e) => {
-        e.preventDefault();
-        console.log(e.currentTarget.value);
-        switch (e.currentTarget.value) {
-            case 'infographic':
-                setInfographic(!infographic)
-                break;
-            case 'storybook':
-                setStorybook(!storybook)
-                break;
-            case 'oleStandard':
-                setOleStandard(!oleStandard)
-                break;
-            case 'plainText':
-                setPlainText(!plainText)
-                break;
-            case 'binary':
-                setBinary(!binary)
-                break;
-        }
-    }
+    const formatFontSize = '3rem'
+    const formatOptions = [
+        {
+            label: 'Infographic',
+            color: '#d48',
+            icon: <BubbleChart style={{ fontSize: formatFontSize }} />,
+        },
+        {
+            label: 'Storybook',
+            color: '#d0d',
+            icon: <MenuBook style={{ fontSize: formatFontSize }} />,
+        },
+        {
+            label: 'Ole Standard',
+            color: '#40d',
+            icon: <Assignment style={{ fontSize: formatFontSize }} />,
+        },
+        {
+            label: 'Plain Text',
+            color: '#d80',
+            icon: <TextFormat style={{ fontSize: formatFontSize }} />,
+        },
+        {
+            label: 'PDF',
+            color: '#d00',
+            icon: <PictureAsPdf style={{ fontSize: formatFontSize }} />,
+        },
+    ]
 
     return (
         <div className={styles.resume}>
@@ -139,8 +193,7 @@ const Resume = () => {
                         }
                     }}
                 >
-                    We're not here to waste time.
-                    <br />Please use the control panel below to generate a resume that's relevant for you!
+                    Please use the control panel below to generate a resume that's relevant for you!
                 </motion.span>
             </motion.div>
 
@@ -161,7 +214,7 @@ const Resume = () => {
                             defaultValue={40}
                             getAriaValueText={sliderValue}
                             aria-labelledby="discrete-slider-custom"
-                            step={5}
+                            step={10}
                             marks={marks}
                         />
                     </div>
@@ -265,82 +318,23 @@ const Resume = () => {
                     </Button>
                 </motion.div>
 
-                <motion.div className={styles.sort}
+                <motion.div className={styles.format}
                     animate={{
 
                     }}
                 >
                     <h3>What format would you like?</h3>
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        style={{
-                            color: infographic ? '#fff' : '#ddd',
-                            backgroundColor: infographic ? '#ee6120' : '#bbb',
-                            margin: '1rem'
-                        }}
-                        className={styles.formatBtn}
-                        value='infographic'
-                        onClick={(e) => formatButtonClick(e)}
-                    >
-                        <BubbleChart />
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        style={{
-                            color: storybook ? '#fff' : '#ddd',
-                            backgroundColor: storybook ? '#ee6120' : '#bbb',
-                            margin: '1rem'
-                        }}
-                        className={styles.formatBtn}
-                        value='storybook'
-                        onClick={(e) => formatButtonClick(e)}
-                    >
-                        <MenuBook />
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        style={{
-                            color: oleStandard ? '#fff' : '#ddd',
-                            backgroundColor: oleStandard ? '#ee6120' : '#bbb',
-                            margin: '1rem'
-                        }}
-                        className={styles.formatBtn}
-                        value='oleStandard'
-                        onClick={(e) => formatButtonClick(e)}
-                    >
-                        <Assignment />
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        style={{
-                            color: plainText ? '#fff' : '#ddd',
-                            backgroundColor: plainText ? '#ee6120' : '#bbb',
-                            margin: '1rem'
-                        }}
-                        className={styles.formatBtn}
-                        value='plainText'
-                        onClick={(e) => formatButtonClick(e)}
-                    >
-                        <TextFormat />
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        style={{
-                            color: binary ? '#fff' : '#ddd',
-                            backgroundColor: binary ? '#ee6120' : '#bbb',
-                            margin: '1rem'
-                        }}
-                        className={styles.formatBtn}
-                        value='binary'
-                        onClick={(e) => formatButtonClick(e)}
-                    >
-                        <Explore />
-                    </Button>
+                    <div className={styles.formatBtns}>
+                        {formatOptions.map(format =>
+                            <FormatButton
+                                label={format.label}
+                                color={format.color}
+                                click={() => setSelectedFormat(format.label)}
+                                currentlyClicked={selectedFormat}
+                                icon={format.icon}
+                            />
+                        )}
+                    </div>
                 </motion.div>
             </motion.div>
 

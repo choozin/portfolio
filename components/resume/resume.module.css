@@ -1,5 +1,6 @@
 .header {
     text-align: center;
+    margin-bottom: 7rem;
 }
 
 .title {
@@ -12,16 +13,19 @@
     text-align: center;
     justify-content: center;
     flex-direction: column; 
+    margin-bottom: 7rem;
 }
 
 .timeframe { 
     width: 100%;
     justify-content: center;
+    margin-bottom: 4rem;
 }
 
 .categories {
     width: 100%;
     justify-content: space-between;
+    margin-bottom: 4rem;
 }
 
 .categories h3 {
@@ -32,9 +36,14 @@
     
 }
 
-.sort {
+.formatBtns {
+    display: flex;
+}
+
+.format {
     width: 100%;
     justify-content: center;
+    margin-bottom: 4rem;
 }
 
 .content {
