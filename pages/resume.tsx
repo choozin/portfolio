@@ -14,15 +14,19 @@ const Resume = () => {
     //const { page } = useContext(ThemeContext);
     //page.setPageTitle('Resume');
 
-    
+
 
     return (
-        <Layout home={true}>
+        <Layout
+            nav='navbar'
+            pageStyle='thin'
+            returnHome={true}
+        >
             <Head>
                 <title>Page Title</title>
             </Head>
             <section>
-                <ResumeComponent/>
+                <ResumeComponent />
             </section>
         </Layout>
     )

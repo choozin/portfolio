@@ -177,7 +177,7 @@ const data = [
 ]
 
 const GitCard = (data) => {
-  
+
   const classes = useStyles();
 
   const { title, command, description, link, keywords } = data.data;
@@ -210,12 +210,16 @@ const Git = () => {
   page.setPageTitle('Git Reference');
 
   return (
-    <Layout home={false}>
+    <Layout
+      nav='navbar'
+      pageStyle='thin'
+      returnHome={true}
+    >
       <Head>
         <title>{page.pageTitle}</title>
       </Head>
       <section>
-        {data.map(dataObj => 
+        {data.map(dataObj =>
           <GitCard key={dataObj.title} data={dataObj} />
         )}
       </section>

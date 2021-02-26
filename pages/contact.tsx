@@ -120,7 +120,11 @@ const Contact = () => {
     )*/
 
     return (
-        <Layout home={false}>
+        <Layout
+            nav='navbar'
+            pageStyle='thin'
+            returnHome={true}
+        >
             <Head>
                 <title>{page.pageTitle}</title>
             </Head>
@@ -161,7 +165,7 @@ const Contact = () => {
                                 onChange={handleReasonChange}
                                 multiple
                                 input={<Input />}
-                                inputProps={{ id: 'select-reason-change'}}
+                                inputProps={{ id: 'select-reason-change' }}
                                 renderValue={(selected) => (selected as string[]).join(', ')}
                             >
                                 {reasons.map((reason) => (

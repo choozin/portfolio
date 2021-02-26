@@ -30,7 +30,11 @@ const Todo = () => {
     };
 
     return (
-        <Layout home={false}>
+        <Layout
+            nav='navbar'
+            pageStyle='thin'
+            returnHome={true}
+        >
             <Head>
                 <title>{page.pageTitle}</title>
             </Head>

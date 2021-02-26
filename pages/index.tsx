@@ -21,14 +21,14 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-export default function Home({ 
-  allPostsData 
-}: { 
-  allPostsData: { 
-    date: string, 
-    title: string, 
-    id: string 
-  }[] 
+export default function Home({
+  allPostsData
+}: {
+  allPostsData: {
+    date: string,
+    title: string,
+    id: string
+  }[]
 }) {
 
   /*let mailjet = request;
@@ -36,18 +36,22 @@ export default function Home({
   console.log('mailjet: ', mailjet);*/
 
   return (
-    <Layout home>
+    <Layout
+      nav='navbar'
+      pageStyle='thin'
+      returnHome={true}
+    >
       <Head>
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
         <p>[Your Self Introduction]</p>
         <p>
-          (This is a sample Active Link, it only goes red if the current url path matches the href.<br/>
+          (This is a sample Active Link, it only goes red if the current url path matches the href.<br />
           <ActiveLink
             children='otherwise its green'
             href='https://nextjs.org/learn'
-          />).<br/>
+          />).<br />
           Use this for links in a nav where you want to signal which page or subpage the user is on.
         </p>
       </section>
@@ -56,14 +60,14 @@ export default function Home({
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
-            <Link href={`/posts/${id}`}>
-              <a>{title}</a>
-            </Link>
-            <br />
-            <small className={utilStyles.lightText}>
-              <Date dateString={date} />
-            </small>
-          </li>
+              <Link href={`/posts/${id}`}>
+                <a>{title}</a>
+              </Link>
+              <br />
+              <small className={utilStyles.lightText}>
+                <Date dateString={date} />
+              </small>
+            </li>
           ))}
         </ul>
       </section>

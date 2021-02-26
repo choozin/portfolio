@@ -10,58 +10,83 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 
 export const siteTitle = `Cam's Portfolio`;
 
-export default function Layout({ children, home }: { children: React.ReactNode, home?: boolean }) {
+export default function Layout({ children, nav, pageStyle, returnHome, header }: { children: React.ReactNode, nav: string, pageStyle: string, returnHome?: boolean, header?: boolean }) {
+
+  let navigation;
+  switch (nav) {
+
+    case 'navbar':
+      navigation = <Navbar />;
+      break;
+
+    case 'navball':
+      navigation = 'navball';
+      break;
+  }
+
+  let page;
+  switch (pageStyle) {
+
+    case 'thin':
+      page =
+        <div className={styles.container}>
+
+          {header &&
+            <header className={styles.header}>
+              This is the header.
+            </header>
+          }
+
+          <main className={styles.main}>
+            {children}
+          </main>
+
+          {!returnHome && (
+            <div className={styles.backToHome}>
+              <p>This is the footer.</p>
+              <Link href="/">
+                <a>← Back to home</a>
+              </Link>
+              <div className={styles.icons}>
+                <LinkedInIcon />
+                <GitHubIcon />
+              </div>
+            </div>
+          )}
+
+        </div>
+      break;
+    
+    case 'full-width' :
+      page = 
+            <div className={styles.fullWidth}>
+              {children}
+            </div>
+      break;
+  }
+
   return (
     <>
-      <Navbar />
-      <div className={styles.container}>
-        <Head>
-          <link rel="icon" href="/favicon.ico" />
-          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-          <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-          <meta
-            name="Cam's Portfolio"
-            content="Learn about Cam's Skills, Accomplishments and Goals"
-          />
-          <meta
-            property="og:image"
-            content={`https://og-image.now.sh/${encodeURI(
-              siteTitle
-            )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
-          />
-          <meta name="og:title" content={siteTitle} />
-          <meta name="twitter:card" content="summary_large_image" />
-        </Head>
-        <header className={styles.header}>
-          {home ? (
-            <>
-              
-            </>
-          ) : (
-              <>
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+        <meta
+          name="Cam's Portfolio"
+          content="Learn about Cam's Skills, Accomplishments and Goals"
+        />
+        <meta
+          property="og:image"
+          content={`https://og-image.now.sh/${encodeURI(
+            siteTitle
+          )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
+        />
+        <meta name="og:title" content={siteTitle} />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Head>
 
-                <h2>
-                  <Link href="/">
-                    <a>Go to Homepage</a>
-                  </Link>
-                </h2>
-              </>
-            )}
-        </header>
-        <main className={styles.main}>{children}</main>
-        {!home && (
-          <div className={styles.backToHome}>
-            <p>This is the footer.</p>
-            <Link href="/">
-              <a>← Back to home</a>
-            </Link>
-            <div className={styles.icons}>
-              <LinkedInIcon />
-              <GitHubIcon />
-            </div>
-          </div>
-        )}
-      </div>
+      {navigation}
+      {page}
     </>
   )
 }

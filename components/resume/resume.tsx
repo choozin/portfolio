@@ -16,23 +16,40 @@ const FormatButton = ({ label, color, click, currentlyClicked, icon }) => {
 
     return (
         <div style={{ height: '7rem' }}>
-            <Button
-                variant="contained"
-                color="secondary"
-                style={{
-                    color: currentlyClicked === label ? '#fff' : '#ddd',
-                    backgroundColor: currentlyClicked === label ? color : '#bbb',
-                    margin: '1rem'
-                }}
-                className={styles.formatBtn}
-                value={label}
-                onClick={click}
-                onMouseEnter={() => setMouseOver(true)}
-                onMouseLeave={() => setMouseOver(false)}
+            <motion.div
+                whileTap={{ scale: 0.9 }}
             >
-                {icon}
-            </Button>
-            {mouseOver && <motion.div
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    style={{
+                        color: currentlyClicked === label ? '#fff' : '#ddd',
+                        backgroundColor: currentlyClicked === label ? color : '#bbb',
+                        margin: '1rem'
+                    }}
+                    className={styles.formatBtn}
+                    value={label}
+                    onClick={click}
+                    onMouseEnter={() => setMouseOver(true)}
+                    onMouseLeave={() => setMouseOver(false)}
+                >
+                    {icon}
+                </Button>
+            </motion.div>
+            {currentlyClicked === label &&
+                <div>
+                    <span style={{
+                        color: color,
+                        fontWeight: 'bold',
+                        position: 'relative',
+                        top: '-0.5rem',
+                        textShadow: '0px 0px 1.5px ' + color,
+                    }}>
+                        {label}
+                    </span>
+                </div>
+            }
+            {(mouseOver && !(currentlyClicked === label)) && <motion.div
                 initial={{
                     opacity: 0,
                 }}
@@ -48,7 +65,7 @@ const FormatButton = ({ label, color, click, currentlyClicked, icon }) => {
                     fontWeight: 'bold',
                     position: 'relative',
                     top: '-0.5rem',
-                    textShadow: '0px 0px 1.5px '+color,
+                    textShadow: '0px 0px 1.5px ' + color,
                 }}>
                     {label}
                 </span>
@@ -80,6 +97,10 @@ const Resume = () => {
     const [interests, setInterests] = useState(true);
 
     const [selectedFormat, setSelectedFormat] = useState('Infographic')
+
+    const [timeframePosition, setTimeframePosition] = useState('center');
+    const [categoriesPosition, setCategoriesPosition] = useState('nearRight');
+    const [formatPosition, setFormatPosition] = useState('farRight');
 
     const updateSelectedFormat = (value) => {
 
@@ -163,6 +184,73 @@ const Resume = () => {
         },
     ]
 
+    let transitionDuration = 2.0
+
+    const variants = {
+        farLeft: {
+            opacity: 0.1,
+            x: -1400,
+            scale: 0.1,
+            transition: {
+                duration: transitionDuration
+            }
+        },
+        nearLeft: {
+            opacity: 0.0,
+            x: 0,
+            scale: 0.4,
+            transition: {
+                duration: transitionDuration,
+            }
+        },
+        center: {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            transition: {
+                duration: transitionDuration,
+                delay: 1.0
+            }
+        },
+        nearRight: {
+            opacity: 0.0,
+            x: 0,
+            scale: 0.4,
+            transition: {
+                duration: transitionDuration,
+
+            }
+        },
+        farRight: {
+            opacity: 0.1,
+            x: 0,
+            scale: 0.1,
+            transition: {
+                duration: transitionDuration
+            }
+        },
+    }
+
+    const changePositions = (center) => {
+        switch (center) {
+            case 'timeframe':
+                setTimeframePosition('center')
+                setCategoriesPosition('nearRight')
+                setFormatPosition('farRight')
+                break;
+            case 'categories':
+                setTimeframePosition('nearLeft')
+                setCategoriesPosition('center')
+                setFormatPosition('nearRight')
+                break;
+            case 'format':
+                setTimeframePosition('farLeft')
+                setCategoriesPosition('nearLeft')
+                setFormatPosition('center')
+                break;
+        }
+    }
+
     return (
         <div className={styles.resume}>
             <motion.div className={styles.header}>
@@ -204,9 +292,10 @@ const Resume = () => {
             >
 
                 <motion.div className={styles.timeframe}
-                    animate={{
-
-                    }}
+                    animate={
+                        timeframePosition
+                    }
+                    variants={variants}
                 >
                     <h3>How far back should we go?</h3>
                     <div>
@@ -218,12 +307,18 @@ const Resume = () => {
                             marks={marks}
                         />
                     </div>
+                    <button
+                        onClick={() => changePositions('categories')}
+                    >
+                        Next
+                    </button>
                 </motion.div>
 
                 <motion.div className={styles.categories}
-                    animate={{
-
-                    }}
+                    animate={
+                        categoriesPosition
+                    }
+                    variants={variants}
                 >
                     <h3>What matters to you?</h3>
                     <Button
@@ -316,12 +411,23 @@ const Resume = () => {
                     >
                         Interests & Passions
                     </Button>
+                    <button
+                        onClick={() => changePositions('timeframe')}
+                    >
+                        Back
+                    </button>
+                    <button
+                        onClick={() => changePositions('format')}
+                    >
+                        Next
+                    </button>
                 </motion.div>
 
                 <motion.div className={styles.format}
-                    animate={{
-
-                    }}
+                    animate={
+                        formatPosition
+                    }
+                    variants={variants}
                 >
                     <h3>What format would you like?</h3>
                     <div className={styles.formatBtns}>
@@ -335,6 +441,11 @@ const Resume = () => {
                             />
                         )}
                     </div>
+                    <button
+                        onClick={() => changePositions('categories')}
+                    >
+                        Back
+                    </button>
                 </motion.div>
             </motion.div>
 

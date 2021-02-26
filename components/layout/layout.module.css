@@ -1,9 +1,14 @@
 .container {
     max-width: 38rem;
     padding: 0 1rem;
-    margin: 3rem auto 6rem;
+    margin: 7rem auto 6rem;
   }
   
+.fullWidth {
+  width: 100vw;
+  height: 100vh;
+}
+
   .header {
     display: flex;
     flex-direction: column;
