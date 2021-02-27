@@ -7,7 +7,7 @@ const Space = (props) => {
             className={props.style}
             id={props.id}
             style={{
-                backgroundColor: props.active ? 'lightgrey' : 'darkgrey',
+                backgroundColor: props.active ? 'red' : 'green',
                 width: props.spaceSize+'rem',
                 height: props.spaceSize+'rem',
             }}

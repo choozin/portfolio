@@ -2,6 +2,7 @@ import { Height } from '@material-ui/icons';
 import React, { useState, forwardRef, useImperativeHandle } from 'react'
 
 import styles from './minesweeper.module.css'
+import { Cake, BugReport, Memory, Filter1, Filter2, Filter3, Filter4, Filter5, Filter6, Filter7, Filter8 } from '@material-ui/icons';
 
 import Space from './Space';
 
@@ -205,15 +206,35 @@ const MineSweeperMap = forwardRef((props, ref) => {
 
     const generateSpaceContent = (row, col) => {
         if(revealedSpacesGrid[row][col] === 0) {
-            return '_'
+            return <Memory/>
         } else if(revealedSpacesGrid[row][col] === 1) {
             if(typeof grid[row][col] === 'number') {
-                return grid[row][col]
+                //return grid[row][col]
+                switch (grid[row][col]) {
+                    case 0 : return <Memory/>
+                    break;
+                    case 1 : return <Filter1/>
+                    break;
+                    case 2 : return <Filter2/>
+                    break;
+                    case 3 : return <Filter3/>
+                    break;
+                    case 4 : return <Filter4/>
+                    break;
+                    case 5 : return <Filter5/>
+                    break;
+                    case 6 : return <Filter6/>
+                    break;
+                    case 7 : return <Filter7/>
+                    break;
+                    case 8 : return <Filter8/>
+                    break;
+                }
             } else {
-                return 'M'
+                return <BugReport/>
             }
         } else if (revealedSpacesGrid[row][col] === 2) {
-            return 'f'
+            return <Cake/>
         }
     }
 
