@@ -205,36 +205,45 @@ const MineSweeperMap = forwardRef((props, ref) => {
     }
 
     const generateSpaceContent = (row, col) => {
+
+        let fontSize = (spaceSize) => {
+            if (spaceSize < 3) return 'small'
+            else if (spaceSize > 5) return 'large'
+            else return 'default'
+        }
+
         if(revealedSpacesGrid[row][col] === 0) {
-            return <Memory/>
+            return <Memory 
+                fontSize={fontSize(props.spaceSize)}
+            />
         } else if(revealedSpacesGrid[row][col] === 1) {
             if(typeof grid[row][col] === 'number') {
                 //return grid[row][col]
                 switch (grid[row][col]) {
-                    case 0 : return <Memory/>
+                    case 0 : return <Memory fontSize={fontSize(props.spaceSize)}/>
                     break;
-                    case 1 : return <Filter1/>
+                    case 1 : return <Filter1 fontSize={fontSize(props.spaceSize)}/>
                     break;
-                    case 2 : return <Filter2/>
+                    case 2 : return <Filter2 fontSize={fontSize(props.spaceSize)}/>
                     break;
-                    case 3 : return <Filter3/>
+                    case 3 : return <Filter3 fontSize={fontSize(props.spaceSize)}/>
                     break;
-                    case 4 : return <Filter4/>
+                    case 4 : return <Filter4 fontSize={fontSize(props.spaceSize)}/>
                     break;
-                    case 5 : return <Filter5/>
+                    case 5 : return <Filter5 fontSize={fontSize(props.spaceSize)}/>
                     break;
-                    case 6 : return <Filter6/>
+                    case 6 : return <Filter6 fontSize={fontSize(props.spaceSize)}/>
                     break;
-                    case 7 : return <Filter7/>
+                    case 7 : return <Filter7 fontSize={fontSize(props.spaceSize)}/>
                     break;
-                    case 8 : return <Filter8/>
+                    case 8 : return <Filter8 fontSize={fontSize(props.spaceSize)}/>
                     break;
                 }
             } else {
-                return <BugReport/>
+                return <BugReport fontSize={fontSize(props.spaceSize)}/>
             }
         } else if (revealedSpacesGrid[row][col] === 2) {
-            return <Cake/>
+            return <Cake fontSize={fontSize(props.spaceSize)}/>
         }
     }
 

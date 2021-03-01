@@ -18,7 +18,7 @@ const MineSweeper = () => {
     return (
         <Layout
             nav='navbar'
-            pageStyle='thin'
+            pageStyle='full-width'
             returnHome={true}
         >
             <Head>

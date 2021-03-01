@@ -1,7 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+
 .window {
     margin: 0 auto;
 }
 
 .space {
     
+}
+
+.helpModal {
+    height: 350px;
+    overflow-y: auto;
+    font-family: 'Josefin Sans', cursive;
+}
+
+.gameMap {
+    margin: 0 auto;
+}
+
+.advancedMenu {
+    width: 100%;
+    max-width: 680px;
 }

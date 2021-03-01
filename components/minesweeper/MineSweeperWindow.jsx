@@ -20,6 +20,7 @@ const MineSweeperWindow = () => {
     const [difficulty, setDifficulty] = useState(33)
     const [size, setSize] = useState(50)
     const [displayBoard, setDisplayBoard] = useState(false)
+    const [displayInstructions, setDisplayInstructions] = useState(true)
     const [startGame, setStartGame] = useState(false)
 
     const handleDifficultyChange = (e, value) => {
@@ -33,30 +34,30 @@ const MineSweeperWindow = () => {
     }
 
     const handleMapChange = () => {
-        if (size > 70) {
+        if (size > 75) {
             setNumberOfRows(20)
             setNumberOfCols(20)
-            setSpaceCSSSize(1.5)
-            setMapCSSSize(30)
-            if (difficulty > 70) {
+            setSpaceCSSSize(2.7)
+            setMapCSSSize(54)
+            if (difficulty > 83) {
                 setTotalMines(100)
-            } else if (difficulty > 40) {
+            } else if (difficulty > 50) {
                 setTotalMines(64)
-            } else if (difficulty > 10) {
+            } else if (difficulty > 17) {
                 setTotalMines(40)
             } else {
                 setTotalMines(25)
             }
-        } else if (size > 30) {
+        } else if (size > 25) {
             setNumberOfRows(10)
             setNumberOfCols(10)
             setSpaceCSSSize(3)
             setMapCSSSize(30)
-            if (difficulty > 70) {
+            if (difficulty > 83) {
                 setTotalMines(25)
-            } else if (difficulty > 40) {
+            } else if (difficulty > 50) {
                 setTotalMines(20)
-            } else if (difficulty > 10) {
+            } else if (difficulty > 17) {
                 setTotalMines(10)
             } else {
                 setTotalMines(5)
@@ -66,11 +67,11 @@ const MineSweeperWindow = () => {
             setNumberOfCols(5)
             setSpaceCSSSize(6)
             setMapCSSSize(30)
-            if (difficulty > 70) {
+            if (difficulty > 83) {
                 setTotalMines(7)
-            } else if (difficulty > 40) {
+            } else if (difficulty > 50) {
                 setTotalMines(5)
-            } else if (difficulty > 10) {
+            } else if (difficulty > 17) {
                 setTotalMines(4)
             } else {
                 setTotalMines(3)
@@ -95,12 +96,16 @@ const MineSweeperWindow = () => {
     const opacity = startGame ? 'block' : 'none';
 
     return (
-        <div 
+        <div
             className={styles.window}
             style={{ width: mapCSSSize + 'rem', height: mapCSSSize + 'rem' }}
         >
-            <div className={styles.helpModal}>
-                <p>Welcome to Virologist! A remake of Microsoft's MineSweeper</p>
+
+            <div className={styles.header}>
+                <span>VirusSweeper</span>
+            </div>
+            {displayInstructions && <div className={styles.helpModal}>
+                <p>Welcome to VirusSweeper! A remake of Microsoft's MineSweeper</p>
                 <p>
                     In this game your job is to find and isolate every single virus on a memory card, which is comprised of a grid of 'memory blocks'.
                     Each memory card will have a different number of memory blocks and bugs, depending on which difficulty level and card size you choose to clean.
@@ -110,7 +115,7 @@ const MineSweeperWindow = () => {
                 </p>
                 <p>You'd better find and isolate every single virus!</p>
                 <p>
-                    To isolate a virus, you will need to right-click (or tap AND hold, for those on mobile devices) the memory block that you believe is hiding a virus. 
+                    To isolate a virus, you will need to right-click (or tap AND hold, for those on mobile devices) the memory block that you believe is hiding a virus.
                     But how can you tell which memory blocks might contain viruses?
                 </p>
                 <p>
@@ -120,7 +125,7 @@ const MineSweeperWindow = () => {
                 </p>
                 <p>Once a block is green, you can rest assured it's clean.</p>
                 <p>
-                    But that's not all! If you run the anti-virus software on a memory block that isn't infected, it will then go on to check EVERY SINGLE MEMORY BLOCK surrounding itself - 
+                    But that's not all! If you run the anti-virus software on a memory block that isn't infected, it will then go on to check EVERY SINGLE MEMORY BLOCK surrounding itself -
                     not only those above, below and beside, but also those that are immediately diagonal from the memory block as well!
                 </p>
                 <p>
@@ -134,72 +139,69 @@ const MineSweeperWindow = () => {
                 <p>
                     For this reason, you'll need to use a combination of the anti-virus software (the left-click/tap) and your isolation ability (right-click/tap and hold) to identify and properly isolate each virus on the card. Once you've isolated every single virus, you win!
                 </p>
-            </div>
+            </div>}
+            { displayInstructions ? <button onClick={() => setDisplayInstructions(false)}>Hide Instructions</button> : <button onClick={() => setDisplayInstructions(true)}>Show Instructions</button>
+            }
             { !displayBoard ? <>
-                <div className={styles.header}>
-                    <span>Debugger</span>
-                </div>
-                <button>How to Play</button>
                 <div className={styles.menu}>
-                    <button
-                        className={styles.menuBtn}
-                        onClick={() => { setDisplayBoard(true)}}>
-                        Create Game
-                    </button>
                     <Slider step={33} marks={difficultyMarks} value={difficulty} onChange={handleDifficultyChange} />
                     <Slider step={50} marks={sizeMarks} value={size} onChange={handleSizeChange} />
-
+                    <button
+                        className={styles.menuBtn}
+                        onClick={() => { setDisplayBoard(true) }}>
+                        Create Game
+                    </button>
                 </div>
             </>
-            : <>
-                <div style={{display: opacity }}>
-                    <div /*style={{ display: {...startGame[0] ? 'block' : 'hidden'} }}*/ className={styles.advancedMenu}>
-                        <div>
-                            <span>Flags: </span><span>{flagsPlanted}</span>
-                            <span>Mines: </span><span>{totalMines}</span>
+                : <>
+                    <div style={{ display: opacity }}>
+                        <div className={styles.advancedMenu}>
+                            <div>
+                                <span>Flags: </span><span>{flagsPlanted}</span>
+                                <span>Mines: </span><span>{totalMines}</span>
+                            </div>
+                            <button
+                                className={styles.menuBtn}
+                                onClick={() => mapRef.current.newGame()}>
+                                New Game
+                        </button>
+                            <button
+                                className={styles.menuBtn}
+                                onClick={() => mapRef.current.restartGame()}>
+                                Restart
+                        </button>
+                            <button
+                                className={styles.menuBtn}
+                                onClick={() => mapRef.current.solveGame()}>
+                                Solve
+                        </button>
+                            <button
+                                className={styles.menuBtn}
+                                onClick={() => { setDisplayBoard(false), setStartGame(false) }}>
+                                Back to Settings
+                        </button>
                         </div>
-                        <button
-                            className={styles.menuBtn}
-                            onClick={() => mapRef.current.newGame()}>
-                            New Game
-                        </button>
-                        <button
-                            className={styles.menuBtn}
-                            onClick={() => mapRef.current.restartGame()}>
-                            Restart
-                        </button>
-                        <button
-                            className={styles.menuBtn}
-                            onClick={() => mapRef.current.solveGame()}>
-                            Solve
-                        </button>
-                        <button
-                            className={styles.menuBtn}
-                            onClick={() => {setDisplayBoard(false), setStartGame(false)}}>
-                            Back to Settings
-                        </button>
+                        <div className={styles.gameMap}>
+                            <MineSweeperMap
+                                ref={mapRef}
+                                totalMines={totalMines}
+                                flagsPlanted={flagsPlanted}
+                                setFlagsPlanted={setFlagsPlanted}
+                                numberOfRows={numberOfRows}
+                                numberOfCols={numberOfCols}
+                                spaceSize={spaceCSSSize}
+                            />
+                        </div>
                     </div>
-                    <div className={styles.gameMap}>
-                        <MineSweeperMap
-                            ref={mapRef}
-                            totalMines={totalMines}
-                            flagsPlanted={flagsPlanted}
-                            setFlagsPlanted={setFlagsPlanted}
-                            numberOfRows={numberOfRows}
-                            numberOfCols={numberOfCols}
-                            spaceSize={spaceCSSSize}
-                        />
-                    </div> 
-                </div>
-                {startGame ? null : 
-                <button
-                    //style={{ display: {...startGame[0] ? 'none' : 'block'} }}
-                    className={styles.menuBtn}
-                    onClick={() => {mapRef.current.newGame(), setStartGame(true)}}>
-                    Begin
+                    {startGame ? null :
+                        <button
+                            //style={{ display: {...startGame[0] ? 'none' : 'block'} }}
+                            className={styles.menuBtn}
+                            onClick={() => { mapRef.current.newGame(), setStartGame(true) }}>
+                            Begin
                 </button>
-                }
-            </>
+                    }
+                </>
             }
         </div>
     )
