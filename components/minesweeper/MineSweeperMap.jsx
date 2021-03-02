@@ -6,19 +6,6 @@ import { Cake, BugReport, Memory, Filter1, Filter2, Filter3, Filter4, Filter5, F
 
 import Space from './Space';
 
-const numberColors = {
-    0: '#0f0',
-    1: '#0f8',
-    2: '#08f',
-    3: '#00f',
-    4: '#80f',
-    5: '#f0f',
-    6: '#f08',
-    7: '#f00',
-    8: '#fff',
-    x: '#000',
-}
-
 const generateRevealedSpacesGrid = (totalCols, totalRows, val) => {
     let grid = [];
     for (let i = 0; i < totalRows; i++) {

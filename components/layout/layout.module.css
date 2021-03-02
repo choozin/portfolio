@@ -1,5 +1,5 @@
 .container {
-    max-width: 38rem;
+    max-width: 40rem;
     padding: 0 1rem;
     margin: 7rem auto 6rem;
   }
@@ -7,7 +7,6 @@
 .fullWidth {
   width: 100vw;
   height: 100vh;
-  padding: 0 1rem;
   margin: 7rem auto 6rem;
 }
 

@@ -1,7 +1,37 @@
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+@import url('https://fonts.googleapis.com/css?family=DotGothic16');
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
 
 .window {
     margin: 0 auto;
+    width: 60rem;
+    background-color: #000;
+    padding: 1rem;
+    padding-top: 10rem;
+    margin-top: -10rem;
+    border: double 0.5rem #0F0;
+    border-bottom: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.extendedBottom {
+    margin: 0 auto;
+    height: 200vh;
+    width: 60rem;
+    border: double 0.5rem #0F0;
+    background-color: #000;
+    border-top: none;
+}
+
+.header {
+    font-family: 'Permanent Marker';
+    text-align: center;
+    font-size: 5rem;
+    margin-top: -1rem;
+    font-style: italic;
+    color: #0D0;
+    text-shadow: 2px 2px rgb(255, 0, 212);
+    padding-bottom: 1rem;
 }
 
 .space {
@@ -9,9 +39,17 @@
 }
 
 .helpModal {
-    height: 350px;
+    height: 75vh;
     overflow-y: auto;
-    font-family: 'Josefin Sans', cursive;
+    font-family: 'DotGothic16', cursive;
+    border: solid 0.5rem rgb(255, 0, 212);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1rem;
+    background-color:#484;
+    color: #242;
+    font-weight: bold;
+    font-size: 1.5rem;
 }
 
 .gameMap {
@@ -19,6 +57,37 @@
 }
 
 .advancedMenu {
-    width: 100%;
-    max-width: 680px;
+    text-align: center;
+    padding: 4rem;
+}
+
+.sliderLabels {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    font-size: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.instructionsBtn {
+    width: 50%;
+    margin: 0 auto;
+    padding: 0rem;
+    padding-bottom: 0.25rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    background: rgba(0,0,0,0);
+    color: #080;
+    border: dashed 0.5rem #080; 
+    border-radius: 2rem;
+    font-family: 'DotGothic16', cursive;
+}
+
+.createGameBtn {
+
+}
+
+.beginBtn {
+
 }
