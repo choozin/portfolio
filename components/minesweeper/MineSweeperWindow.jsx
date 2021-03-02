@@ -22,7 +22,7 @@ const MineSweeperWindow = () => {
     const [difficulty, setDifficulty] = useState(33)
     const [size, setSize] = useState(50)
     const [displayBoard, setDisplayBoard] = useState(false)
-    const [displayInstructions, setDisplayInstructions] = useState(true)
+    const [displayInstructions, setDisplayInstructions] = useState(false)
     const [startGame, setStartGame] = useState(false)
 
     const handleDifficultyChange = (e, value) => {

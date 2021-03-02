@@ -28,7 +28,10 @@ export const getStaticPaths = async () => {
 export const Post = ({ postData }) => {
   console.log();
     return (
-      <Layout home={false}>
+      <Layout 
+        nav='navbar'
+        pageStyle='thin'
+        returnHome={true}>
         <Head>
           <title>{postData.title}</title>
         </Head>
