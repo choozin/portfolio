@@ -12,26 +12,45 @@
     border-bottom: none;
     display: flex;
     flex-direction: column;
+    margin-bottom: -2rem;
 }
 
 .extendedBottom {
     margin: 0 auto;
+    z-index: -1;
     height: 200vh;
     width: 60rem;
     border: double 0.5rem #0F0;
     background-color: #000;
     border-top: none;
+    overflow: auto; 
 }
 
 .header {
-    font-family: 'Permanent Marker';
+    text-align: center;
+    margin-bottom: 4rem;
+    margin-top: -4rem;
+}
+
+.header h2 {
+    font-family: 'DotGothic16';
     text-align: center;
     font-size: 5rem;
+    font-weight: bold;
+    color: #8F8;
+    text-shadow: 2px 2px #484;
+    margin-bottom: -0.5rem;
+}
+
+.header span {
+    font-family: 'DotGothic16';
+    text-align: center;
+    font-size: 3rem;
     margin-top: -1rem;
     font-style: italic;
-    color: #0D0;
-    text-shadow: 2px 2px rgb(255, 0, 212);
-    padding-bottom: 1rem;
+    color: #0F0;
+    text-shadow: 2px 2px #F8F;
+    text-decoration: underline;
 }
 
 .space {
@@ -61,33 +80,156 @@
     padding: 4rem;
 }
 
+.advancedMenu h4 {
+    font-family: 'DotGothic16';
+    text-align: center;
+    font-size: 2rem;
+    font-style: italic;
+    color: #8F8;
+}
+
 .sliderLabels {
-    color: white;
+    color: #8F8;
     display: flex;
     justify-content: space-between;
     font-size: 2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 6rem;
+    font-family: 'DotGothic16', cursive;
+}
+
+.preview {
+    color: #8F8;
+    font-family: 'DotGothic16';
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 2rem;
+    padding: 1rem;
     margin-top: 1rem;
-    margin-bottom: 2rem;
+}
+
+.preview span {
+    padding-bottom: 1rem;
 }
 
 .instructionsBtn {
     width: 50%;
     margin: 0 auto;
+    margin-bottom: 4rem;
     padding: 0rem;
     padding-bottom: 0.25rem;
     font-size: 2.5rem;
     font-weight: bold;
     background: rgba(0,0,0,0);
-    color: #080;
-    border: dashed 0.5rem #080; 
+    color: #484;
+    border: dashed 0.5rem #484; 
     border-radius: 2rem;
     font-family: 'DotGothic16', cursive;
 }
 
 .createGameBtn {
-
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 4rem;
+    padding: 0rem;
+    padding-bottom: 0.25rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    background: rgba(0,0,0,0);
+    color: #8F8;
+    border: dashed 0.5rem #8F8; 
+    border-radius: 2rem;
+    font-family: 'DotGothic16', cursive;
 }
 
 .beginBtn {
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 4rem;
+    padding: 0rem;
+    padding-bottom: 0.25rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    background: rgba(0,0,0,0);
+    color: #8F8;
+    border: dashed 0.5rem #8F8; 
+    border-radius: 2rem;
+    font-family: 'DotGothic16', cursive;
+}
 
+.newGameBtn {
+    width: 24%;
+    margin: 0 2rem;
+    margin-bottom: 4rem;
+    padding: 0rem;
+    padding-bottom: 0.25rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    background: rgba(0,0,0,0);
+    color: #88F;
+    border: dashed 0.5rem #88F;
+    border-radius: 2rem;
+    font-family: 'DotGothic16', cursive;
+}
+
+.restartBtn {
+    width: 24%;
+    margin: 0 2rem;
+    margin-bottom: 4rem;
+    padding: 0rem;
+    padding-bottom: 0.25rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    background: rgba(0,0,0,0);
+    color: #448;
+    border: dashed 0.5rem #448;
+    border-radius: 2rem;
+    font-family: 'DotGothic16', cursive;
+}
+
+.solveBtn {
+    width: 24%;
+    margin: 0 2rem;
+    padding: 0rem;
+    padding-bottom: 0.25rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    background: rgba(0,0,0,0);
+    color: #F8F;
+    border: dashed 0.5rem #F8F; 
+    border-radius: 2rem;
+    font-family: 'DotGothic16', cursive;
+}
+
+.settingsBtn {
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 4rem;
+    padding: 0rem;
+    padding-bottom: 0.25rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    background: rgba(0,0,0,0);
+    color: #884;
+    border: dashed 0.5rem #884; 
+    border-radius: 2rem;
+    font-family: 'DotGothic16', cursive;
+}
+
+.bug {
+
+}
+
+.number {
+
+}
+
+.memory {
+
+}
+
+.cake {
+    
 }

@@ -9,6 +9,11 @@ import { createMuiTheme } from '@material-ui/core/styles'
 
 import MineSweeperMap from './MineSweeperMap';
 
+const scrollToTop = () => {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+
 const MineSweeperWindow = () => {
 
     const mapRef = useRef()
@@ -83,16 +88,16 @@ const MineSweeperWindow = () => {
     }
 
     const difficultyMarks = [
-        { value: 0, label: 'Easy' },
-        { value: 33, label: 'Normal' },
-        { value: 66, label: 'Hard' },
-        { value: 99, label: 'Expert' },
+        { value: 0 },
+        { value: 33 },
+        { value: 66 },
+        { value: 99 },
     ]
 
     const sizeMarks = [
-        { value: 0, label: 'Small' },
-        { value: 50, label: 'Medium' },
-        { value: 100, label: 'Large' },
+        { value: 0 },
+        { value: 50 },
+        { value: 100 },
     ]
 
     const opacity = startGame ? 'block' : 'none';
@@ -112,7 +117,7 @@ const MineSweeperWindow = () => {
                     color: '#484',
                     height: '2.7rem',
                 },
-                rail: { 
+                rail: {
                     color: '#080',
                     height: '2.7rem',
                 },
@@ -135,7 +140,7 @@ const MineSweeperWindow = () => {
                     color: '#484',
                     height: '2.7rem',
                 },
-                rail: { 
+                rail: {
                     color: '#080',
                     height: '2.7rem',
                 },
@@ -149,7 +154,8 @@ const MineSweeperWindow = () => {
                 className={styles.window}
             >
                 <div className={styles.header}>
-                    <span>++Virus_Sweeper++</span>
+                    <h2>++Virus_Sweeper++</h2>
+                    <span>Attack of the RetroVirus</span>
                 </div>
                 {displayInstructions && <div className={styles.helpModal}>
                     <p>Welcome to VirusSweeper! A remake of Microsoft's MineSweeper</p>
@@ -187,23 +193,24 @@ const MineSweeperWindow = () => {
                         For this reason, you'll need to use a combination of the anti-virus software (the left-click/tap) and your isolation ability (right-click/tap and hold) to identify and properly isolate each virus on the card. Once you've isolated every single virus, you win!
                 </p>
                 </div>}
-                {displayInstructions ? <button 
+                {displayInstructions ? <button
                     onClick={() => setDisplayInstructions(false)}
                     className={styles.instructionsBtn}
-                    >Hide Instructions</button> : 
-                    <button 
+                >Hide Instructions</button> :
+                    <button
                         onClick={() => setDisplayInstructions(true)}
                         className={styles.instructionsBtn}
                     >Show Instructions</button>
                 }
                 {!displayBoard ? <>
                     <div className={styles.advancedMenu}>
+                        <h4>Select Your Skill Level</h4>
                         <ThemeProvider theme={difficultyTheme}>
-                            <Slider 
-                                step={33} 
-                                marks={difficultyMarks} 
-                                value={difficulty} 
-                                onChange={handleDifficultyChange} 
+                            <Slider
+                                step={33}
+                                marks={difficultyMarks}
+                                value={difficulty}
+                                onChange={handleDifficultyChange}
                             />
                         </ThemeProvider>
                         <div className={styles.sliderLabels}>
@@ -212,12 +219,13 @@ const MineSweeperWindow = () => {
                             <span>1337</span>
                             <span>h4x0r</span>
                         </div>
+                        <h4>Select Your Card Size</h4>
                         <ThemeProvider theme={sizeTheme}>
-                            <Slider 
-                                step={50} 
-                                marks={sizeMarks} 
-                                value={size} 
-                                onChange={handleSizeChange} 
+                            <Slider
+                                step={50}
+                                marks={sizeMarks}
+                                value={size}
+                                onChange={handleSizeChange}
                             />
                         </ThemeProvider>
                         <div className={styles.sliderLabels}>
@@ -226,9 +234,9 @@ const MineSweeperWindow = () => {
                             <span>Giga</span>
                         </div>
                         <button
-                            className={styles.menuBtn}
-                            onClick={() => { setDisplayBoard(true) }}>
-                        Create Game
+                            className={styles.createGameBtn}
+                            onClick={() => { setDisplayBoard(true), scrollToTop() }}>
+                            Create Game
                     </button>
                     </div>
                 </>
@@ -240,25 +248,25 @@ const MineSweeperWindow = () => {
                                     <span>Mines: </span><span>{totalMines}</span>
                                 </div>
                                 <button
-                                    className={styles.menuBtn}
+                                    className={styles.newGameBtn}
                                     onClick={() => mapRef.current.newGame()}>
-                            New Game
-                        </button>
+                                    New Game
+                                </button>
                                 <button
-                                    className={styles.menuBtn}
+                                    className={styles.restartBtn}
                                     onClick={() => mapRef.current.restartGame()}>
-                            Restart
-                        </button>
+                                    Restart
+                                </button>
                                 <button
-                                    className={styles.menuBtn}
+                                    className={styles.solveBtn}
                                     onClick={() => mapRef.current.solveGame()}>
-                            Solve
-                        </button>
+                                    Solve
+                                </button>
                                 <button
-                                    className={styles.menuBtn}
-                                    onClick={() => { setDisplayBoard(false), setStartGame(false) }}>
-                            Back to Settings
-                        </button>
+                                    className={styles.settingsBtn}
+                                    onClick={() => { setDisplayBoard(false), setStartGame(false), scrollToTop() }}>
+                                    Back to Game Setup
+                                </button>
                             </div>
                             <div className={styles.gameMap}
                                 style={{ width: mapCSSSize + 'rem', height: mapCSSSize + 'rem' }}>
@@ -274,12 +282,25 @@ const MineSweeperWindow = () => {
                             </div>
                         </div>
                         {startGame ? null :
-                            <button
-                                //style={{ display: {...startGame[0] ? 'none' : 'block'} }}
-                                className={styles.menuBtn}
-                                onClick={() => { mapRef.current.newGame(), setStartGame(true) }}>
-                        Begin
-                </button>
+                            <>
+                                <button
+                                    className={styles.settingsBtn}
+                                    onClick={() => { setDisplayBoard(false), setStartGame(false) }}
+                                >
+                                    Back to Game Setup
+                                </button>
+                                <div className={styles.preview}>
+                                    <span>Difficulty: {difficulty}%</span>
+                                    <span>Card Size: {numberOfCols} x {numberOfRows}</span>
+                                </div>
+                                <button
+                                    //style={{ display: {...startGame[0] ? 'none' : 'block'} }}
+                                    className={styles.beginBtn}
+                                    onClick={() => { mapRef.current.newGame(), setStartGame(true) }}
+                                >
+                                    Begin
+                                </button>
+                            </>
                         }
                     </>
                 }

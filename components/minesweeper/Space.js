@@ -4,6 +4,7 @@ const Space = (props) => {
 
     return (
         <button
+            bgColor={props.bgColor}
             className={props.style}
             id={props.id}
             style={{
