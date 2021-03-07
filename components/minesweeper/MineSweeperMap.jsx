@@ -58,6 +58,9 @@ const MineSweeperMap = forwardRef((props, ref) => {
     const [revealedSpacesGrid, setRevealedSpacesGrid] = useState(generateRevealedSpacesGrid(props.numberOfRows, props.numberOfCols, props.totalMines))
     const [numberOfRevealedSpaces, setNumberOfRevealedSpaces] = useState(0);
     let [numberOfFlagsPlanted, setNumberOfFlagsPlanted] = useState(0)
+    
+    const [gameStillActive, setGameStillActive] = useState(true);
+    
     useImperativeHandle(ref, () => ({
         newGame() {
             setNumberOfFlagsPlanted(0)
@@ -69,6 +72,7 @@ const MineSweeperMap = forwardRef((props, ref) => {
             setRevealedSpacesGrid([
                 ...generateRevealedSpacesGrid(props.numberOfRows, props.numberOfCols, 0)
             ])
+            setGameStillActive(true)
         },
         restartGame() {
             setNumberOfFlagsPlanted(0)
@@ -77,6 +81,7 @@ const MineSweeperMap = forwardRef((props, ref) => {
             setRevealedSpacesGrid([
                 ...generateRevealedSpacesGrid(props.numberOfRows, props.numberOfCols, 0)
             ])
+            setGameStillActive(true)
         },
         solveGame() {
             setNumberOfFlagsPlanted(0)
@@ -92,6 +97,7 @@ const MineSweeperMap = forwardRef((props, ref) => {
         setRevealedSpacesGrid([
             ...generateRevealedSpacesGrid(props.numberOfRows, props.numberOfCols, 1)
         ])
+        setGameStillActive(false)
     }
 
     const gameWon = () => {
@@ -240,13 +246,14 @@ const MineSweeperMap = forwardRef((props, ref) => {
         for (let colIndex = 0; colIndex < grid.length; colIndex++) {
             map.push(
                 <Space
-                    style={styles.space}
+                    spaceClass={styles.space}
                     id={colIndex + ',' + rowIndex}
                     spaceSize={props.spaceSize}
                     active={revealedSpacesGrid[rowIndex][colIndex] === 1 ? false : true}
                     handleLeftClick={() => handleLeftClick(event, rowIndex, colIndex)}
                     handleClick={() => handleSpaceClick(rowIndex, colIndex)}
                     spaceContent={generateSpaceContent(rowIndex, colIndex)}
+                    gameStillActive={gameStillActive}
                 />
             )
         }

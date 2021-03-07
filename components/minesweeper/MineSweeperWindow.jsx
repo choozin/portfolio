@@ -25,6 +25,7 @@ const MineSweeperWindow = () => {
     const [spaceCSSSize, setSpaceCSSSize] = useState(3)
     const [mapCSSSize, setMapCSSSize] = useState(30)
     const [difficulty, setDifficulty] = useState(33)
+    const [difficultyLabel, setDifficultyLabel] = useState('user')
     const [size, setSize] = useState(50)
     const [displayBoard, setDisplayBoard] = useState(false)
     const [displayInstructions, setDisplayInstructions] = useState(false)
@@ -32,6 +33,22 @@ const MineSweeperWindow = () => {
 
     const handleDifficultyChange = (e, value) => {
         setDifficulty(value)
+
+        switch (value) {
+            case 0:
+                setDifficultyLabel('n00b')
+                break;
+            case 33:
+                setDifficultyLabel('user')
+                break;
+            case 66:
+                setDifficultyLabel('1337')
+                break;
+            case 100:
+                setDifficultyLabel('h4x0r')
+                break;
+        }
+
         handleMapChange()
     }
 
@@ -290,8 +307,10 @@ const MineSweeperWindow = () => {
                                     Back to Game Setup
                                 </button>
                                 <div className={styles.preview}>
-                                    <span>Difficulty: {difficulty}%</span>
+                                    <span>Difficulty: {difficultyLabel}</span>
+                                    <span>Viruses on Card: {totalMines}</span>
                                     <span>Card Size: {numberOfCols} x {numberOfRows}</span>
+                                    <span>Starting Virus Coverage: {totalMines / numberOfCols * numberOfRows}%</span>
                                 </div>
                                 <button
                                     //style={{ display: {...startGame[0] ? 'none' : 'block'} }}
