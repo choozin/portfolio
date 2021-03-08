@@ -61,7 +61,7 @@
     height: 75vh;
     overflow-y: auto;
     font-family: 'DotGothic16', cursive;
-    border: solid 0.5rem rgb(255, 0, 212);
+    border: solid 0.5rem #4B4;
     border-radius: 1rem;
     padding: 1rem;
     margin: 1rem;
@@ -71,8 +71,37 @@
     font-size: 1.5rem;
 }
 
+/* width */
+.window ::-webkit-scrollbar {
+  width: 2rem;
+}
+
+/* Track */
+.window ::-webkit-scrollbar-track {
+  background: #8B8; 
+}
+ 
+/* Handle */
+.window ::-webkit-scrollbar-thumb {
+  background: #040; 
+}
+
+/* Handle on hover */
+.window ::-webkit-scrollbar-thumb:hover {
+  background: #080; 
+}
+
+.window button:focus { 
+    outline: none;
+}
+
 .gameMap {
     margin: 0 auto;
+}
+
+.gameMenu {
+    text-align: center;
+    padding: 4rem;
 }
 
 .advancedMenu {
@@ -117,7 +146,7 @@
 .instructionsBtn {
     width: 50%;
     margin: 0 auto;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     padding: 0rem;
     padding-bottom: 0.25rem;
     font-size: 2.5rem;
@@ -205,6 +234,7 @@
 
 .settingsBtn {
     width: 50%;
+    display: block;
     margin: 0 auto;
     margin-bottom: 4rem;
     padding: 0rem;

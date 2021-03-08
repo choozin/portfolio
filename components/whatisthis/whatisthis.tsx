@@ -2,8 +2,24 @@ import { useState, useEffect, useContext, Component } from 'react';
 import Link from 'next/link'
 import styles from './whatisthis.module.css'
 import { Button } from '@material-ui/core';
+import { motion } from 'framer-motion'
 
 const WhatIsThisBtn = ({ children, topic }) => {
+
+    const witStyle = {
+        color: [
+            '#0f8',
+            '#08f',
+            '#0f8',
+        ],
+        opacity: [1, 0.5, 1],
+        transition: {
+            duration: 4,
+            delay: 1,
+            repeat: Infinity,
+            stiffness: 1,
+        }
+    }
 
     // lookups array should contain strings that match the part of the text
     // to be made into a lookup component, including any punctuation
@@ -138,13 +154,13 @@ const WhatIsThisBtn = ({ children, topic }) => {
         const [isLookupWord, setIsLookupWord] = useState(false)
 
         if (typeof lookups === 'object') {
-            
+
             for (let wordIndex = 0; wordIndex < wordArray.length; wordIndex++) {
 
                 let isLookupWord = false;
 
                 for (let lookupsIndex = 0; lookupsIndex < lookups.length; lookupsIndex++) {
-                    
+
                     if ((wordArray[wordIndex] === lookups[lookupsIndex].label) && (isLookupWord === false)) {
 
                         isLookupWord = true;
@@ -162,7 +178,7 @@ const WhatIsThisBtn = ({ children, topic }) => {
                 }
 
                 newWordsArray.push(' ');
-                
+
                 !isLookupWord && newWordsArray.push(wordArray[wordIndex]);
                 isLookupWord = false;
 
@@ -186,12 +202,15 @@ const WhatIsThisBtn = ({ children, topic }) => {
     const InternalWITBtn = ({ text, topic }) => {
 
         return (
-            <span className={styles.WITBtn} onClick={() => { 
-                setIsWITModalOpen(true); 
-                setPreviousData(previousData.length > 0 ? [...previousData, currentData] : [currentData]); 
-                getTopicData(topic); }}>
+            <motion.span animate={
+                witStyle
+            } className={styles.WITBtn} onClick={() => {
+                setIsWITModalOpen(true);
+                setPreviousData(previousData.length > 0 ? [...previousData, currentData] : [currentData]);
+                getTopicData(topic);
+            }}>
                 {text}
-            </span>
+            </motion.span>
         )
     }
 
@@ -206,48 +225,53 @@ const WhatIsThisBtn = ({ children, topic }) => {
 
     const goBackBtn = () => {
 
-        switch(previousData.length) {
-            case 0: 
+        switch (previousData.length) {
+            case 0:
                 //
                 setCurrentData([]);
                 setPreviousData([]);
                 break;
-            case 1: 
+            case 1:
                 //
-                setCurrentData(previousData[previousData.length-1]);
+                setCurrentData(previousData[previousData.length - 1]);
                 setPreviousData([]);
                 break;
-            default: 
+            default:
                 //
-                setCurrentData(previousData[previousData.length-1]);
+                setCurrentData(previousData[previousData.length - 1]);
 
                 let pData = previousData;
-                pData.splice(-1,1);
+                pData.splice(-1, 1);
                 setPreviousData(pData);
         }
 
     }
 
-    console.log(previousData);
     return (
         <>
-            <span className={styles.WITBtn} onClick={() => { setIsWITModalOpen(true); getTopicData(topic); }}>
+            <motion.div animate={
+                witStyle
+            }
+                className={styles.WITBtn} onClick={() => { setIsWITModalOpen(true); getTopicData(topic); }}>
                 {children}
-            </span>
+            </motion.div>
             {
                 isWITModalOpen &&
                 <div className={styles.fullscreenBase}>
                     <div className={styles.WITModal}>
-                        <img className={styles.image} src={currentData.imagePath}/>
+                        <img className={styles.image} src={currentData.imagePath} />
                         <h2>What Is <span className={styles.title}>{currentData.title}</span>?</h2>
                         <div className={styles.description}>
                             <WITDescription description={currentData.description} lookups={currentData.lookups} />
                         </div>
                         <div className={styles.btnContainer}>
-                            { previousData.length > 0 && <Button onClick={() => goBackBtn()}>Back</Button> }
-                            <Link href={currentData.url}>
+                            {
+                                previousData.length > 0 && <Button onClick={() => goBackBtn()}>Back</Button>
+                            }
+                            {currentData.url && <Link href={currentData.url}>
                                 <Button>Visit Official Website</Button>
                             </Link>
+                            }
                             <Button onClick={() => setIsWITModalOpen(false)}>Close</Button>
                         </div>
                     </div>

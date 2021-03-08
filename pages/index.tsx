@@ -9,6 +9,7 @@ import ActiveLink from '../components/common/active-link'
 
 import Auth from '../components/auth/auth'
 import WhatIsThisBtn from '../components/whatisthis/whatisthis'
+import Welcome from '../components/welcome/Welcome'
 
 import request from '../pages/api/mailjet'
 
@@ -44,6 +45,7 @@ export default function Home({
       <Head>
         <title>{siteTitle}</title>
       </Head>
+      
       <section className={utilStyles.headingMd}>
         <p>[Your Self Introduction]</p>
         <p>
@@ -52,7 +54,7 @@ export default function Home({
             children='otherwise its green'
             href='https://nextjs.org/learn'
           />).<br />
-          Use this for links in a nav where you want to signal which page or subpage the user is on.
+          Use this for links in a nav where you want to signal which page or <WhatIsThisBtn topic='javascript'>subpage</WhatIsThisBtn> the user is on.
         </p>
       </section>
       <section>

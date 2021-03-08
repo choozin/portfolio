@@ -8,7 +8,6 @@ import ThemeProvider from '@material-ui/styles/ThemeProvider'
 import { createMuiTheme } from '@material-ui/core/styles'
 
 import Header from './Header';
-import AdvancedMenu from './AdvancedMenu';
 import MineSweeperMap from './MineSweeperMap';
 
 const scrollToTop = () => {
@@ -105,7 +104,66 @@ const MineSweeperWindow = () => {
 
     }
 
+    const difficultyMarks = [
+        { value: 0 },
+        { value: 33 },
+        { value: 66 },
+        { value: 99 },
+    ]
+
+    const sizeMarks = [
+        { value: 0 },
+        { value: 50 },
+        { value: 100 },
+    ]
+
     const opacity = startGame ? 'block' : 'none';
+
+    const difficultyTheme = createMuiTheme({
+        overrides: {
+            MuiSlider: {
+                thumb: {
+                    color: '#8F8',
+                    height: '2.7rem',
+                    width: '2.7rem',
+                    marginTop: '0rem',
+                    marginLeft: '-1.3rem',
+                    borderRadius: '2rem'
+                },
+                track: {
+                    color: '#484',
+                    height: '2.7rem',
+                },
+                rail: {
+                    color: '#080',
+                    height: '2.7rem',
+                },
+            }
+        }
+    })
+
+    const sizeTheme = createMuiTheme({
+        overrides: {
+            MuiSlider: {
+                thumb: {
+                    color: '#8F8',
+                    height: '2.7rem',
+                    width: '2.7rem',
+                    marginTop: '0rem',
+                    marginLeft: '-1.3rem',
+                    borderRadius: '2rem'
+                },
+                track: {
+                    color: '#484',
+                    height: '2.7rem',
+                },
+                rail: {
+                    color: '#080',
+                    height: '2.7rem',
+                },
+            }
+        }
+    })
 
     return (
         <>
@@ -113,27 +171,51 @@ const MineSweeperWindow = () => {
                 className={styles.window}
             >
                 <Header/>
-                {!displayBoard ?
-                    <AdvancedMenu 
-                        handleDifficultyChange={handleDifficultyChange}
-                        handleSizeChange={handleSizeChange}
-                        setDisplayBoard={setDisplayBoard}
-                        scrollToTop={scrollToTop}
-                        difficulty={difficulty}
-                        size={size}
-                    />
+                {!displayBoard ? <>
+                    <div className={styles.advancedMenu}>
+                        <h4>Select Your Skill Level</h4>
+                        <ThemeProvider theme={difficultyTheme}>
+                            <Slider
+                                step={33}
+                                marks={difficultyMarks}
+                                value={difficulty}
+                                onChange={handleDifficultyChange}
+                            />
+                        </ThemeProvider>
+                        <div className={styles.sliderLabels}>
+                            <span>n00b</span>
+                            <span>User</span>
+                            <span>1337</span>
+                            <span>h4x0r</span>
+                        </div>
+                        <h4>Select Your Card Size</h4>
+                        <ThemeProvider theme={sizeTheme}>
+                            <Slider
+                                step={50}
+                                marks={sizeMarks}
+                                value={size}
+                                onChange={handleSizeChange}
+                            />
+                        </ThemeProvider>
+                        <div className={styles.sliderLabels}>
+                            <span>Kilo</span>
+                            <span>Mega</span>
+                            <span>Giga</span>
+                        </div>
+                        <button
+                            className={styles.createGameBtn}
+                            onClick={() => { setDisplayBoard(true), scrollToTop() }}>
+                            Create Game
+                    </button>
+                    </div>
+                </>
                     : <>
                         <div style={{ display: opacity }}>
-                            <div className={styles.gameMenu}>
+                            <div className={styles.advancedMenu}>
                                 <div>
                                     <span>Flags: </span><span>{flagsPlanted}</span>
                                     <span>Mines: </span><span>{totalMines}</span>
                                 </div>
-                                <button
-                                    className={styles.settingsBtn}
-                                    onClick={() => { setDisplayBoard(false), setStartGame(false), scrollToTop() }}>
-                                    Back to Game Setup
-                                </button>
                                 <button
                                     className={styles.newGameBtn}
                                     onClick={() => mapRef.current.newGame()}>
@@ -148,6 +230,11 @@ const MineSweeperWindow = () => {
                                     className={styles.solveBtn}
                                     onClick={() => mapRef.current.solveGame()}>
                                     Solve
+                                </button>
+                                <button
+                                    className={styles.settingsBtn}
+                                    onClick={() => { setDisplayBoard(false), setStartGame(false), scrollToTop() }}>
+                                    Back to Game Setup
                                 </button>
                             </div>
                             <div className={styles.gameMap}

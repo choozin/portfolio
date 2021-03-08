@@ -1,0 +1,22 @@
+.welcome {
+    width: 100vw;
+    height: 100vh;
+    background-color: #FFF;
+    text-align: center;
+    z-index: 70;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.invitation {
+    margin: 0 auto;
+    max-width: 32rem;
+    font-size: 1rem;
+}
+
+.introduction {
+    margin: 0 auto;
+    max-width: 32rem;
+    font-size: 1rem;
+}

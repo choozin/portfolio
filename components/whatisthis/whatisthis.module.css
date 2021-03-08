@@ -1,17 +1,23 @@
 .WITBtn {
-    color: red;
-    font-weight: bold,
+    font-weight: bold;
+    display: inline;
+    cursor: crosshair;
+}
+
+.WITBtn:hover {
+    
 }
 
 .fullscreenBase {
     width: 100vw;
     height: 100vh;
     margin: 0 auto;
-    z-index: 1;
+    z-index: 99;
     position: fixed;
     left: 0;
     top: 0;
     background-color: rgba(0, 0, 0, 0.7);
+    overflow-y: auto;
 }
 
 .openWITModalBtn {
@@ -26,13 +32,13 @@
     border-radius: 1rem;
     background-color: white;
     padding: 1rem;
-    z-index: 2;
+    z-index: 100;
     min-width: 15rem;
     max-width: 38rem;
     min-height: 10rem;
     align-items: center;
     justify-content: center;
-    margin: 3rem auto 6rem;
+    margin: 2rem auto 6rem;
 }
 
 .title {
@@ -47,6 +53,8 @@
 
 .description {
     color: inherit;
+    text-align: center;
+    padding-bottom: 2rem;
 }
 
 .btnContainer {
