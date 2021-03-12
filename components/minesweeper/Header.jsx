@@ -35,11 +35,11 @@ const Header = () => {
 
             {displayInstructions ? <motion.button whileTap={{ color: '#BFB' }} 
                 onClick={() => setDisplayInstructions(false)}
-                className={styles.instructionsBtn}
+                className={styles.mediumBtn}
             >Hide Instructions</motion.button> :
                 <motion.button whileTap={{ color: '#BFB' }} 
                     onClick={() => setDisplayInstructions(true)}
-                    className={styles.instructionsBtn}
+                    className={styles.mediumBtn}
                 >Show Instructions</motion.button>
             }
 

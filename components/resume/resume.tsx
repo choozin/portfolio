@@ -459,7 +459,7 @@ const Resume = () => {
 
                     }}
                 >
-                    Content
+                    
                 </motion.p>
             </motion.div>
         </div>

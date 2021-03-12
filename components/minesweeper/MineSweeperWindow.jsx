@@ -24,8 +24,8 @@ const MineSweeperWindow = () => {
     let [flagsPlanted, setFlagsPlanted] = useState(0)
     const [numberOfRows, setNumberOfRows] = useState(10)
     const [numberOfCols, setNumberOfCols] = useState(10)
-    const [spaceCSSSize, setSpaceCSSSize] = useState(3)
-    const [mapCSSSize, setMapCSSSize] = useState(30)
+    const [spaceCSSSize, setSpaceCSSSize] = useState(2)
+    const [mapCSSSize, setMapCSSSize] = useState(20)
     const [difficulty, setDifficulty] = useState(33)
     const [difficultyLabel, setDifficultyLabel] = useState('user')
     const [size, setSize] = useState(50)
@@ -62,8 +62,8 @@ const MineSweeperWindow = () => {
         if (size > 75) {
             setNumberOfRows(20)
             setNumberOfCols(20)
-            setSpaceCSSSize(2.7)
-            setMapCSSSize(54)
+            setSpaceCSSSize(2)
+            setMapCSSSize(40)
             if (difficulty > 83) {
                 setTotalMines(80)
             } else if (difficulty > 50) {
@@ -76,8 +76,8 @@ const MineSweeperWindow = () => {
         } else if (size > 25) {
             setNumberOfRows(10)
             setNumberOfCols(10)
-            setSpaceCSSSize(3)
-            setMapCSSSize(30)
+            setSpaceCSSSize(1)
+            setMapCSSSize(10)
             if (difficulty > 83) {
                 setTotalMines(20)
             } else if (difficulty > 50) {
@@ -90,8 +90,8 @@ const MineSweeperWindow = () => {
         } else {
             setNumberOfRows(5)
             setNumberOfCols(5)
-            setSpaceCSSSize(6)
-            setMapCSSSize(30)
+            setSpaceCSSSize(2)
+            setMapCSSSize(10)
             if (difficulty > 83) {
                 setTotalMines(7)
             } else if (difficulty > 50) {
@@ -130,22 +130,22 @@ const MineSweeperWindow = () => {
                                     <span>Mines: </span><span>{totalMines}</span>
                                 </div>
                                 <button
-                                    className={styles.settingsBtn}
+                                    className={styles.darkBtn}
                                     onClick={() => { setDisplayBoard(false), setStartGame(false), scrollToTop() }}>
                                     Back to Game Setup
                                 </button>
                                 <button
-                                    className={styles.newGameBtn}
+                                    className={styles.mediumBtn}
                                     onClick={() => mapRef.current.newGame()}>
                                     New Game
                                 </button>
                                 <button
-                                    className={styles.restartBtn}
+                                    className={styles.mediumBtn}
                                     onClick={() => mapRef.current.restartGame()}>
                                     Restart
                                 </button>
                                 <button
-                                    className={styles.solveBtn}
+                                    className={styles.darkBtn}
                                     onClick={() => mapRef.current.solveGame()}>
                                     Solve
                                 </button>
@@ -166,7 +166,7 @@ const MineSweeperWindow = () => {
                         {startGame ? null :
                             <>
                                 <button
-                                    className={styles.settingsBtn}
+                                    className={styles.mediumBtn}
                                     onClick={() => { setDisplayBoard(false), setStartGame(false) }}
                                 >
                                     Back to Game Setup
@@ -179,7 +179,7 @@ const MineSweeperWindow = () => {
                                 </div>
                                 <button
                                     //style={{ display: {...startGame[0] ? 'none' : 'block'} }}
-                                    className={styles.beginBtn}
+                                    className={styles.lightBtn}
                                     onClick={() => { mapRef.current.newGame(), setStartGame(true) }}
                                 >
                                     Begin

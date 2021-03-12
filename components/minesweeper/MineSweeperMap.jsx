@@ -98,12 +98,14 @@ const MineSweeperMap = forwardRef((props, ref) => {
             ...generateRevealedSpacesGrid(props.numberOfRows, props.numberOfCols, 1)
         ])
         setGameStillActive(false)
+        alert('lose');
     }
 
     const gameWon = () => {
         setRevealedSpacesGrid([
             ...generateRevealedSpacesGrid(props.numberOfRows, props.numberOfCols, 1)
         ])
+        alert('win!');
     }
 
     const handleLeftClick = (event, row, col) => {
@@ -111,12 +113,14 @@ const MineSweeperMap = forwardRef((props, ref) => {
         if (revealedSpacesGrid[row][col] === 0) {
             revealedSpacesGrid[row][col] = 2;
             setNumberOfFlagsPlanted(++numberOfFlagsPlanted)
+            alert('1');
         } else if (revealedSpacesGrid[row][col] === 2) {
             revealedSpacesGrid[row][col] = 0;
-            setNumberOfFlagsPlanted(--numberOfFlagsPlanted)
+            alert('2')
         }
         props.setFlagsPlanted(numberOfFlagsPlanted)
         setRevealedSpacesGrid([...revealedSpacesGrid])
+        alert(numberOfFlagsPlanted);
     }
 
     const handleSpaceClick = (row, col) => {
@@ -201,16 +205,16 @@ const MineSweeperMap = forwardRef((props, ref) => {
 
         let fontSize = (spaceSize) => {
             if (spaceSize < 3) return 'small'
-            else if (spaceSize > 5) return 'large'
-            else return 'default'
+            else if (spaceSize > 5) return 'small'
+            else return 'small'
         }
 
-        if(revealedSpacesGrid[row][col] === 0) {
+        if(revealedSpacesGrid[row][col] === 0) { // unclicked 
             return <Memory 
                 fontSize={fontSize(props.spaceSize)}
             />
-        } else if(revealedSpacesGrid[row][col] === 1) {
-            if(typeof grid[row][col] === 'number') {
+        } else if(revealedSpacesGrid[row][col] === 1) { // affected by left click
+            if(typeof grid[row][col] === 'number') { // not a bug
                 //return grid[row][col]
                 switch (grid[row][col]) {
                     case 0 : return <Memory fontSize={fontSize(props.spaceSize)}/>
@@ -232,10 +236,10 @@ const MineSweeperMap = forwardRef((props, ref) => {
                     case 8 : return <Filter8 fontSize={fontSize(props.spaceSize)}/>
                     break;
                 }
-            } else {
+            } else { // is a bug
                 return <BugReport fontSize={fontSize(props.spaceSize)}/>
             }
-        } else if (revealedSpacesGrid[row][col] === 2) {
+        } else if (revealedSpacesGrid[row][col] === 2) { // been right clicked
             return <Cake fontSize={fontSize(props.spaceSize)}/>
         }
     }

@@ -1,22 +1,48 @@
 .welcome {
     width: 100vw;
     height: 100vh;
-    background-color: #FFF;
+    background: rgb(255, 136, 0);
     text-align: center;
     z-index: 70;
     position: fixed;
     left: 0;
     top: 0;
+    display: flex;
+    align-items: center;
 }
 
-.invitation {
+.welcomeContainer {
+    color: rgb(255, 230, 180);
+    font-size: 2rem;
     margin: 0 auto;
-    max-width: 32rem;
-    font-size: 1rem;
 }
 
-.introduction {
+.container {
+    color: rgb(255, 230, 180);
+    font-size: 2rem;
     margin: 0 auto;
-    max-width: 32rem;
+}
+
+.welcomeContainer h2 {
+    height: 7rem;
+}
+
+.container p {
+    font-size: 1.5rem;
+}
+
+.optionsButtons {
+    display: flex;
+    flex-direction: column;
+}
+
+.optionsBtn {
+    width: 20rem;
+    height: 3rem;
+    margin: 0.5rem auto;
+    border: none;
+    border-radius: 2rem;
+    background-color: rgb(255, 180, 90);
+    color: #FDD;
     font-size: 1rem;
 }

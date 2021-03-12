@@ -12,19 +12,19 @@ const AdvancedMenu = (props) => {
             MuiSlider: {
                 thumb: {
                     color: '#8F8',
-                    height: '2.7rem',
-                    width: '2.7rem',
+                    height: '1rem',
+                    width: '1rem',
                     marginTop: '0rem',
-                    marginLeft: '-1.3rem',
+                    marginLeft: '-0.4rem',
                     borderRadius: '2rem'
                 },
                 track: {
                     color: '#484',
-                    height: '2.7rem',
+                    height: '1rem',
                 },
                 rail: {
                     color: '#080',
-                    height: '2.7rem',
+                    height: '1rem',
                 },
             }
         }
@@ -35,19 +35,19 @@ const AdvancedMenu = (props) => {
             MuiSlider: {
                 thumb: {
                     color: '#8F8',
-                    height: '2.7rem',
-                    width: '2.7rem',
+                    height: '1rem',
+                    width: '1rem',
                     marginTop: '0rem',
-                    marginLeft: '-1.3rem',
+                    marginLeft: '-0.4rem',
                     borderRadius: '2rem'
                 },
                 track: {
                     color: '#484',
-                    height: '2.7rem',
+                    height: '1rem',
                 },
                 rail: {
                     color: '#080',
-                    height: '2.7rem',
+                    height: '1rem',
                 },
             }
         }
@@ -99,7 +99,7 @@ const AdvancedMenu = (props) => {
                     <span>Giga</span>
                 </div>
                 <button
-                    className={styles.createGameBtn}
+                    className={styles.lightBtn}
                     onClick={() => { props.setDisplayBoard(true), props.scrollToTop }}>
                     Create Game
             </button>

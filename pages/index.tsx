@@ -1,4 +1,6 @@
 import Head from 'next/head'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Layout, { siteTitle } from '../components/layout/layout'
 import utilStyles from '../styles/utils.module.css'
 import { getSortedPostsData } from '../lib/posts'
@@ -36,6 +38,16 @@ export default function Home({
 
   console.log('mailjet: ', mailjet);*/
 
+  const [showWelcome, setShowWelcome] = useState(true);
+
+  const exitWelcome = () => {
+    setShowWelcome(false)
+  }
+
+  setTimeout(() => {
+    setShowWelcome(false);
+  }, 30000)
+
   return (
     <Layout
       nav='navbar'
@@ -45,7 +57,9 @@ export default function Home({
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      
+      <AnimatePresence>
+        {showWelcome && <motion.div exit={{opacity:0, transition: {duration: 2}}}><Welcome exitFunction={() => setShowWelcome(false)} /></motion.div>}
+      </AnimatePresence>
       <section className={utilStyles.headingMd}>
         <p>[Your Self Introduction]</p>
         <p>
