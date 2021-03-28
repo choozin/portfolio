@@ -1,7 +1,7 @@
 .WITBtn {
     font-weight: bold;
     display: inline;
-    cursor: crosshair;
+    cursor: help;
 }
 
 .WITBtn:hover {

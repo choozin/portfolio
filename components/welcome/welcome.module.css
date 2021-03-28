@@ -1,7 +1,7 @@
 .welcome {
     width: 100vw;
     height: 100vh;
-    background: rgb(255, 136, 0);
+    background: #44B;/* rgb(255, 136, 0);*/
     text-align: center;
     z-index: 70;
     position: fixed;
@@ -31,6 +31,18 @@
     font-size: 1.5rem;
 }
 
+.topLeft {
+    top: 3rem;
+    left: 3rem;
+    position: absolute;
+}
+
+.bottomRight {
+    right: 3rem;
+    bottom: 3rem;
+    position: absolute;
+}
+
 .optionsButtons {
     display: flex;
     flex-direction: column;
@@ -45,4 +57,21 @@
     background-color: rgb(255, 180, 90);
     color: #FDD;
     font-size: 1rem;
+    outline: none;
+}
+
+.fixedStaticArea {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 1rem;
+}
+
+.fixedStaticArea button {
+    font-weight: bold;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    color: #FDD;
+    outline: none;
 }

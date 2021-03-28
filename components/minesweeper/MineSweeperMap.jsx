@@ -125,10 +125,10 @@ const MineSweeperMap = forwardRef((props, ref) => {
 
     const handleSpaceClick = (row, col) => {
         console.log('1', revealedSpacesGrid[row][col])
-        if (revealedSpacesGrid[row][col] === 1) {
+        if (revealedSpacesGrid[row][col] === 1) { // already clicked
             return;
         }
-        if (grid[row][col] === 0) {
+        if (grid[row][col] === 0) { // an open space, no mines touching or nearby
             revealSurroundingZeroSpaces(row, col);
         }
         if (grid[row][col] === 'x') {
