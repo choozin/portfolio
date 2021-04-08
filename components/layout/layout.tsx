@@ -81,7 +81,7 @@ export default function Layout({ children, nav, pageStyle, returnHome, header }:
                   </div>
                 </header>
                 
-                <iframe src="https://www.youtube.com/embed/W0LHTWG-UmQ?controls=0&showinfo=0&rel=0&autoplay=1&mute=1&enablejsapi=1&loop=1&playlist=W0LHTWG-UmQ" frameborder="0" allowfullscreen></iframe>               
+                <iframe src="https://www.youtube.com/embed/W0LHTWG-UmQ?controls=0&showinfo=0&rel=0&autoplay=1&mute=1&enablejsapi=1&loop=1&playlist=W0LHTWG-UmQ"></iframe>               
                 <div className={styles.overlay}></div>
 
                 <div className={styles.text}>
