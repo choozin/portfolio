@@ -68,7 +68,8 @@ export default function Home({
             children='otherwise its green'
             href='https://nextjs.org/learn'
           />).<br />
-          Use this for links in a nav where you want to signal which page or <WhatIsThisBtn topic='javascript'>subpage</WhatIsThisBtn> the user is on.
+          
+          Use this for links in a nav where you want to signal which page or <WhatIsThisBtn topic='next'>subpage</WhatIsThisBtn> the user is on.
         </p>
       </section>
       <section>

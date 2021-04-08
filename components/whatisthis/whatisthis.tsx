@@ -129,6 +129,25 @@ const WhatIsThisBtn = ({ children, topic }) => {
                     topic: 'library',
                 }
             ]
+        },
+        {
+            topic: 'next',
+            title: 'Next.js',
+            description: `
+                Next is an extension Library of React allowing for lightning fast, serverless page loads.
+            `,
+            url: 'http://reactjs.org',
+            imagePath: '/images/vercel.png',
+            lookups: [
+                {
+                    label: 'React',
+                    topic: 'react',
+                },
+                {
+                    label: 'Library',
+                    topic: 'library',
+                }
+            ]
         }
     ];
 

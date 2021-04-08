@@ -14,8 +14,8 @@ const Test = () => {
 
   return (
     <Layout
-      nav='navbar'
-      pageStyle='thin'
+      nav='none'
+      pageStyle='landingPage'
       returnHome={true}
     >
       <Head>

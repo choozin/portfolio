@@ -22,6 +22,10 @@ export default function Layout({ children, nav, pageStyle, returnHome, header }:
     case 'navball':
       navigation = 'navball';
       break;
+
+    case 'none':
+      navigation = '';
+      break;
   }
 
   let page;
@@ -61,6 +65,51 @@ export default function Layout({ children, nav, pageStyle, returnHome, header }:
       page = 
             <div className={styles.fullWidth}>
               {children}
+            </div>
+      break;
+
+
+    case 'landingPage' :
+      page = 
+            <div className={styles.landingPage}>
+
+              <section className={styles.showcase}>
+                <header>
+                  <h2 className={styles.logo}>Travel</h2>
+                  <div className={styles.toggle}>
+
+                  </div>
+                </header>
+                
+                <iframe src="https://www.youtube.com/embed/W0LHTWG-UmQ?controls=0&showinfo=0&rel=0&autoplay=1&mute=1&enablejsapi=1&loop=1&playlist=W0LHTWG-UmQ" frameborder="0" allowfullscreen></iframe>               
+                <div className={styles.overlay}></div>
+
+                <div className={styles.text}>
+                  <h2>Never Stop</h2>
+                  <h3>Exploring The World</h3>
+                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur debitis ullam ipsa laborum saepe? Esse cupiditate temporibus suscipit id tempora provident beatae deleniti assumenda veniam dolorem, repellendus aut, asperiores omnis?</p>
+                </div>
+
+                <ul className={styles.social}>
+                  <li>
+                    <a href='#'><img src='facebook.png' alt=''/></a>
+                    <a href='#'><img src='twitter.png' alt=''/></a>
+                    <a href='#'><img src='instagram.png' alt=''/></a>
+                  </li>
+                </ul>
+
+              </section>
+
+              <div className={styles.menu}>
+                <ul>
+                  <li><a href='#'>Home</a></li>
+                  <li><a href='#'>News</a></li>
+                  <li><a href='#'>Destinations</a></li>
+                  <li><a href='#'>Blog</a></li>
+                  <li><a href='#'>Pricing</a></li>
+                </ul>
+
+              </div>
             </div>
       break;
   }
