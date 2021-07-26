@@ -150,6 +150,9 @@ const MineSweeperWindow = () => {
                                     Solve
                                 </button>
                             </div>
+                            <div style={{ width: '100%', color: 'green' }}>
+                                <p>{flagsPlanted}</p>
+                            </div>
                             <div className={styles.gameMap}
                                 style={{ width: mapCSSSize + 'rem', height: mapCSSSize + 'rem' }}>
                                 <MineSweeperMap

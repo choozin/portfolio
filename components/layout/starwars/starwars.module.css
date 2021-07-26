@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:wght@500;700');
+@import url('https://fonts.googleapis.com/css?family=Russo+One:wght@500;700');
+
+.container {
+    display: flex;
+    height: 100%;
+    width: 60%;
+    margin: 0 auto;
+    perspective: 450px;
+    font-family: 'Roboto';
+    display: flex;
+}
+
+
+.bigTitle {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: -30%;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.bigTitle h2 {
+    color: #111;
+    -webkit-text-stroke: 7px #Fd1;
+    margin: 0 auto;
+    font-size: 32vw;
+    line-height: 25vw;
+    font-family: 'Russo One';
+    animation: shrink 9s ease-out forwards;
+}
+
+@media (orientation: portrait) {
+    .bigTitle h2 {
+        -webkit-text-stroke: 4px #Fd1;
+    }
+}
+
+.scrollingText {
+    color: #Fd1;
+    font-size: 3vw;
+    line-height: 4vw;
+    font-weight: bold;
+    text-align: justify;
+    position: relative;
+    animation: scroll 100s linear forwards;
+}
+
+@media screen and (max-width: 420px) {
+    .scrollingText {
+        animation: scroll 180s ease-in forwards;
+    }
+}
+
+.fadeOut {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 20%;
+    background: linear-gradient(180deg, rgba(0, 0, 8, 1) 20%, rgba(0, 0, 8, 0) 100%);
+    z-index: 5;
+}
+
+.episode {
+    text-align: center
+}
+
+.title {
+    text-align: center;
+    font-variant: small-caps;
+    font-stretch: narrower;
+    font-size: 1.7em;
+}
+
+.stars {
+    background: black url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png) repeat;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: block;
+    z-index: 0;
+}
+
+/*36 lines, 4 paragraphs*/
+
+@keyframes scroll {
+    from {
+        top: 120vh;
+        transform: translateZ(600px) rotateX(48deg)
+    }
+    to {
+        top: calc(120vh - 3600px);
+        transform: translateZ(-3600px) rotateX(48deg)
+    }
+}
+
+@keyframes shrink {
+    from {
+        transform: scaleY(1.6) scaleX(1.6) translateY(0px);
+    }
+    to {
+        transform: scaleY(0) scaleX(0) translateY(0px);
+    }
+}
+
+
+@media (orientation: portrait) {
+    @keyframes scroll {
+        from {
+            top: 56vh;
+            transform: translateZ(600px) rotateX(48deg)
+        }
+        to {
+            top: calc(56vh - 3600px);
+            transform: translateZ(-3600px) rotateX(48deg)
+        }
+    }
+}

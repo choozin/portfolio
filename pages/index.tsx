@@ -12,8 +12,10 @@ import ActiveLink from '../components/common/active-link'
 import Auth from '../components/auth/auth'
 import WhatIsThisBtn from '../components/whatisthis/whatisthis'
 import Welcome from '../components/welcome/Welcome'
+import Homepage from '../components/home/home'
 
 import request from '../pages/api/mailjet'
+import { StylesContext } from '@material-ui/styles'
 
 export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData()
@@ -38,7 +40,7 @@ export default function Home({
 
   console.log('mailjet: ', mailjet);*/
 
-  const [showWelcome, setShowWelcome] = useState(true);
+  /*const [showWelcome, setShowWelcome] = useState(false);
 
   const exitWelcome = () => {
     setShowWelcome(false)
@@ -47,11 +49,16 @@ export default function Home({
   setTimeout(() => {
     setShowWelcome(false);
   }, 30000)
-
+*/
   return (
+    <Welcome/>
+  )
+
+
+  /*return (
     <Layout
       nav='navbar'
-      pageStyle='thin'
+      pageStyle='full-width'
       returnHome={true}
     >
       <Head>
@@ -60,6 +67,8 @@ export default function Home({
       <AnimatePresence>
         {showWelcome && <motion.div exit={{opacity:0, transition: {duration: 2}}}><Welcome exitFunction={() => setShowWelcome(false)} /></motion.div>}
       </AnimatePresence>
+      <Homepage/>
+
       <section className={utilStyles.headingMd}>
         <p>[Your Self Introduction]</p>
         <p>
@@ -89,7 +98,7 @@ export default function Home({
         </ul>
       </section>
     </Layout>
-  )
+  )*/
 }
 
 /*

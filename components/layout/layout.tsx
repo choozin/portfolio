@@ -1,5 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
+//import milkyway from '../../public/images/milkyway.jpeg'
 
 import styles from './layout.module.css'
 
@@ -9,6 +11,12 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 
 
 export const siteTitle = `Cam's Portfolio`;
+
+const bgImages = [
+  '/images/milkyway.jpeg',
+  '/images/sombrero.jpg',
+  '/images/andromeda.jpg',
+]
 
 export default function Layout({ children, nav, pageStyle, returnHome, header }: { children: React.ReactNode, nav: string, pageStyle: string, returnHome?: boolean, header?: boolean }) {
 
@@ -33,84 +41,105 @@ export default function Layout({ children, nav, pageStyle, returnHome, header }:
 
     case 'thin':
       page =
-        <div className={styles.container}>
+        <>
+          <div style={{
+            width: '100vw',
+            height: '100vh',
+            position: 'fixed',
+            zIndex: -10
+          }}>
+            <Image src={bgImages[Math.round(Math.random()*(bgImages.length-1))]}
+              alt='Picture of the Milky Way'
+              layout='fill'/>
+          </div>
+          <div className={styles.container}>
 
-          {header &&
-            <header className={styles.header}>
-              This is the header.
-            </header>
-          }
 
-          <main className={styles.main}>
-            {children}
-          </main>
 
-          {!returnHome && (
-            <div className={styles.backToHome}>
-              <p>This is the footer.</p>
-              <Link href="/">
-                <a>← Back to home</a>
-              </Link>
-              <div className={styles.icons}>
-                <LinkedInIcon />
-                <GitHubIcon />
+            {header &&
+              <header className={styles.header}>
+                This is the header.
+              </header>
+            }
+
+            <main className={styles.main}>
+              {children}
+            </main>
+
+            {!returnHome && (
+              <div className={styles.backToHome}>
+                <p>This is the footer.</p>
+                <Link href="/">
+                  <a>← Back to home</a>
+                </Link>
+                <div className={styles.icons}>
+                  <LinkedInIcon />
+                  <GitHubIcon />
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
+          </div>
+        </>
+      break;
+
+    case 'full-width':
+      page =
+        <div className={styles.fullWidth}>
+          {children}
         </div>
       break;
-    
-    case 'full-width' :
-      page = 
-            <div className={styles.fullWidth}>
-              {children}
-            </div>
+
+    case 'full-screen':
+      page =
+        <div className={styles.fullScreen}>
+          {children}
+        </div>
       break;
 
 
-    case 'landingPage' :
-      page = 
-            <div className={styles.landingPage}>
+    case 'landingPage':
+      page =
+        <div className={styles.landingPage}>
 
-              <section className={styles.showcase}>
-                <header>
-                  <h2 className={styles.logo}>Travel</h2>
-                  <div className={styles.toggle}>
-
-                  </div>
-                </header>
-                
-                <iframe src="https://www.youtube.com/embed/W0LHTWG-UmQ?controls=0&showinfo=0&rel=0&autoplay=1&mute=1&enablejsapi=1&loop=1&playlist=W0LHTWG-UmQ"></iframe>               
-                <div className={styles.overlay}></div>
-
-                <div className={styles.text}>
-                  <h2>Never Stop</h2>
-                  <h3>Exploring The World</h3>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur debitis ullam ipsa laborum saepe? Esse cupiditate temporibus suscipit id tempora provident beatae deleniti assumenda veniam dolorem, repellendus aut, asperiores omnis?</p>
-                </div>
-
-                <ul className={styles.social}>
-                  <li>
-                    <a href='#'><img src='facebook.png' alt=''/></a>
-                    <a href='#'><img src='twitter.png' alt=''/></a>
-                    <a href='#'><img src='instagram.png' alt=''/></a>
-                  </li>
-                </ul>
-
-              </section>
-
-              <div className={styles.menu}>
-                <ul>
-                  <li><a href='#'>Home</a></li>
-                  <li><a href='#'>News</a></li>
-                  <li><a href='#'>Destinations</a></li>
-                  <li><a href='#'>Blog</a></li>
-                  <li><a href='#'>Pricing</a></li>
-                </ul>
+          <section className={styles.showcase}>
+            <header>
+              <Link href='/'><h2 className={styles.logo}>SPACE</h2></Link>
+              <div className={styles.toggle}>
 
               </div>
+            </header>
+
+            <iframe src="https://www.youtube.com/embed/W0LHTWG-UmQ?controls=0&showinfo=0&rel=0&autoplay=1&mute=1&enablejsapi=1&loop=1&playlist=W0LHTWG-UmQ"></iframe>
+            <div className={styles.overlay}></div>
+
+            <div className={styles.text}>
+              <h2>Always Keep</h2>
+              <h3>Reaching Higher</h3>
+              <p>It's amazing what some discolouration along with a bold font can do. Look at this landing page. My God... it's gorgeous!</p>
             </div>
+
+            <ul className={styles.social}>
+              <li>
+                <a href='#'><img src='facebook.png' alt='' /></a>
+                <a href='#'><img src='twitter.png' alt='' /></a>
+                <a href='#'><img src='instagram.png' alt='' /></a>
+              </li>
+            </ul>
+
+          </section>
+
+          <div className={styles.menu}>
+            <ul>
+              <li><a href='#'>Home</a></li>
+              <li><a href='#'>News</a></li>
+              <li><a href='#'>Destinations</a></li>
+              <li><a href='#'>Blog</a></li>
+              <li><a href='#'>Pricing</a></li>
+            </ul>
+
+          </div>
+        </div>
       break;
   }
 

@@ -36,30 +36,41 @@ const Todo = () => {
             returnHome={true}
         >
             <Head>
-                <title>{page.pageTitle}</title>
+                <title>{page.pageTitle}{page.siteTitle}</title>
             </Head>
-            <AppBar position='static'>
-                <Tabs value={selectedTab} onChange={handleTabChange}>
-                    <Tab value={0} label="Local Device List" />
-                    <Tab value={1} label="Public List" />
-                    <Tab value={2} label="Default List" />
-                </Tabs>
-            </AppBar>
-            {selectedTab === 0 && <section>
-                <h2>Local Device List</h2>
-                <NoSSR onSSR={<section />}>
-                    <ToDosLocalStorage />
-                </NoSSR>
-            </section>}
-            {selectedTab === 1 && <section>
-                <h2>Public List</h2>
-                <ToDosFirebase />
-            </section>}
-            {selectedTab === 2 && <section>
-                <h2>Default List</h2>
-                <ToDos />
-                <AddToDo />
-            </section>}
+            <div
+                style={{
+                    backgroundColor: 'white',
+                    borderRadius: '17px',
+                }}>
+                <AppBar position='static'>
+                    <Tabs value={selectedTab} onChange={handleTabChange}>
+                        <Tab value={0} label="Sample List" />
+                        <Tab value={1} label="Public List" />
+                        <Tab value={2} label="Local Device List" />
+                    </Tabs>
+                </AppBar>
+                <div
+                    style={{
+                        padding: '1rem',
+                    }}>
+                    {selectedTab === 0 && <section>
+                        <h2>Default List</h2>
+                        <ToDos />
+                        <AddToDo />
+                    </section>}
+                    {selectedTab === 1 && <section>
+                        <h2>Public List</h2>
+                        <ToDosFirebase />
+                    </section>}
+                    {selectedTab === 2 && <section>
+                        <h2>Local Device List</h2>
+                        <NoSSR onSSR={<section />}>
+                            <ToDosLocalStorage />
+                        </NoSSR>
+                    </section>}
+                </div>
+            </div>
         </Layout>
     );
 };

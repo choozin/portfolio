@@ -8,12 +8,12 @@ import { ThemeContext } from '../../contexts/ThemeContext'
 
 import Layout from '../../components/layout/layout'
 
-import MineSweeperWindow from '../../components/minesweeper/MineSweeperWindow'
+import Calculator from '../../components/paintcalc/calculator'
 
-const MineSweeper = () => {
+const PaintCalc = () => {
 
     const { page } = useContext(ThemeContext);
-    page.setPageTitle(`Virus Sweeper`);
+    page.setPageTitle(`Painting Cost Estimator`);
 
     return (
         <Layout
@@ -24,9 +24,9 @@ const MineSweeper = () => {
             <Head>
                 <title>{page.pageTitle}{page.siteTitle}</title>
             </Head>
-            <MineSweeperWindow />
+            <Calculator />
         </Layout>
     );
 };
 
-export default MineSweeper;
+export default PaintCalc;

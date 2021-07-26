@@ -50,7 +50,10 @@ const Header = () => {
                     Each memory card will have a different number of memory blocks and bugs, depending on which difficulty level and card size you choose to clean.
                 </p>
                 <p>
-                    Viruses need to be isolated in order to stop them from infecting the rest of the card, which could go on to infect the rest of the computer, and then... maybe even the entire internet. Oh my.
+                    Viruses need to be isolated in order to stop them from infecting the rest of the card, which could go on to infect the rest of the computer, and then... maybe even the entire internet. 
+                </p>
+                <p>
+                    Oh my.
                 </p>
                 <p>You'd better find and isolate every single virus!</p>
                 <p>
@@ -78,6 +81,7 @@ const Header = () => {
                 <p>
                     For this reason, you'll need to use a combination of the anti-virus software (the left-click/tap) and your isolation ability (right-click/tap and hold) to identify and properly isolate each virus on the card. Once you've isolated every single virus, you win!
                 </p>
+                <p>Good luck! The fate of the internet is in your hands...</p>
             </div>
             }
 

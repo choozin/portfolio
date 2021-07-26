@@ -8,6 +8,7 @@ export const ThemeContext = createContext();
 const ThemeContextProvider = ({ children }) => {
 
     const [ pageTitle, setPageTitle ] = useState(`Cam's Site`);
+    const [ siteTitle, setSiteTitle ] = useState(` | Cam Makes Stuff - Web Development Skills for Everyone's Needs, and Other Skills for Other People's Needs Too!`);
     const [ themeName, setThemeName ] = useState('light');
 
 
@@ -29,6 +30,8 @@ const ThemeContextProvider = ({ children }) => {
         page: {
             pageTitle,
             setPageTitle,
+            siteTitle,
+            setSiteTitle,
         },
         theme: {
             themeName,

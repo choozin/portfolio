@@ -41,7 +41,7 @@ const FourOhFour = () => {
         <title>404 Error</title>
       </Head>
 
-      <section style={{margin: '0 auto', marginTop: '-3.5rem', textAlign: 'center', backgroundColor: 'black', paddingBottom: '100vh'}}>
+      <section style={{margin: '0 auto', paddingTop: '7rem', textAlign: 'center', backgroundColor: 'black', paddingBottom: '100vh'}}>
         <motion.p 
           animate={
             flash

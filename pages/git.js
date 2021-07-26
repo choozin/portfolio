@@ -19,7 +19,7 @@ import { useEffect, useContext } from 'react';
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
-    margin: 16
+    margin: '1rem',
   },
   description: {
     fontSize: 14,
@@ -216,7 +216,7 @@ const Git = () => {
       returnHome={true}
     >
       <Head>
-        <title>{page.pageTitle}</title>
+        <title>{page.pageTitle}{page.siteTitle}</title>
       </Head>
       <section>
         {data.map(dataObj =>

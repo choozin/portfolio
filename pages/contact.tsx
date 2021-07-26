@@ -27,7 +27,7 @@ import {
 const Contact = () => {
 
     const { page } = useContext(ThemeContext);
-    page.setPageTitle('Contact');
+    page.setPageTitle('Contact Cam');
 
     const [status, setStatus] = useState("");
     const [contactReason, setContactReason] = useState<string[]>([]);
@@ -126,10 +126,10 @@ const Contact = () => {
             returnHome={true}
         >
             <Head>
-                <title>{page.pageTitle}</title>
+                <title>{page.pageTitle}{page.siteTitle}</title>
             </Head>
             <section>
-                <Paper variant="elevation">
+                <Paper variant="elevation" style={{ borderRadius: '30px' }}>
                     <form
                         className={styles.contactForm}
                         onSubmit={(e) => submitForm(e)}

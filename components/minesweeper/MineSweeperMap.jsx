@@ -93,6 +93,10 @@ const MineSweeperMap = forwardRef((props, ref) => {
         },
     }))
 
+    const updateScore = () => {
+
+    }
+
     const gameOver = () => {
         setRevealedSpacesGrid([
             ...generateRevealedSpacesGrid(props.numberOfRows, props.numberOfCols, 1)
@@ -111,16 +115,14 @@ const MineSweeperMap = forwardRef((props, ref) => {
     const handleLeftClick = (event, row, col) => {
         event.preventDefault()
         if (revealedSpacesGrid[row][col] === 0) {
+            // correct
             revealedSpacesGrid[row][col] = 2;
             setNumberOfFlagsPlanted(++numberOfFlagsPlanted)
-            alert('1');
         } else if (revealedSpacesGrid[row][col] === 2) {
             revealedSpacesGrid[row][col] = 0;
-            alert('2')
         }
         props.setFlagsPlanted(numberOfFlagsPlanted)
         setRevealedSpacesGrid([...revealedSpacesGrid])
-        alert(numberOfFlagsPlanted);
     }
 
     const handleSpaceClick = (row, col) => {

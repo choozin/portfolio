@@ -4,6 +4,8 @@
 .window {
     margin: 0 auto;
     width: 21rem;
+    top: 7rem;
+    position: relative;
     background-color: #000;
     padding: 1rem;
     padding-top: 10rem;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import styles from './welcome.module.css'
 
@@ -79,12 +80,12 @@ const Welcome = (props): JSX.Element => {
         setShowFirst(false);
         setTimeout(() => {
             setShowedSecond(true)
-            setShowSecond(!showedSecond ? true : false)
+            setShowSecond(!showedSecond)
             setTimeout(() => {
                 setShowSecond(false)
                 setTimeout(() => {
                     setShowedThird(true)
-                    setShowThird(!showedThird ? true : false)
+                    setShowThird(true)
                 }, 2800)
             }, 5000)
         }, 2800)
@@ -92,6 +93,9 @@ const Welcome = (props): JSX.Element => {
 
     const closeWelcome = () => {
         setShowWelcome(false)
+        setTimeout(() => {
+            window.location.href='/landingpage'
+        }, 3000)
     }
 
     return (
@@ -156,11 +160,18 @@ const Welcome = (props): JSX.Element => {
                                             }
                                         }}
                                         className={styles.bottomRight}
+                                        style={{ 
+                                            display: 'flex', 
+                                            flexDirection: 'column',
+                                        }}
                                     >
-                                        <div style={{display: 'flex', float: 'right', maxWidth: '90vw', fontSize: '4rem', fontWeight: 'bold', backgroundColor: 'none', padding: '0.75rem', marginBottom: '-1rem', borderRadius: '3rem', textShadow: '2px 2px 2px white, -2px 2px 2px white, 2px -2px 2px white, -2px -2px 2px white'}}>
-                                            <span style={{color: 'red', display: 'inline'}}>Code</span>
-                                            <span style={{color: 'white', textShadow: '2px 2px 2px black, -2px 2px 2px black, 2px -2px 2px black, -2px -2px 2px black', display: 'inline'}}>Works</span>
-                                            <span style={{color: 'red', display: 'inline'}}>Canada</span>
+                                        <div style={{ display: 'flex', float: 'right', maxWidth: '90vw', fontSize: '4rem', fontWeight: 'bold', backgroundColor: 'none', padding: '0.75rem', marginBottom: '-1rem', borderRadius: '3rem', textShadow: '2px 2px 2px white, -2px 2px 2px white, 2px -2px 2px white, -2px -2px 2px white' }}>
+                                            <span style={{ color: 'red', display: 'inline' }}>Code</span>
+                                            <span style={{ color: 'white', textShadow: '2px 2px 2px black, -2px 2px 2px black, 2px -2px 2px black, -2px -2px 2px black', display: 'inline' }}>Works</span>
+                                            <span style={{ color: 'red', display: 'inline' }}>Canada</span>
+                                        </div>
+                                        <div style={{ display: 'flex', float: 'right', maxWidth: '90vw', fontSize: '3rem', backgroundColor: 'none', paddingLeft: '3rem', marginBottom: '-1rem', borderRadius: '3rem' }}>
+                                            <span style={{ color: 'gray', display: 'inline' }}>A.K.A. Cam Makes Stuff</span>
                                         </div>
                                     </motion.div>
                                 </>
@@ -187,15 +198,15 @@ const Welcome = (props): JSX.Element => {
                                         }
                                     }}
                                 >
-                                    <h2>Before we start...</h2>
+                                    <h2>This site's a little random...</h2>
                                     <motion.div className={styles.container}
                                         variants={container}
                                         initial='hidden'
                                         animate='show'
                                     >
-                                        <motion.div variants={item}>Please tell me</motion.div>
-                                        <motion.div variants={item}>a bit about</motion.div>
-                                        <motion.div variants={item}>who you are?</motion.div>
+                                        <motion.div variants={item}>Let's get you</motion.div>
+                                        <motion.div variants={item}>pointed in the</motion.div>
+                                        <motion.div variants={item}>right direction...</motion.div>
                                     </motion.div>
                                 </motion.div>
                             )
@@ -221,16 +232,17 @@ const Welcome = (props): JSX.Element => {
                                         }
                                     }}
                                 >
-                                    <h2>Please Select One...</h2>
+                                    <h2>So whatchu wanna do?</h2>
                                     <motion.div className={styles.container}
                                         variants={container}
                                         initial='hidden'
                                         animate='show'
                                     >
-                                        <motion.div variants={item} whileTap='tap' whileHover='hover'><button className={styles.optionsBtn} onClick={props.exitFunction}>First Time Here</button></motion.div>
-                                        <motion.div variants={item} whileTap='tap' whileHover='hover'><button className={styles.optionsBtn} onClick={props.exitFunction}>Prospective Client</button></motion.div>
-                                        <motion.div variants={item} whileTap='tap' whileHover='hover'><button className={styles.optionsBtn} onClick={props.exitFunction}>Potential Employer</button></motion.div>
-                                        <motion.div variants={item} whileTap='tap' whileHover='hover'><button className={styles.optionsBtn} onClick={props.exitFunction}>Just Take Me To The Home Page</button></motion.div>
+                                        <motion.div variants={item} whileTap='tap' whileHover='hover'><button className={styles.optionsBtn} onClick={props.exitFunction}>Take the Introduction/Tutorial (Recommended)</button></motion.div>
+                                        <motion.div variants={item} whileTap='tap' whileHover='hover'><Link href='/contact'><button className={styles.optionsBtn} onClick={props.exitFunction}>Check Out Some Projects</button></Link></motion.div>
+                                        <motion.div variants={item} whileTap='tap' whileHover='hover'><button className={styles.optionsBtn} onClick={props.exitFunction}>Browse Cam's Virtual Resume</button></motion.div>
+                                        <motion.div variants={item} whileTap='tap' whileHover='hover'><Link href='/contact'><button className={styles.optionsBtn} onClick={props.exitFunction}>Send Cam a Message</button></Link></motion.div>
+                                        <motion.div variants={item} whileTap='tap' whileHover='hover'><button className={styles.optionsBtn} onClick={props.exitFunction}>Take Me To The Main Menu</button></motion.div>
                                     </motion.div>
                                 </motion.div>
                             )

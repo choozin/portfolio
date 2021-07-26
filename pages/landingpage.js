@@ -7,27 +7,22 @@ import { ThemeContext } from '../contexts/ThemeContext'
 import Layout from '../components/layout/layout'
 import { useContext } from 'react';
 
-const Test = () => {
+const LandingPage = () => {
 
   const { page } = useContext(ThemeContext);
-  page.setPageTitle('Test Page');
+  page.setPageTitle('Epic Space Landing Page');
 
   return (
     <Layout
       nav='none'
-      pageStyle='landingPage'
+      pageStyle='landingPage' // Entire page is generated in the layout component
       returnHome={true}
     >
       <Head>
-        <title>{page.pageTitle}</title>
+        <title>{page.pageTitle}{page.siteTitle}</title>
       </Head>
-      <section>
-        <div style={{ width: '100%', height: '100%', border: 'solid 1px silver' }}>
-          <p>This is a test.</p>
-        </div>
-      </section>
     </Layout>
   )
 }
 
-export default Test;
+export default LandingPage;

@@ -121,18 +121,20 @@ const Navbar = () => {
 
     const [secondaryNavElements, setSecondaryNavElements] = useState({
         titles: [
-            'Test Webpage',
+            'Retro Game',
+            'Pro Painting Estimator',
+            'Landing Page',
             'To Do List',
             'Git Reference',
-            'Posts',
-            'MineSweeper',
+            'Blog',
         ],
         links: [
-            '/test',
+            '/portfolio/minesweeper',
+            '/portfolio/paintcalc',
+            '/landingpage',
             '/portfolio/todo',
             '/git',
             '/posts',
-            '/portfolio/minesweeper',
         ]
     });
 
@@ -140,7 +142,7 @@ const Navbar = () => {
 
     return (
         <div className={navbarStyles.root}>
-            <AppBar position="static">
+            <AppBar position="static" style={{ background: 'transparent', boxShadow: 'none'}}>
                 <Toolbar>
                     <IconButton
                         edge="start"
@@ -182,7 +184,7 @@ const Navbar = () => {
                         </div>
                     </Drawer>
                     <Typography className={navbarStyles.title} variant="h6" noWrap>
-                        {page.pageTitle}
+                        {page.pageTitle} @ Cam Makes Stuff
                     </Typography>
                     <div className={navbarStyles.search}>
                         <div className={navbarStyles.searchIcon}>

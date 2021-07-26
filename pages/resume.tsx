@@ -11,8 +11,8 @@ import ResumeComponent from '../components/resume/resume'
 
 const Resume = () => {
 
-    //const { page } = useContext(ThemeContext);
-    //page.setPageTitle('Resume');
+    const { page } = useContext(ThemeContext);
+    page.setPageTitle('Resume-ish');
 
 
 
@@ -23,7 +23,7 @@ const Resume = () => {
             returnHome={true}
         >
             <Head>
-                <title>Page Title</title>
+                <title>{page.pageTitle}{page.siteTitle}</title>
             </Head>
             <section>
                 <ResumeComponent />

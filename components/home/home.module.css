@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
+@import url('https://fonts.googleapis.com/css?family=Teko');
+@import url('https://fonts.googleapis.com/css?family=Righteous');
+@import url('https://fonts.googleapis.com/css?family=Architects+Daughter');
+
+.container {
+    width: 100%;
+    display: flex;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.titleContainer {
+    width: 100%;
+    height: 105vh;
+    position: relative;
+}
+
+.title {
+    font-size: 3.5em;
+    position: absolute;
+    z-index: 10;
+    left: 8%;
+    bottom: 30%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 0px;
+    line-height: 3rem;
+    font-family: 'Permanent Marker';
+    font-weight: bold;
+}
+
+.title span {
+    padding-right: 0.3em;
+    color: #D00;
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: white;
+}
+
+.keywords {
+    z-index: 10;
+    position: absolute;
+    left: 8%;
+    bottom: 15%;
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    max-width: 800px;
+    font-weight: bold;
+    flex-wrap: wrap;
+    font-family: 'Righteous';
+}
+
+.keywords span {
+    padding-right: 1.5rem;
+    -webkit-text-stroke-width: 0px;
+    -webkit-text-stroke-color: #BBB;
+    font-size: 1.2em;
+    color: #444;
+}
+
+.titleBackground {
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    position: absolute;
+    z-index: -1;
+    background-image: linear-gradient(to top right, #B00, white, #B44, #B00, #800);
+}
+
+.introContainer {
+    width: 100%;
+    background-color: #444;
+    padding: 1rem;
+    padding-top: 3rem;
+    color: #fff;
+    font-family: 'Architects Daughter';
+}
