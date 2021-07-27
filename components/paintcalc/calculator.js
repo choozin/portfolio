@@ -38,7 +38,9 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         padding: theme.spacing(2),
         textAlign: 'center',
-        color: theme.palette.text.secondary,
+        color: '#DDD',
+        backgroundColor: '#FFF',
+        opacity: '1',
     },
     formControl: {
         margin: theme.spacing(2),
@@ -136,15 +138,6 @@ const Calculator = () => {
             'wallpaper': wallpaper,
             'repair': repair,
             'notes': notes,
-            'firstName': firstName,
-            'lastName': lastName,
-            'unit': unit,
-            'address': address,
-            'city': city,
-            'state': state,
-            'zip': zip,
-            'phone': phone,
-            'email': email,
             'baseRate': baseRate,
             'roomSetupRate': roomSetupRate,
             'tapePricePerFootOfWall': tapePricePerFootOfWall,
@@ -184,16 +177,6 @@ const Calculator = () => {
 
         setNotes(obj.notes)
 
-        setFirstName(obj.firstName)
-        setLastName(obj.lastName)
-        setUnit(obj.unit)
-        setAddress(obj.address)
-        setCity(obj.city)
-        setState(obj.state)
-        setZip(obj.zip)
-        setPhone(obj.phone)
-        setEmail(obj.email)
-
         setBaseRate(obj.baseRate)
         setRoomSetupRate(obj.roomSetupRate)
 
@@ -210,6 +193,33 @@ const Calculator = () => {
         setLow(obj.low)
         setHigh(obj.high)
         setMarginOfError(obj.marginOfError)
+    }
+
+    const saveContact = () => {
+        let stateObj = {
+            'firstName': firstName,
+            'lastName': lastName,
+            'unit': unit,
+            'address': address,
+            'city': city,
+            'state': state,
+            'zip': zip,
+            'phone': phone,
+            'email': email,
+        }
+        window.localStorage.setItem('paint-calc' + roomId, JSON.stringify(stateObj))
+    }
+
+    const loadContact = (obj) => {
+        setFirstName(obj.firstName)
+        setLastName(obj.lastName)
+        setUnit(obj.unit)
+        setAddress(obj.address)
+        setCity(obj.city)
+        setState(obj.state)
+        setZip(obj.zip)
+        setPhone(obj.phone)
+        setEmail(obj.email)
     }
 
     /*if(typeof window !== 'undefined') {
@@ -302,7 +312,7 @@ const Calculator = () => {
                     <Grid item xs={12}>
                         <Paper className={classes.paper} elevation={3}>
                             <h2>Amazing Interior<br />Painting Estimator</h2>
-                            <p>Expected Total: ${total.toFixed(2)} (+/- ${(total / 100 * marginOfError).toFixed(2)})</p>
+                            <p>Expected Total: ${total ? total.toFixed(2) : '0.00'} (+/- ${total ? (total / 100 * marginOfError).toFixed(2) : '0.00'})</p>
                             <FormControl className={classes.formControl}>
                                 <InputLabel id="loadState-label">Switch Style</InputLabel>
                                 <Select
@@ -361,10 +371,26 @@ const Calculator = () => {
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                     >
-                        <Typography className={classes.heading}>Job Specifications</Typography>
+                        <Typography className={classes.heading}>Style Specifications</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Grid container spacing={2}>
+                            <Grid item sm={12} xs={12}>
+                                <TextField
+                                    id="numRooms"
+                                    className={classes.textField}
+                                    label="Number of Rooms"
+                                    helperText="Including large closets."
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    InputProps={{
+                                        endAdornment: <InputAdornment position="start">Rooms</InputAdornment>,
+                                    }}
+                                    value={numRooms}
+                                    onChange={(e) => setNumRooms(e.target.value)}
+                                />
+                            </Grid>
                             <Grid item sm={6} xs={12}>
                                 <TextField
                                     id="floorArea"
@@ -395,22 +421,6 @@ const Calculator = () => {
                                     }}
                                     value={height}
                                     onChange={(e) => setHeight(e.target.value)}
-                                />
-                            </Grid>
-                            <Grid item sm={12} xs={12}>
-                                <TextField
-                                    id="numRooms"
-                                    className={classes.textField}
-                                    label="Number of Rooms"
-                                    helperText="Including large closets."
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    InputProps={{
-                                        endAdornment: <InputAdornment position="start">Rooms</InputAdornment>,
-                                    }}
-                                    value={numRooms}
-                                    onChange={(e) => setNumRooms(e.target.value)}
                                 />
                             </Grid>
                             <Grid item sm={6} xs={12}>
@@ -659,6 +669,7 @@ const Calculator = () => {
                     >
                         <Typography className={classes.heading}>Contact Information</Typography>
                     </AccordionSummary>
+
                     <AccordionDetails>
                         <Grid container spacing={2}>
                             <Grid item sm={6} xs={12}>
@@ -787,11 +798,11 @@ const Calculator = () => {
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
                         <Paper className={classes.paper} elevation={3}>
-                            <p>Expected Total: ${total.toFixed(2)}</p>
-                            <p>Low Range: ${(total - (total / 100 * marginOfError)).toFixed(2)}</p>
-                            <p>High Range: ${(total + (total / 100 * marginOfError)).toFixed(2)}</p>
-                            <p>Labor: ${(total - (paintCostsArray.find(e => e.quality === paintType).price * (Math.sqrt(sqft / numRooms) * 4 * numRooms) * height / 100)).toFixed(2)}</p>
-                            <p>Paint: ${(paintCostsArray.find(e => e.quality === paintType).price * (Math.sqrt(sqft / numRooms) * 4 * numRooms) * height / 100).toFixed(2)}</p>
+                            <p>Expected Total: ${total ? total.toFixed(2) : '0.00'}</p>
+                            <p>Low Range: ${total ? (total - (total / 100 * marginOfError)).toFixed(2) : '0.00'}</p>
+                            <p>High Range: ${total ? (total + (total / 100 * marginOfError)).toFixed(2) : '0.00'}</p>
+                            <p>Labor: ${paintType ? (total - (paintCostsArray.find(e => e.quality === paintType).price * (Math.sqrt(sqft / numRooms) * 4 * numRooms) * height / 100)).toFixed(2) : '0.00'}</p>
+                            <p>Paint: ${paintType ? (paintCostsArray.find(e => e.quality === paintType).price * (Math.sqrt(sqft / numRooms) * 4 * numRooms) * height / 100).toFixed(2) : '0.00'}</p>
                             <br />
 
                             <Button

@@ -1,7 +1,7 @@
 .welcome {
     width: 100vw;
     height: 100vh;
-    background: #44B;/* rgb(255, 136, 0);*/
+    background: #383838;/* rgb(255, 136, 0);*/
     text-align: center;
     z-index: 70;
     position: fixed;
@@ -52,10 +52,10 @@
     width: 20rem;
     height: 3rem;
     margin: 0.5rem auto;
-    border: none;
+    border: solid 0.25rem rgb(180, 140, 45);
     border-radius: 2rem;
     background-color: rgb(255, 180, 90);
-    color: #FDD;
+    color: rgb(120, 100, 30);
     font-size: 1rem;
     outline: none;
 }

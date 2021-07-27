@@ -94,7 +94,7 @@ const Welcome = (props): JSX.Element => {
     const closeWelcome = () => {
         setShowWelcome(false)
         setTimeout(() => {
-            window.location.href='/landingpage'
+            window.location.href='/portfolio'
         }, 3000)
     }
 
@@ -198,7 +198,7 @@ const Welcome = (props): JSX.Element => {
                                         }
                                     }}
                                 >
-                                    <h2>This site's a little random...</h2>
+                                    <h2>So, why are you here?</h2>
                                     <motion.div className={styles.container}
                                         variants={container}
                                         initial='hidden'
@@ -232,17 +232,61 @@ const Welcome = (props): JSX.Element => {
                                         }
                                     }}
                                 >
-                                    <h2>So whatchu wanna do?</h2>
+                                    <h2>Where would you like to start?</h2>
                                     <motion.div className={styles.container}
                                         variants={container}
                                         initial='hidden'
                                         animate='show'
                                     >
-                                        <motion.div variants={item} whileTap='tap' whileHover='hover'><button className={styles.optionsBtn} onClick={props.exitFunction}>Take the Introduction/Tutorial (Recommended)</button></motion.div>
-                                        <motion.div variants={item} whileTap='tap' whileHover='hover'><Link href='/contact'><button className={styles.optionsBtn} onClick={props.exitFunction}>Check Out Some Projects</button></Link></motion.div>
-                                        <motion.div variants={item} whileTap='tap' whileHover='hover'><button className={styles.optionsBtn} onClick={props.exitFunction}>Browse Cam's Virtual Resume</button></motion.div>
-                                        <motion.div variants={item} whileTap='tap' whileHover='hover'><Link href='/contact'><button className={styles.optionsBtn} onClick={props.exitFunction}>Send Cam a Message</button></Link></motion.div>
-                                        <motion.div variants={item} whileTap='tap' whileHover='hover'><button className={styles.optionsBtn} onClick={props.exitFunction}>Take Me To The Main Menu</button></motion.div>
+                                        <motion.div 
+                                            variants={item} 
+                                            whileTap='tap' 
+                                            whileHover='hover'
+                                        >
+                                            <button className={styles.optionsBtn} onClick={props.exitFunction}>
+                                                Take the Introduction/Tutorial (Recommended)
+                                            </button>
+                                        </motion.div>
+                                        <motion.div 
+                                            variants={item} 
+                                            whileTap='tap' 
+                                            whileHover='hover'
+                                        >
+                                            <Link href='/contact'>
+                                                <button className={styles.optionsBtn} onClick={props.exitFunction}>
+                                                    Check Out Some Projects
+                                                </button>
+                                            </Link>
+                                        </motion.div>
+                                        <motion.div 
+                                            variants={item} 
+                                            whileTap='tap' 
+                                            whileHover='hover'
+                                        >
+                                            <button className={styles.optionsBtn} onClick={props.exitFunction}>
+                                                Browse Cam's Virtual Resume
+                                            </button>
+                                        </motion.div>
+                                        <motion.div 
+                                            variants={item} 
+                                            whileTap='tap' 
+                                            whileHover='hover'
+                                        >
+                                            <Link href='/contact'>
+                                                <button className={styles.optionsBtn} onClick={props.exitFunction}>
+                                                    Send Cam a Message
+                                                </button>
+                                            </Link>
+                                        </motion.div>
+                                        <motion.div 
+                                            variants={item} 
+                                            whileTap='tap' 
+                                            whileHover='hover'
+                                        >
+                                            <button className={styles.optionsBtn} onClick={props.exitFunction}>
+                                                Take Me To The Main Menu
+                                            </button>
+                                        </motion.div>
                                     </motion.div>
                                 </motion.div>
                             )

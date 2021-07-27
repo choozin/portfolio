@@ -8,6 +8,8 @@ import styles from './layout.module.css'
 import Navbar from '../navbar/Navbar'
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import GitHubIcon from '@material-ui/icons/GitHub';
+import { motion } from 'framer-motion'
+import Footer from './Footer'
 
 
 export const siteTitle = `Cam's Portfolio`;
@@ -48,9 +50,9 @@ export default function Layout({ children, nav, pageStyle, returnHome, header }:
             position: 'fixed',
             zIndex: -10
           }}>
-            <Image src={bgImages[Math.round(Math.random()*(bgImages.length-1))]}
+            <Image src={bgImages[0]} //Math.round(Math.random() * (bgImages.length - 1))]}
               alt='Picture of the Milky Way'
-              layout='fill'/>
+              layout='fill' />
           </div>
           <div className={styles.container}>
 
@@ -79,7 +81,9 @@ export default function Layout({ children, nav, pageStyle, returnHome, header }:
               </div>
             )}
 
+
           </div>
+          <Footer />
         </>
       break;
 
@@ -104,7 +108,7 @@ export default function Layout({ children, nav, pageStyle, returnHome, header }:
 
           <section className={styles.showcase}>
             <header>
-              <Link href='/'><h2 className={styles.logo}>SPACE</h2></Link>
+              <button onClick={() => window.history.back}><h2 className={styles.logo}>SPACE</h2></button>
               <div className={styles.toggle}>
 
               </div>

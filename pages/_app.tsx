@@ -11,6 +11,8 @@ import TodosContextProvider from '../contexts/ToDosContext'
 
 import React from 'react'
 
+import { motion } from 'framer-motion'
+
 
 
 /*This App component is the top-level component 

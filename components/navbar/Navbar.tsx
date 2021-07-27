@@ -19,12 +19,39 @@ import SearchIcon from '@material-ui/icons/Search';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
+import { 
+    MenuBook,
+    Face,
+    AssignmentInd,
+    ImportantDevices,
+    Memory,
+    Brightness4,
+    FormatPaint,
+    FlightLand,
+    AssignmentTurnedIn,
+    GitHub,
+    Create,
+} from '@material-ui/icons'
+
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+
+import "@fontsource/mate-sc"
+import "@fontsource/zen-tokyo-zoo"
+import "@fontsource/bebas-neue"
+import "@fontsource/shadows-into-light"
+import "@fontsource/lobster"
+import "@fontsource/special-elite"
+import "@fontsource/satisfy"
+import "@fontsource/pacifico"
+import "@fontsource/tourney"
+import "@fontsource/orbitron"
+import "@fontsource/press-start-2p"
+import "@fontsource/dotgothic16"
 
 
 
@@ -102,39 +129,67 @@ const Navbar = () => {
 
     const [primaryNavElements, setPrimaryNavElements] = useState({
         titles: [
-            'Home',
+            'Introduction',
             'Biography',
             'Resume',
             'Portfolio',
-            'Interests & Goals',
             'Contact'
         ],
         links: [
-            '/',
-            'Biography',
+            '/introduction',
+            '/biography',
             '/resume',
-            'Portfolio',
-            'Interests',
+            '/portfolio',
             '/contact',
+        ],
+        icons: [
+            <MenuBook />,
+            <Face/>,
+            <AssignmentInd/>,
+            <ImportantDevices/>,
+            <MailIcon/>,
         ]
     });
 
     const [secondaryNavElements, setSecondaryNavElements] = useState({
         titles: [
             'Retro Game',
+            'Helio-Tour',
             'Pro Painting Estimator',
-            'Landing Page',
+            'Video Landing Page',
             'To Do List',
             'Git Reference',
             'Blog',
+            'don\'t click this',
         ],
         links: [
             '/portfolio/minesweeper',
+            'https://r3f-next.vercel.app/planets',
             '/portfolio/paintcalc',
             '/landingpage',
             '/portfolio/todo',
             '/git',
             '/posts',
+            '/isaiddontclickthat'
+        ],
+        font: [
+            'DotGothic16',
+            'Tourney',
+            'Mate SC',
+            'Bebas Neue',
+            'Mate SC',
+            'Mate SC',
+            'Mate SC',
+            'Special Elite'
+        ],
+        icons: [
+            <Memory/>,
+            <Brightness4/>,
+            <FormatPaint/>,
+            <FlightLand/>,
+            <AssignmentTurnedIn/>,
+            <GitHub/>,
+            <Create/>,
         ]
     });
 
@@ -162,21 +217,24 @@ const Navbar = () => {
                         >
                             <List>
                                 {primaryNavElements.titles.map((text, index) => (
-                                    <Link href={primaryNavElements.links[index]} key={index}>
+                                    <Link 
+                                        href={primaryNavElements.links[index]} 
+                                        key={index}
+                                    >
                                         <ListItem button key={text}>
-                                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                                            <ListItemText primary={text} />
+                                            <ListItemIcon>{primaryNavElements.icons[index]}</ListItemIcon>
+                                            <ListItemText><span style={{ fontFamily: 'Special Elite', fontSize: '1.2rem' }}>{text}</span></ListItemText>
                                         </ListItem>
                                     </Link>
                                 ))}
                             </List>
                             <Divider />
-                            <List>
+                            <List style={{ color: '#888'}}>
                                 {secondaryNavElements.titles.map((text, index) => (
                                     <Link href={secondaryNavElements.links[index]} key={index}>
                                         <ListItem button key={text}>
-                                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                                            <ListItemText primary={text} />
+                                            <ListItemIcon>{secondaryNavElements.icons[index]}</ListItemIcon>
+                                            <ListItemText><span style={{ fontFamily: secondaryNavElements.font[index] }}>{text}</span></ListItemText>
                                         </ListItem>
                                     </Link>
                                 ))}
@@ -184,7 +242,7 @@ const Navbar = () => {
                         </div>
                     </Drawer>
                     <Typography className={navbarStyles.title} variant="h6" noWrap>
-                        {page.pageTitle} @ Cam Makes Stuff
+                        {page.pageTitle} <span style={{ color: 'white', fontFamily: 'Special Elite', fontSize: '1.2rem' }}>@CamMakesStuff</span>
                     </Typography>
                     <div className={navbarStyles.search}>
                         <div className={navbarStyles.searchIcon}>

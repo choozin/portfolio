@@ -20,7 +20,7 @@ const Header = () => {
                             stiffness: 1,
                         },
                     }}
-                >++Virus_Sweeper++</motion.h2>
+                >{'<Virus_Sweeper>'}</motion.h2>
                 <motion.span
                     animate={{
                         color: ['#4B4', '#8F8', '#F44', '#f88', '#88F', '#8F8', '#4B4'],

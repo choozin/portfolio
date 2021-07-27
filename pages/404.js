@@ -55,7 +55,7 @@ const FourOhFour = () => {
             opacity: 1,
             transition: {
               duration: 4,
-              delay: 2,
+              delay: 1.5,
             }
           }}
           style={{color: 'white'}}
