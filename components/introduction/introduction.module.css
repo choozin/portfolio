@@ -32,10 +32,6 @@
     font-size: 1.5rem;
 }
 
-.centered {
-    margin: 0 auto;
-}
-
 .topLeft {
     top: 3rem;
     left: 3rem;
@@ -61,18 +57,6 @@
     border-radius: 2rem;
     background-color: rgb(255, 180, 90);
     color: rgb(120, 100, 30);
-    font-size: 1rem;
-    outline: none;
-}
-
-.specialOptionsBtn {
-    width: 20rem;
-    height: 3rem;
-    margin: 0.5rem auto;
-    border: solid 0.25rem rgb(68, 180, 45);
-    border-radius: 2rem;
-    background-color: rgb(96, 255, 90);
-    color: rgb(38, 120, 30);
     font-size: 1rem;
     outline: none;
 }
@@ -115,22 +99,6 @@
     box-shadow: 0 -0.25rem 1.5rem rgb(155, 118, 15) inset, 0 0.75rem 0.5rem rgba(121, 84, 6, 0.4) inset, 0 0.25rem 0.5rem 0 rgb(207, 132, 70) inset;
 }
 
-.specialBtn {
-    cursor: pointer;
-    position: relative;
-    padding: 1rem 2.5rem;
-    min-width: 340px;
-    margin: 0.75rem;
-    border-radius: 3.75rem;
-    line-height: 1rem;
-    font-size: 1rem;
-    font-weight: 600;
-    color: rgb(0, 68, 9);
-    border: 1px solid rgb(195, 255, 187);
-    background-image: linear-gradient(-180deg, #97ff89 0%, #1fc01f 100%);
-    box-shadow: 0 -0.25rem 1.5rem rgb(15, 155, 22) inset, 0 0.75rem 0.5rem rgba(6, 121, 16, 0.4) inset, 0 0.25rem 0.5rem 0 rgb(81, 207, 70) inset;
-}
-
 .btn span {
     color: transparent;
     background-image: linear-gradient(0deg, #EE82DA 0%, #FEFAFD 100%);
@@ -140,37 +108,6 @@
 }
 
 .btn::before {
-    content: "";
-    display: block;
-    height: 0.25rem;
-    position: absolute;
-    top: 0.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100% - 7.5rem);
-    background: #fff;
-    border-radius: 100%;
-    opacity: 0.7;
-    background-image: linear-gradient(-270deg, rgba(255, 255, 255, 0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255, 255, 255, 0.00) 100%);
-}
-
-.specialBtn::after {
-    content: "";
-    display: block;
-    height: 0.25rem;
-    position: absolute;
-    bottom: 0.75rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100% - 7.5rem);
-    background: #fff;
-    border-radius: 100%;
-    filter: blur(1px);
-    opacity: 0.05;
-    background-image: linear-gradient(-270deg, rgba(255, 255, 255, 0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255, 255, 255, 0.00) 100%);
-}
-
-.specialBtn::before {
     content: "";
     display: block;
     height: 0.25rem;

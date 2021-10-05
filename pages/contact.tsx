@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
 
 import { ThemeContext } from '../contexts/ThemeContext'
 import styles from './contact.module.css'
@@ -129,7 +130,19 @@ const Contact = () => {
                 <title>{page.pageTitle}{page.siteTitle}</title>
             </Head>
             <section>
-                <Paper variant="elevation" style={{ borderRadius: '30px' }}>
+                <div style={{
+                    width: '100%',
+                    textAlign: 'center',
+                    margin: '0 auto',
+                    paddingTop: '3rem',
+                }}>
+                    <Image src='/images/cammakesstuff.png'
+                        alt='Cam Makes Stuff Logo'
+                        width='340px'
+                        height='340px'
+                    />
+                </div>
+                <Paper variant="elevation" style={{ borderRadius: '30px', margin: '1rem', }}>
                     <form
                         className={styles.contactForm}
                         onSubmit={(e) => submitForm(e)}

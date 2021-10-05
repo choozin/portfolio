@@ -1,8 +1,5 @@
 import React, { Component, useContext, useState } from 'react';
-
-import { db, base } from './firebase';
-
-import { v4 as uuid } from 'uuid'
+import { ToDosContext } from '../../contexts/ToDosContext';
 
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -14,32 +11,30 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
+import { setPriority } from 'os';
 
-const AddToDoFirebase = (props) => {
+const AddLocalToDo = (props) => {
+    const { toDos } = useContext(ToDosContext);
 
     const [label, setLabel] = useState('');
     const [description, setDescription] = useState('');
-    const [category, setCategory] = useState('');
+    const [category, setCategory] = useState(null);
     const [priority, setPriority] = useState(false);
 
-    const handleSubmit = () => {
-        let ref = base.push('todos', {
-            data: {
-                label: label,
-                category: category,
-                priority: priority,
-                description: description,
-                id: uuid()
-            },
-            then(err) { console.log('could not add todo: ', err) }
-        })
-        props.callback(ref)
+    const handleSubmit = (e) => {
+        props.addToDo(label, description, category, priority);
 
         // clear out state
         setLabel('');
         setDescription('');
-        setCategory('');
+        setCategory(null);
         setPriority(false);
+        
+        window.location.reload();
+    }
+
+    const handleCategoryChange = (e) => {
+        setCategory(e.target.value);
     }
 
     return (
@@ -50,6 +45,7 @@ const AddToDoFirebase = (props) => {
             borderRadius: '1rem',
         }}>
             <h3 style={{ textAlign: 'center', color: '#444' }}>Add an Item</h3>
+            <p>Please be aware, this part of the website uses cookies to store information on your local device. No personal data is collected by this website.</p>
             <TextField
                 style={{
                     margin: '0rem 1rem'
@@ -80,7 +76,7 @@ const AddToDoFirebase = (props) => {
                         id='category-select'
                         value={category}
                         label='Category'
-                        onChange={(e) => setCategory(e.target.value)}
+                        onChange={handleCategoryChange}
                     >
                         <MenuItem value='Produce'>Produce</MenuItem>
                         <MenuItem value='Frozen'>Frozen</MenuItem>
@@ -119,4 +115,4 @@ const AddToDoFirebase = (props) => {
     );
 }
 
-export default AddToDoFirebase;
+export default AddLocalToDo;

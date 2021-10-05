@@ -52,7 +52,9 @@ export default function Layout({ children, nav, pageStyle, returnHome, header }:
           }}>
             <Image src={bgImages[0]} //Math.round(Math.random() * (bgImages.length - 1))]}
               alt='Picture of the Milky Way'
-              layout='fill' />
+              layout='fill'
+              objectFit='cover'
+              objectPosition='center' />
           </div>
           <div className={styles.container}>
 
@@ -65,6 +67,52 @@ export default function Layout({ children, nav, pageStyle, returnHome, header }:
             }
 
             <main className={styles.main}>
+              {children}
+            </main>
+
+            {!returnHome && (
+              <div className={styles.backToHome}>
+                <p>This is the footer.</p>
+                <Link href="/">
+                  <a>← Back to home</a>
+                </Link>
+                <div className={styles.icons}>
+                  <LinkedInIcon />
+                  <GitHubIcon />
+                </div>
+              </div>
+            )}
+
+
+          </div>
+          <Footer />
+        </>
+      break;
+
+    case 'wide':
+      page =
+        <>
+          <div style={{
+            width: '100%',
+            height: '100%',
+            position: 'fixed',
+            zIndex: -10
+          }}>
+            <Image src={bgImages[0]} //Math.round(Math.random() * (bgImages.length - 1))]}
+              alt='Picture of the Milky Way'
+              layout='fill' />
+          </div>
+          <div className={styles.wideContainer}>
+
+
+
+            {header &&
+              <header className={styles.header}>
+                This is the header.
+              </header>
+            }
+
+            <main className={styles.wideMain}>
               {children}
             </main>
 

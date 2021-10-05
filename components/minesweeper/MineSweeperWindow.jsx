@@ -26,11 +26,12 @@ const MineSweeperWindow = () => {
     const [numberOfCols, setNumberOfCols] = useState(10)
     const [spaceCSSSize, setSpaceCSSSize] = useState(2)
     const [mapCSSSize, setMapCSSSize] = useState(20)
-    const [difficulty, setDifficulty] = useState(33)
-    const [difficultyLabel, setDifficultyLabel] = useState('user')
-    const [size, setSize] = useState(50)
+    const [difficulty, setDifficulty] = useState(0)
+    const [difficultyLabel, setDifficultyLabel] = useState('n00b')
+    const [size, setSize] = useState(0)
     const [displayBoard, setDisplayBoard] = useState(false)
     const [startGame, setStartGame] = useState(false)
+    const [currentStatus, setCurrentStatus] = useState('playing')
 
     const handleDifficultyChange = (e, value) => {
         setDifficulty(value)
@@ -76,7 +77,7 @@ const MineSweeperWindow = () => {
         } else if (size > 25) {
             setNumberOfRows(10)
             setNumberOfCols(10)
-            setSpaceCSSSize(1)
+            setSpaceCSSSize(2)
             setMapCSSSize(10)
             if (difficulty > 83) {
                 setTotalMines(20)
@@ -91,7 +92,7 @@ const MineSweeperWindow = () => {
             setNumberOfRows(5)
             setNumberOfCols(5)
             setSpaceCSSSize(2)
-            setMapCSSSize(10)
+            setMapCSSSize(20)
             if (difficulty > 83) {
                 setTotalMines(7)
             } else if (difficulty > 50) {
@@ -112,9 +113,15 @@ const MineSweeperWindow = () => {
             <div
                 className={styles.window}
             >
-                <Header/>
+                {currentStatus !== 'playing' && <div className={styles.popup}>
+                    <div style={{width: '100%', marginBottom: '1rem'}}>
+                        <span>You {currentStatus}!</span>
+                    </div>
+                    <button className={styles.lightBtn} onClick={() => setCurrentStatus('playing')}>Close</button>
+                </div>}
+                <Header />
                 {!displayBoard ?
-                    <AdvancedMenu 
+                    <AdvancedMenu
                         handleDifficultyChange={handleDifficultyChange}
                         handleSizeChange={handleSizeChange}
                         setDisplayBoard={setDisplayBoard}
@@ -150,8 +157,15 @@ const MineSweeperWindow = () => {
                                     Solve
                                 </button>
                             </div>
-                            <div style={{ width: '100%', color: 'green' }}>
-                                <p>{flagsPlanted}</p>
+                            <div style={{ width: '100%', color: 'green', display: 'flex', width: '100%', justifyContent: 'space-between' }}>
+                                <p style={{}}>{flagsPlanted}/{totalMines} Found</p>
+                                {currentStatus === 'lose' ?
+                                    'You lost, try again!'
+                                    :
+                                        flagsPlanted === totalMines ? 'You Win!'
+                                        :
+                                        totalMines - flagsPlanted + ' Remaining'
+                                }
                             </div>
                             <div className={styles.gameMap}
                                 style={{ width: mapCSSSize + 'rem', height: mapCSSSize + 'rem' }}>
@@ -163,6 +177,7 @@ const MineSweeperWindow = () => {
                                     numberOfRows={numberOfRows}
                                     numberOfCols={numberOfCols}
                                     spaceSize={spaceCSSSize}
+                                    updateWindow={setCurrentStatus}
                                 />
                             </div>
                         </div>
@@ -178,7 +193,7 @@ const MineSweeperWindow = () => {
                                     <span>Difficulty: {difficultyLabel}</span>
                                     <span>Viruses on Card: {totalMines}</span>
                                     <span>Card Size: {numberOfCols} x {numberOfRows}</span>
-                                    <span>Starting Virus Coverage: {totalMines / numberOfCols * numberOfRows}%</span>
+                                    <span>Starting Virus Coverage: {totalMines / (numberOfCols * numberOfRows) * 100}%</span>
                                 </div>
                                 <button
                                     //style={{ display: {...startGame[0] ? 'none' : 'block'} }}

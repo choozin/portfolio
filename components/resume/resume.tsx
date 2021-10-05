@@ -15,7 +15,7 @@ const FormatButton = ({ label, color, click, currentlyClicked, icon }) => {
     const [mouseOver, setMouseOver] = useState(false)
 
     return (
-        <div style={{ height: '7rem' }}>
+        <div style={{ height: '7rem', width: '5.5rem', textAlign: 'center' }}>
             <motion.div
                 whileTap={{ scale: 0.9 }}
             >
@@ -25,7 +25,7 @@ const FormatButton = ({ label, color, click, currentlyClicked, icon }) => {
                     style={{
                         color: currentlyClicked === label ? '#fff' : '#ddd',
                         backgroundColor: currentlyClicked === label ? color : '#bbb',
-                        margin: '1rem'
+                        marginBottom: '1rem'
                     }}
                     className={styles.formatBtn}
                     value={label}
@@ -74,7 +74,7 @@ const FormatButton = ({ label, color, click, currentlyClicked, icon }) => {
     )
 }
 
-const Resume = () => {
+const ResumeGenerator = (props) => {
 
     const headerH3 = {
 
@@ -88,19 +88,6 @@ const Resume = () => {
         console.log(viewHeight, viewWidth);
         //const {viewHeight, viewWidth } = useWindowDimensions() 
     })
-
-    const [techStuff, setTechStuff] = useState(true);
-    const [clients, setClients] = useState(true);
-    const [programming, setProgramming] = useState(true);
-    const [creative, setCreative] = useState(true);
-    const [education, setEducation] = useState(true);
-    const [interests, setInterests] = useState(true);
-
-    const [selectedFormat, setSelectedFormat] = useState('Infographic')
-
-    const [timeframePosition, setTimeframePosition] = useState('center');
-    const [categoriesPosition, setCategoriesPosition] = useState('nearRight');
-    const [formatPosition, setFormatPosition] = useState('farRight');
 
     const updateSelectedFormat = (value) => {
 
@@ -135,22 +122,25 @@ const Resume = () => {
         console.log(e.currentTarget.value);
         switch (e.currentTarget.value) {
             case 'techStuff':
-                setTechStuff(!techStuff)
+                props.setTechStuff(!props.techStuff)
                 break;
             case 'clients':
-                setClients(!clients)
+                props.setClients(!props.clients)
+                break;
+            case 'problemSolving':
+                props.setProblemSolving(!props.problemSolving)
                 break;
             case 'programming':
-                setProgramming(!programming)
+                props.setProgramming(!props.programming)
                 break;
             case 'creative':
-                setCreative(!creative)
+                props.setCreative(!props.creative)
                 break;
             case 'education':
-                setEducation(!education)
+                props.setEducation(!props.education)
                 break;
             case 'interests':
-                setInterests(!interests)
+                props.setInterests(!props.interests)
                 break;
         }
     }
@@ -231,103 +221,18 @@ const Resume = () => {
         },
     }
 
-    const changePositions = (center) => {
-        switch (center) {
-            case 'timeframe':
-                setTimeframePosition('center')
-                setCategoriesPosition('nearRight')
-                setFormatPosition('farRight')
-                break;
-            case 'categories':
-                setTimeframePosition('nearLeft')
-                setCategoriesPosition('center')
-                setFormatPosition('nearRight')
-                break;
-            case 'format':
-                setTimeframePosition('farLeft')
-                setCategoriesPosition('nearLeft')
-                setFormatPosition('center')
-                break;
-        }
-    }
-
     return (
         <div className={styles.resume}>
-            <motion.div className={styles.header}>
-                <motion.h2
-                    initial={{
-                        x: 1000,
-                        opacity: 0,
-                    }}
-                    animate={{
-                        x: 0,
-                        opacity: 100,
-                        transition: {
-                            duration: 1.0
-                        },
-                    }}
-                >
-                    Welcome to my Resume
-                </motion.h2>
-                <motion.span
-                    initial={{
-                        opacity: 0
-                    }}
-                    animate={{
-                        opacity: 100,
-                        transition: {
-                            delay: 1,
-                            duration: 10.0
-                        }
-                    }}
-                >
-                    Please use the control panel below to generate a resume that's relevant for you!
-                </motion.span>
-            </motion.div>
-
-            <motion.div className={styles.controlPanel}
-                animate={{
-
-                }}
-            >
-
-                <motion.div className={styles.timeframe}
-                    animate={
-                        timeframePosition
-                    }
-                    variants={variants}
-                >
-                    <h3>How far back should we go?</h3>
-                    <div>
-                        <Slider
-                            defaultValue={40}
-                            getAriaValueText={sliderValue}
-                            aria-labelledby="discrete-slider-custom"
-                            step={10}
-                            marks={marks}
-                        />
-                    </div>
-                    <button
-                        onClick={() => changePositions('categories')}
-                    >
-                        Next
-                    </button>
-                </motion.div>
-
-                <motion.div className={styles.categories}
-                    animate={
-                        categoriesPosition
-                    }
-                    variants={variants}
-                >
-                    <h3>What matters to you?</h3>
+            <div>
+                <h3 className={styles.headers}>What matters to you?</h3>
+                <div className={styles.categories}>
                     <Button
                         variant="contained"
                         color='primary'
                         style={{
-                            color: techStuff ? '#fff' : '#ddd',
-                            backgroundColor: techStuff ? '#5dc66b' : '#bbb',
-                            margin: '1rem'
+                            color: props.techStuff ? '#fff' : '#ddd',
+                            backgroundColor: props.techStuff ? '#5dc66b' : '#bbb',
+                            margin: '0.5rem 1rem'
                         }}
                         className={styles.categoriesBtn}
                         startIcon={<Mouse />}
@@ -340,9 +245,9 @@ const Resume = () => {
                         variant="contained"
                         color="secondary"
                         style={{
-                            color: clients ? '#fff' : '#ddd',
-                            backgroundColor: clients ? '#aa134a' : '#bbb',
-                            margin: '1rem'
+                            color: props.clients ? '#fff' : '#ddd',
+                            backgroundColor: props.clients ? '#aa134a' : '#bbb',
+                            margin: '0.5rem 1rem'
                         }}
                         className={styles.categoriesBtn}
                         startIcon={<People />}
@@ -355,9 +260,25 @@ const Resume = () => {
                         variant="contained"
                         color="secondary"
                         style={{
-                            color: programming ? '#fff' : '#ddd',
-                            backgroundColor: programming ? '#318c3d' : '#bbb',
-                            margin: '1rem'
+                            color: props.problemSolving ? '#fff' : '#ddd',
+                            backgroundColor: props.problemSolving ? '#aa134a' : '#bbb',
+                            margin: '0.5rem 1rem'
+                        }}
+                        className={styles.categoriesBtn}
+                        startIcon={<People />}
+                        value='problemSolving'
+                        onClick={(e) => categoriesButtonClick(e)}
+                    >
+                        Problem Solving
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        style={{
+                            color: props.programming ? '#fff' : '#ddd',
+                            backgroundColor: props.programming ? '#318c3d' : '#bbb',
+                            margin: '0.5rem 1rem',
+                            padding: '0.5rem',
                         }}
                         className={styles.categoriesBtn}
                         startIcon={<Code />}
@@ -370,9 +291,9 @@ const Resume = () => {
                         variant="contained"
                         color="secondary"
                         style={{
-                            color: creative ? '#fff' : '#ddd',
-                            backgroundColor: creative ? '#0f93cc' : '#bbb',
-                            margin: '1rem'
+                            color: props.creative ? '#fff' : '#ddd',
+                            backgroundColor: props.creative ? '#0f93cc' : '#bbb',
+                            margin: '0.5rem 1rem'
                         }}
                         className={styles.categoriesBtn}
                         startIcon={<Palette />}
@@ -385,9 +306,9 @@ const Resume = () => {
                         variant="contained"
                         color="secondary"
                         style={{
-                            color: education ? '#fff' : '#ddd',
-                            backgroundColor: education ? '#e8c111' : '#bbb',
-                            margin: '1rem'
+                            color: props.education ? '#fff' : '#ddd',
+                            backgroundColor: props.education ? '#e8c111' : '#bbb',
+                            margin: '0.5rem 1rem'
                         }}
                         className={styles.categoriesBtn}
                         startIcon={<School />}
@@ -400,70 +321,51 @@ const Resume = () => {
                         variant="contained"
                         color="secondary"
                         style={{
-                            color: interests ? '#fff' : '#ddd',
-                            backgroundColor: interests ? '#ee6120' : '#bbb',
-                            margin: '1rem'
+                            color: props.interests ? '#fff' : '#ddd',
+                            backgroundColor: props.interests ? '#ee6120' : '#bbb',
+                            margin: '0.5rem 1rem'
                         }}
                         className={styles.categoriesBtn}
                         startIcon={<Explore />}
                         value='interests'
                         onClick={(e) => categoriesButtonClick(e)}
                     >
-                        Interests & Passions
+                        Interests & Hobbies
                     </Button>
-                    <button
-                        onClick={() => changePositions('timeframe')}
-                    >
-                        Back
-                    </button>
-                    <button
-                        onClick={() => changePositions('format')}
-                    >
-                        Next
-                    </button>
-                </motion.div>
+                </div>
+            </div>
 
-                <motion.div className={styles.format}
-                    animate={
-                        formatPosition
-                    }
-                    variants={variants}
-                >
-                    <h3>What format would you like?</h3>
-                    <div className={styles.formatBtns}>
-                        {formatOptions.map(format =>
-                            <FormatButton
-                                label={format.label}
-                                color={format.color}
-                                click={() => setSelectedFormat(format.label)}
-                                currentlyClicked={selectedFormat}
-                                icon={format.icon}
-                            />
-                        )}
-                    </div>
-                    <button
-                        onClick={() => changePositions('categories')}
-                    >
-                        Back
-                    </button>
-                </motion.div>
-            </motion.div>
+            <div>
+                <h3 className={styles.headers}>How far back should we go?</h3>
+                <div className={styles.timeframe}>
+                    <Slider
+                        defaultValue={0}
+                        getAriaValueText={sliderValue}
+                        aria-labelledby="discrete-slider-custom"
+                        step={10}
+                        marks={marks}
+                        track="inverted"
+                        onChange={(e, val) => props.setPeriod(val)}
+                    />
+                </div>
+            </div>
 
-            <motion.div className={styles.content}
-                animate={{
-
-                }}
-            >
-                <motion.p
-                    animate={{
-
-                    }}
-                >
-                    
-                </motion.p>
-            </motion.div>
+            <div>
+                <h3 className={styles.headers}>What format would you like?</h3>
+                <div className={styles.formatBtns}>
+                    {formatOptions.map(format =>
+                        <FormatButton
+                            label={format.label}
+                            color={format.color}
+                            click={() => props.setSelectedFormat(format.label)}
+                            currentlyClicked={props.selectedFormat}
+                            icon={format.icon}
+                        />
+                    )}
+                </div>
+            </div>
         </div>
     )
 }
 
-export default Resume;
+export default ResumeGenerator;

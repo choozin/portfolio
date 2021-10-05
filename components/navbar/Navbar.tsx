@@ -1,4 +1,4 @@
-import React, { Component, useState, useContext } from 'react';
+import React, { Component, useState, useContext, useEffect } from 'react';
 import Link from 'next/link'
 
 import { AuthContext } from '../../contexts/AuthContext';
@@ -157,7 +157,7 @@ const Navbar = () => {
             'Helio-Tour',
             'Pro Painting Estimator',
             'Video Landing Page',
-            'To Do List',
+            'Grocery List',
             'Git Reference',
             'Blog',
             'don\'t click this',
@@ -195,9 +195,26 @@ const Navbar = () => {
 
     const classes = useStyles();
 
+    const [scrollY, setScrollY] = useState(0);
+
+    useEffect(() => {
+      const handleScroll = () => {
+        setScrollY(window.scrollY);
+      };
+  
+      handleScroll();
+  
+      window.addEventListener("scroll", handleScroll);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+  
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
         <div className={navbarStyles.root}>
-            <AppBar position="static" style={{ background: 'transparent', boxShadow: 'none'}}>
+            <AppBar position="static" style={{ background: 'rgba(32, 32, 32, '+ (scrollY/400) +')', boxShadow: 'none'}}>
                 <Toolbar>
                     <IconButton
                         edge="start"
@@ -242,7 +259,7 @@ const Navbar = () => {
                         </div>
                     </Drawer>
                     <Typography className={navbarStyles.title} variant="h6" noWrap>
-                        {page.pageTitle} <span style={{ color: 'white', fontFamily: 'Special Elite', fontSize: '1.2rem' }}>@CamMakesStuff</span>
+                        {page.pageTitle} <Link href='/'><span style={{ color: 'white', fontFamily: 'Special Elite', fontSize: '1.2rem' }}>@CamMakesStuff</span></Link>
                     </Typography>
                     <div className={navbarStyles.search}>
                         <div className={navbarStyles.searchIcon}>

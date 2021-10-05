@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import styles from './welcome.module.css'
-import Image from 'next/image'
 
 const containerVariants = {
     hidden: {
@@ -65,7 +64,7 @@ const item = {
     }
 }
 
-const Welcome = (props) => {
+const Welcome = (props): JSX.Element => {
 
     const [showWelcome, setShowWelcome] = useState(true)
 
@@ -81,9 +80,16 @@ const Welcome = (props) => {
         setShowFirst(false);
         setTimeout(() => {
             setShowedSecond(true)
-            setShowSecond(true)
-        }, 2000)
-    }, 3000)
+            setShowSecond(!showedSecond)
+            setTimeout(() => {
+                setShowSecond(false)
+                setTimeout(() => {
+                    setShowedThird(true)
+                    setShowThird(true)
+                }, 2800)
+            }, 5000)
+        }, 2800)
+    }, 5000)
 
     const closeWelcome = () => {
         setShowWelcome(false)
@@ -98,7 +104,7 @@ const Welcome = (props) => {
                 exit={{
                     opacity: 0,
                     transition: {
-                        duration: 2
+                        duration: 3
                     }
                 }}>
                 <div className={styles.fixedStaticArea}>
@@ -122,22 +128,51 @@ const Welcome = (props) => {
                                             opacity: 1,
                                             x: 0,
                                             transition: {
-                                                duration: 2
+                                                duration: 3
                                             }
                                         }}
                                         exit={{
                                             opacity: 0,
                                             transition: {
-                                                duration: 2
+                                                duration: 3
                                             }
                                         }}
-                                        className={styles.centered}
+                                        className={styles.topLeft}
                                     >
-                                        <Image src='/images/cammakesstuff.png'
-                                            alt='Cam Makes Stuff Logo'
-                                            width='540px'
-                                            height='540px'
-                                        />
+                                        <p>Welcome to...</p>
+                                    </motion.div>
+                                    <motion.div
+                                        initial={{
+                                            opacity: 0,
+                                            x: -1400,
+                                        }}
+                                        animate={{
+                                            opacity: 1,
+                                            x: 0,
+                                            transition: {
+                                                duration: 3
+                                            }
+                                        }}
+                                        exit={{
+                                            opacity: 0,
+                                            transition: {
+                                                duration: 3
+                                            }
+                                        }}
+                                        className={styles.bottomRight}
+                                        style={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                        }}
+                                    >
+                                        <div style={{ display: 'flex', float: 'right', maxWidth: '90vw', fontSize: '4rem', fontWeight: 'bold', backgroundColor: 'none', padding: '0.75rem', marginBottom: '-1rem', borderRadius: '3rem', textShadow: '2px 2px 2px white, -2px 2px 2px white, 2px -2px 2px white, -2px -2px 2px white' }}>
+                                            <span style={{ color: 'red', display: 'inline' }}>Code</span>
+                                            <span style={{ color: 'white', textShadow: '2px 2px 2px black, -2px 2px 2px black, 2px -2px 2px black, -2px -2px 2px black', display: 'inline' }}>Works</span>
+                                            <span style={{ color: 'red', display: 'inline' }}>Canada</span>
+                                        </div>
+                                        <div style={{ display: 'flex', float: 'right', maxWidth: '90vw', fontSize: '3rem', backgroundColor: 'none', paddingLeft: '3rem', marginBottom: '-1rem', borderRadius: '3rem' }}>
+                                            <span style={{ color: 'gray', display: 'inline' }}>A.K.A. Cam Makes Stuff</span>
+                                        </div>
                                     </motion.div>
                                 </>
                             )
@@ -153,17 +188,51 @@ const Welcome = (props) => {
                                     animate={{
                                         opacity: 1,
                                         transition: {
-                                            duration: 2
+                                            duration: 3
                                         }
                                     }}
                                     exit={{
                                         opacity: 0,
                                         transition: {
-                                            duration: 2
+                                            duration: 3
                                         }
                                     }}
                                 >
-                                    <h2>Where to, Pal?🚀</h2>
+                                    <h2>So, why are you here?</h2>
+                                    <motion.div className={styles.container}
+                                        variants={container}
+                                        initial='hidden'
+                                        animate='show'
+                                    >
+                                        <motion.div variants={item}>Let's get you</motion.div>
+                                        <motion.div variants={item}>pointed in the</motion.div>
+                                        <motion.div variants={item}>right direction...</motion.div>
+                                    </motion.div>
+                                </motion.div>
+                            )
+                        }
+                    </AnimatePresence>
+                    <AnimatePresence>
+                        {
+                            showThird && (
+                                <motion.div
+                                    initial={{
+                                        opacity: 0
+                                    }}
+                                    animate={{
+                                        opacity: 1,
+                                        transition: {
+                                            duration: 3
+                                        }
+                                    }}
+                                    exit={{
+                                        opacity: 0,
+                                        transition: {
+                                            duration: 3
+                                        }
+                                    }}
+                                >
+                                    <h2>Where would you like to start?</h2>
                                     <motion.div className={styles.container}
                                         variants={container}
                                         initial='hidden'
@@ -175,8 +244,8 @@ const Welcome = (props) => {
                                             whileHover='hover'
                                         >
                                             <Link href='/portfolio'>
-                                                <button className={styles.specialBtn} onClick={props.exitFunction}>
-                                                    Take the Introduction/Tutorial<br />(Recommended)
+                                                <button className={styles.btn} onClick={props.exitFunction}>
+                                                    Take the Introduction/Tutorial<br/>(Recommended)
                                                 </button>
                                             </Link>
                                         </motion.div>
@@ -210,6 +279,17 @@ const Welcome = (props) => {
                                             <Link href='/contact'>
                                                 <button className={styles.btn} onClick={props.exitFunction}>
                                                     Send Cam a Message
+                                                </button>
+                                            </Link>
+                                        </motion.div>
+                                        <motion.div
+                                            variants={item}
+                                            whileTap='tap'
+                                            whileHover='hover'
+                                        >
+                                            <Link href='/portfolio'>
+                                                <button className={styles.btn} onClick={props.exitFunction}>
+                                                    Take Me To The Main Menu
                                                 </button>
                                             </Link>
                                         </motion.div>

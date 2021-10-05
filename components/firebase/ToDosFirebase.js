@@ -7,7 +7,15 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import { db, base } from '../firebase/firebase';
 
@@ -17,6 +25,7 @@ const ToDosFirebase = () => {
 
     const [todos, setTodos] = useState({})
     const [onlyShowPriority, setOnlyShowPriority] = useState(false)
+    const [sort, setSort] = useState(null)
 
     /*useEffect(() => {
         const ref = base.syncState(`todos`, {
@@ -125,10 +134,29 @@ const ToDosFirebase = () => {
 
     return (
         <div className='todos'>
-            <div className='sort'>
-                <input type='button' value='category' onClick={() => sortItems('category')}/>
-                <input type='button' value='alphabetically' onClick={() => sortItems('alphabetically')}/>
-                <input type='button' value='Priority Only' />
+            <div className='sort' style={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}>
+                <FormControl>
+                    <InputLabel id="sort-label">Sort By...</InputLabel>
+                    <Select
+                        labelId="sort-label"
+                        id="sort-select"
+                        value={sort}
+                        label="Sort by..."
+                        onChange={(event) => sortItems(event.target.value)}
+                        style={{ minWidth: '150px' }}
+                    >
+                        <MenuItem value={'alphabetical'}>Alphabetical</MenuItem>
+                        <MenuItem value={'category'}>Category</MenuItem>
+                    </Select>
+                </FormControl>
+                <Button
+                    variant="contained"
+                    color={onlyShowPriority ? "secondary" : "#888"}
+                    value={onlyShowPriority}
+                    onClick={() => setOnlyShowPriority(!onlyShowPriority)}
+                >
+                    Priority Only
+                </Button>
             </div>
             <List>
                 {//typeof todos !== 'undefined' ?
@@ -141,9 +169,9 @@ const ToDosFirebase = () => {
                             return (
                                 <ListItem id={item.id} button key={item.id}>
                                     <ListItemIcon>
-                                        <InboxIcon  onClick={() => deleteItem(item.id)}/>
+                                        <DeleteIcon  onClick={() => deleteItem(item.id)}/>
                                     </ListItemIcon>
-                                    <ListItemText primary={item.label} />
+                                    <ListItemText primary={item.label} onClick={() => alert(item.description ? item.description : 'No description provided.')} />
                                     <span>{item.category}</span>
                                 </ListItem>
                             )

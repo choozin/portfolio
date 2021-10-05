@@ -74,29 +74,27 @@ const AdvancedMenu = (props) => {
                     <Slider
                         step={33}
                         marks={difficultyMarks}
-                        value={props.difficulty}
                         onChange={props.handleDifficultyChange}
                     />
                 </ThemeProvider>
                 <div className={styles.sliderLabels}>
-                    <span>n00b</span>
-                    <span>User</span>
-                    <span>1337</span>
-                    <span>h4x0r</span>
+                    <span style={props.difficulty < 25 ? {fontWeight: '900'} : {fontWeight: 'normal'}}>n00b</span>
+                    <span style={props.difficulty > 25 && props.difficulty < 50 ? {fontWeight: '900'} : {fontWeight: 'normal'}}>User</span>
+                    <span style={props.difficulty > 50 && props.difficulty < 75 ? {fontWeight: '900'} : {fontWeight: 'normal'}}>1337</span>
+                    <span style={props.difficulty > 75 ? {fontWeight: '900'} : {fontWeight: 'normal'}}>h4x0r</span>
                 </div>
                 <h4>Select Your Card Size</h4>
                 <ThemeProvider theme={sizeTheme}>
                     <Slider
                         step={50}
                         marks={sizeMarks}
-                        value={props.size}
                         onChange={props.handleSizeChange}
                     />
                 </ThemeProvider>
                 <div className={styles.sliderLabels}>
-                    <span>Kilo</span>
-                    <span>Mega</span>
-                    <span>Giga</span>
+                    <span style={props.size < 25 ? {fontWeight: '900'} : {fontWeight: 'normal'}}>Kilo</span>
+                    <span style={props.size > 25 && props.size < 75 ? {fontWeight: '900'} : {fontWeight: 'normal'}}>Mega</span>
+                    <span style={props.size > 75 ? {fontWeight: '900'} : {fontWeight: 'normal'}}>Giga</span>
                 </div>
                 <button
                     className={styles.lightBtn}

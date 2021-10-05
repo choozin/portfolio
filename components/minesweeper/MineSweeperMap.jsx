@@ -101,15 +101,14 @@ const MineSweeperMap = forwardRef((props, ref) => {
         setRevealedSpacesGrid([
             ...generateRevealedSpacesGrid(props.numberOfRows, props.numberOfCols, 1)
         ])
+        props.updateWindow('lose')
         setGameStillActive(false)
-        alert('lose');
     }
 
     const gameWon = () => {
         setRevealedSpacesGrid([
             ...generateRevealedSpacesGrid(props.numberOfRows, props.numberOfCols, 1)
         ])
-        alert('win!');
     }
 
     const handleLeftClick = (event, row, col) => {

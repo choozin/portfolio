@@ -1,64 +1,48 @@
 .resume {
-    
-}
-
-.header {
     text-align: center;
-    margin-bottom: 7rem;
+    margin: 1rem;
 }
 
-.title {
-
+.headers {
+    color: white;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 .controlPanel {
-    width: 100%;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-bottom: 7rem;
-    position: relative;
-    margin-top: -3rem;
+
 }
 
 .timeframe { 
     width: 100%;
-    justify-content: center;
-    margin-bottom: 4rem;
-    top: 0;
-    position: absolute;
-    height: 70vh;
+    overflow: hidden;
+    padding: 1rem;
+    background-color: rgba(255,255,255,0.8);
+    padding: 0.8rem 2.8rem;
+    border-radius: 2rem;
+    margin-bottom: 2rem;
 }
 
 .categories {
-    width: 100%;
-    justify-content: space-between;
-    margin-bottom: 4rem;
-    top: 0;
-    position: absolute;
-    height: 70vh;
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
-.categories h3 {
-    display: block;
-}
 
 .categoriesBtn {
     
 }
 
 .formatBtns {
+    width: 100%;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.format {
-    width: 100%;
-    justify-content: center;
-    margin-bottom: 4rem;
-    top: 0;
-    position: absolute;
-    height: 70vh;
+.formatBtn {
+    
 }
 
 .content {

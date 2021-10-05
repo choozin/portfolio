@@ -10,19 +10,23 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Checkbox from '@material-ui/core/Checkbox';
+
+import AddLocalToDo from './AddLocalToDo';
 
 
 const ToDosLocalStorage = () => {
 
     const [onlyShowPriority, setOnlyShowPriority] = useState(false)
-
-    // for Add ToDo
-    const [label, setLabel] = useState('');
-    const [description, setDescription] = useState('');
-    const [category, setCategory] = useState('');
-    const [datetime, setDatetime] = useState('');
-    const [priority, setPriority] = useState(false);
+    const [sort, setSort] = useState(null)
 
     const [initialArray, setInitialArray] = useState([]);
     const [updatedArray, setUpdatedArray] = useState(
@@ -48,7 +52,7 @@ const ToDosLocalStorage = () => {
         forceUpdate()
     }
 
-    const addItem = () => {
+    const addItem = (label, description, category, priority) => {
 
         let newItem = {
             label: label,
@@ -56,7 +60,6 @@ const ToDosLocalStorage = () => {
             category: category,
             priority: priority,
             id: uuid(),
-            datetime: 'now',
         }
 
         const tempArray = updatedArray;
@@ -65,14 +68,6 @@ const ToDosLocalStorage = () => {
         localStorage.clear();
         localStorage.setItem('todos', JSON.stringify(tempArray))
 
-        setLabel('');
-        setDescription('');
-        setCategory('');
-        setDatetime('');
-        setPriority(false);
-
-        //console.log('new item', newItem)
-        //console.log('temp array', tempArray)
 
     }
 
@@ -86,7 +81,7 @@ const ToDosLocalStorage = () => {
                 sortedArray = unsortedArray.sort((a, b) => a.category.localeCompare(b.category));
                 setUpdatedArray([...sortedArray]);
                 break;
-            case 'alphabetically':
+            case 'alphabetical':
                 //
                 sortedArray = unsortedArray.sort((a, b) => a.label.localeCompare(b.label));
                 setUpdatedArray([...sortedArray]);
@@ -98,57 +93,53 @@ const ToDosLocalStorage = () => {
 
     }
 
-    const togglePriority = () => {
-
-        setOnlyShowPriority(onlyShowPriority ? false : true);
-
-    }
-
     return (
         <div className='todos'>
-            <div className='sort'>
-                <input type='button' value='category' onClick={() => sortItems('category')}/>
-                <input type='button' value='alphabetically' onClick={() => sortItems('alphabetically')}/>
-                <input type='button' value='Priority Only' onClick={() => togglePriority()} />
+            <div className='sort' style={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}>
+                <FormControl>
+                    <InputLabel id="sort-label">Sort By...</InputLabel>
+                    <Select
+                        labelId="sort-label"
+                        id="sort-select"
+                        value={sort}
+                        label="Sort by..."
+                        onChange={(event) => sortItems(event.target.value)}
+                        style={{ minWidth: '150px' }}
+                    >
+                        <MenuItem value={'alphabetical'}>Alphabetical</MenuItem>
+                        <MenuItem value={'category'}>Category</MenuItem>
+                    </Select>
+                </FormControl>
+                <Button
+                    variant="contained"
+                    color={onlyShowPriority ? "secondary" : "#888"}
+                    value={onlyShowPriority}
+                    onClick={() => setOnlyShowPriority(!onlyShowPriority)}
+                >
+                    Priority Only
+                </Button>
             </div>
             <List>
                 {updatedArray.length > 0 && updatedArray.map(item => {
 
                     let showItem = ((onlyShowPriority && item.priority) || !onlyShowPriority);
+                    console.log('showitem', showItem)
 
                     if (showItem && (item !== null)) {
                         return (
                             <ListItem button key={item.id}>
                                 <ListItemIcon>
-                                    <InboxIcon onClick={() => deleteItem(item.id)} />
+                                    <DeleteIcon onClick={() => deleteItem(item.id)} />
                                 </ListItemIcon>
 
-                                <ListItemText primary={item.label} />
+                                <ListItemText primary={item.label} onClick={() => alert(item.description ? item.description : 'No description provided.')} />
                                 <span>{item.category}</span>
                             </ListItem>
                         )
                     }
                 })}
             </List>
-            <form onSubmit={addItem}>
-                <input type="text"
-                    placeholder="label"
-                    value={label}
-                    onChange={(e) => setLabel(e.target.value)} required />
-                <input type="text"
-                    placeholder="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)} />
-                <input type="text"
-                    placeholder="category"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)} />
-                <input type="text"
-                    placeholder="datetime"
-                    value={datetime}
-                    onChange={(e) => setDatetime(e.target.value)} />
-                <input type="submit" value="Add To Do" />
-            </form>
+            <AddLocalToDo addToDo={addItem}/>
         </div>
     );
 

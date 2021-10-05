@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         padding: theme.spacing(2),
         textAlign: 'center',
-        color: '#DDD',
+        color: '#BBB',
         backgroundColor: '#FFF',
         opacity: '1',
     },
@@ -311,7 +311,7 @@ const Calculator = () => {
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
                         <Paper className={classes.paper} elevation={3}>
-                            <h2>Amazing Interior<br />Painting Estimator</h2>
+                            <h3 style={{color: '#555'}}>Professional Paint Co.<br />Instant Quote Generator</h3>
                             <p>Expected Total: ${total ? total.toFixed(2) : '0.00'} (+/- ${total ? (total / 100 * marginOfError).toFixed(2) : '0.00'})</p>
                             <FormControl className={classes.formControl}>
                                 <InputLabel id="loadState-label">Switch Style</InputLabel>
@@ -804,22 +804,14 @@ const Calculator = () => {
                             <p>Labor: ${paintType ? (total - (paintCostsArray.find(e => e.quality === paintType).price * (Math.sqrt(sqft / numRooms) * 4 * numRooms) * height / 100)).toFixed(2) : '0.00'}</p>
                             <p>Paint: ${paintType ? (paintCostsArray.find(e => e.quality === paintType).price * (Math.sqrt(sqft / numRooms) * 4 * numRooms) * height / 100).toFixed(2) : '0.00'}</p>
                             <br />
-
                             <Button
                                 variant='contained'
                                 color='primary'
                                 startIcon={<SendIcon />}
-                                onClick={() => loadState(JSON.parse(window.localStorage.getItem('paint-calc' + roomId)))}
+                                onClick={() => alert('Submitted')}
+                                disabled 
                             >
-                                Load
-                            </Button>
-                            <Button
-                                variant='contained'
-                                color='primary'
-                                startIcon={<SendIcon />}
-                                onClick={() => saveState()}
-                            >
-                                Save
+                                Submit
                             </Button>
                         </Paper>
                     </Grid>

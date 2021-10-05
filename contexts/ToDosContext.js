@@ -54,7 +54,7 @@ const ToDosContextProvider = ({ children }) => {
                 sortedArray = updatedToDos.sort((a, b) => a.category.localeCompare(b.category));
                 setUpdatedToDos([...sortedArray]);
                 break;
-            case 'alphabetically':
+            case 'alphabetical':
                 //
                 sortedArray = updatedToDos.sort((a, b) => a.label.localeCompare(b.label));
                 setUpdatedToDos([...sortedArray]);
@@ -83,7 +83,7 @@ const ToDosContextProvider = ({ children }) => {
 
     return (
         <ToDosContext.Provider value={contextData}>
-            { children}
+            {children}
         </ToDosContext.Provider>
     )
 }
