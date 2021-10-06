@@ -60,6 +60,8 @@ const ToDos = () => {
         }
     }
 
+    let priorityBtnColor = onlyShowPriority ? "secondary" : "primary"
+
     return (
         <div className='todos'>
             <div className='sort' style={{ display: 'flex', width: '100%', justifyContent: 'space-around' }}>
@@ -77,14 +79,23 @@ const ToDos = () => {
                         <MenuItem value={'category'}>Category</MenuItem>
                     </Select>
                 </FormControl>
+                {onlyShowPriority ? 
                 <Button
                     variant="contained"
-                    color={onlyShowPriority ? "secondary" : "#888"}
-                    value={onlyShowPriority}
+                    color="secondary"
                     onClick={() => setOnlyShowPriority(!onlyShowPriority)}
                 >
                     Priority Only
                 </Button>
+                :
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => setOnlyShowPriority(!onlyShowPriority)}
+                >
+                    Priority Only
+                </Button>
+                }
             </div>
             <List>
                 {toDos.updatedToDos.length > 0 && toDos.updatedToDos.map(item => {
