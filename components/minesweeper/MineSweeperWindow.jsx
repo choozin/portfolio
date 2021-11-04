@@ -128,7 +128,7 @@ const MineSweeperWindow = () => {
                         scrollToTop={scrollToTop}
                         difficulty={difficulty}
                         size={size}
-                    />
+                    /> 
                     : <>
                         <div style={{ display: opacity }}>
                             <div className={styles.gameMenu}>
